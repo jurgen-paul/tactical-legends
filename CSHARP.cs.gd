@@ -1,4 +1,4 @@
-public class CivilianBehavior : MonoBehaviour
+public class CivilianBehavior: MonoBehaviour
 {
     public enum EmotionState { Calm, Fear, Panic, Resist }
     private EmotionState currentState = EmotionState.Calm;
@@ -134,7 +134,7 @@ public void TriggerSonar(Vector3 origin)
     AudioSource.PlayClipAtPoint(sonarPing, origin);
 
     GameObject ripple = Instantiate(sonarRipplePrefab, origin, Quaternion.identity);
-    ripple.transform.localScale = Vector3.zero;
+    ripple. transform.localScale = Vector3.zero;
     LeanTween.scale(ripple, Vector3.one * 5f, 1f).setEaseOutCirc();
 
     Destroy(ripple, 2f); // Clean up effect
@@ -325,11 +325,11 @@ NARRATOR (deep and melodic):
 [Flash cuts: HUD glyphs sync. Squad sonar pulses. A boss shimmers behind an audio shield.]
 🎵 Music builds—a tribal stomp, followed by synth bursts and melodic waves colliding.
 NARRATOR:
-"You don't just fight. You perform. Decode vaults. Remix gear. Shatter shields with rhythm. Lead your squad through echo storms and cipher harmonics."
+"You don't just fight. You perform. Decode vaults—remix gear. Shatter shields with rhythm. Lead your squad through echo storms and cipher harmonics."
 [Quick-cut beats: Menu flashes. HUD syncs. Echo cyclone. Boss roar.]
 NARRATOR (crescendo):
 "Tactical Legends. The war isn't over. The next beat… is yours."
-[Logo pulses with beat. Sonic ring ripple out. Screen fades.]
+[Logo pulses with beat. Sonic ring ripples out. Screen fades.]
 
 public void AnimateFactionIntro(string faction, float inputTempo)
 {
@@ -396,7 +396,7 @@ void RenderGameDevManifesto() {
     Narrator.Speak("Phase by phase, we designed not just a game… but a philosophy.");
 
     Manifesto.AddPhase("Strategic Immersion Core", 
-        "Weather becomes weapon. Cities breathe tactics. Vision and morale bend to nature’s tempo.");
+        "Weather becomes a weapon. Cities breathe tactics. Vision and morale bend to nature’s tempo.");
     Manifesto.AddPhase("Environmental Dynamics", 
         "Traps whisper from rooftops. Civilian clutter isn’t chaos—it’s opportunity.");
     Manifesto.AddPhase("Rhythm-Fueled Multiplayer", 
