@@ -1,0 +1,140 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://CharacterGenerator.gd" id=1]
+
+[node name="CharacterGenerator" type="Control"]
+script = ExtResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_colors/font_color = Color(0.9,0.9,1)
+theme_override_colors/bg_color = Color(0.13,0.13,0.17)
+
+[node name="GenerateButton" type="Button" parent="."]
+text = "Generate Character"
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 0.05
+anchor_bottom = 0.15
+margin_left = -120.0
+margin_right = 120.0
+margin_top = 20.0
+margin_bottom = 60.0
+
+[node name="LoadingLabel" type="Label" parent="."]
+text = "Generating..."
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 0.17
+anchor_bottom = 0.22
+margin_left = -60.0
+margin_right = 60.0
+margin_top = 70.0
+margin_bottom = 90.0
+visible = false
+
+[node name="ProfileContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 0.22
+anchor_bottom = 0.95
+margin_left = -240.0
+margin_right = 240.0
+margin_top = 100.0
+margin_bottom = 520.0
+visible = false
+
+[node name="NameLabel" type="Label" parent="ProfileContainer"]
+text = "Name"
+custom_fonts/font_size = 22
+
+[node name="RaceLabel" type="Label" parent="ProfileContainer"]
+text = "Race"
+
+[node name="ClassLabel" type="Label" parent="ProfileContainer"]
+text = "Class"
+
+[node name="ClassDescLabel" type="Label" parent="ProfileContainer"]
+text = "Class Description"
+theme_override_colors/font_color = Color(0.5,0.7,1)
+custom_fonts/font_size = 16
+
+[node name="FactionLabel" type="Label" parent="ProfileContainer"]
+text = "Faction"
+
+[node name="FactionDescLabel" type="Label" parent="ProfileContainer"]
+text = "Faction Description"
+theme_override_colors/font_color = Color(0.6,0.4,1)
+custom_fonts/font_size = 16
+
+[node name="ShipLabel" type="Label" parent="ProfileContainer"]
+text = "Ship"
+
+[node name="ShipDescLabel" type="Label" parent="ProfileContainer"]
+text = "Ship Description"
+theme_override_colors/font_color = Color(0.5,0.9,0.9)
+custom_fonts/font_size = 16
+
+[node name="AbilityLabel" type="Label" parent="ProfileContainer"]
+text = "Special Ability"
+theme_override_colors/font_color = Color(0.8,0.5,1)
+custom_fonts/font_size = 16
+
+[node name="BackgroundLabel" type="Label" parent="ProfileContainer"]
+text = "Background"
+theme_override_colors/font_color = Color(0.8,0.8,0.5)
+custom_fonts/font_size = 16
+
+[node name="EquipmentLabel" type="Label" parent="ProfileContainer"]
+text = "Equipment"
+theme_override_colors/font_color = Color(0.3,0.9,0.7)
+custom_fonts/font_size = 16
+
+[node name="MotivationLabel" type="Label" parent="ProfileContainer"]
+text = "Motivation"
+theme_override_colors/font_color = Color(1,0.6,0.2)
+custom_fonts/font_size = 16
+
+[node name="FlawLabel" type="Label" parent="ProfileContainer"]
+text = "Flaw"
+theme_override_colors/font_color = Color(1,0.3,0.3)
+custom_fonts/font_size = 16
+
+[node name="CombatStat" type="ProgressBar" parent="ProfileContainer"]
+min_value = 0
+max_value = 8
+value = 4
+size_flags_horizontal = 3
+custom_fonts/font_size = 14
+text = "Combat"
+
+[node name="TacticsStat" type="ProgressBar" parent="ProfileContainer"]
+min_value = 0
+max_value = 8
+value = 4
+size_flags_horizontal = 3
+custom_fonts/font_size = 14
+text = "Tactics"
+
+[node name="TechStat" type="ProgressBar" parent="ProfileContainer"]
+min_value = 0
+max_value = 8
+value = 4
+size_flags_horizontal = 3
+custom_fonts/font_size = 14
+text = "Tech"
+
+[node name="StealthStat" type="ProgressBar" parent="ProfileContainer"]
+min_value = 0
+max_value = 8
+value = 4
+size_flags_horizontal = 3
+custom_fonts/font_size = 14
+text = "Stealth"
+
+[node name="LeadershipStat" type="ProgressBar" parent="ProfileContainer"]
+min_value = 0
+max_value = 8
+value = 4
+size_flags_horizontal = 3
+custom_fonts/font_size = 14
+text = "Leadership"
