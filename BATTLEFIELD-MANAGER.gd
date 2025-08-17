@@ -1,4 +1,4 @@
-public class BattlefieldManager : MonoBehaviour
+public class BattlefieldManager: MonoBehaviour
 {
     public enum ObjectiveType { DisableSnipers, HackTerminal, EscortCivilians }
     public enum Faction { Urban, Desert, Arctic }
