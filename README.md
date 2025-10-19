@@ -3,12 +3,13 @@
 
 # Tactical Legends
 
-Welcome to **Tactical Legends**, an open-source tactical strategy game focused on turn-based combat, deep squad customization, and replayable missions. Whether you’re a strategist, developer, or gamer, our modular codebase lets you contribute, experiment, and play on your favorite platform.
+Welcome to **Tactical Legends**, an open-source tactical strategy game focused on turn-based combat, deep squad customization, and replayable missions. Whether you’re a strategist, developer, or player, we welcome your contributions and feedback.
 
 ## Table of Contents
 
 - [About](#about)
 - [Features](#features)
+- [Gameplay Video](#gameplay-video)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Testing](#testing)
@@ -30,6 +31,19 @@ Tactical Legends delivers engaging tactical gameplay built with C++ and SDL2, de
 - SDL2-powered graphics and audio
 - Unit testing via CTest
 - Deep squad customization and branching campaign (coming soon)
+
+## Gameplay Video
+
+Share gameplay demos to help visitors quickly understand the game. You can embed a YouTube video or link to a GIF. The example below embeds a YouTube thumbnail that links to the video.
+
+Example (YouTube thumbnail + link):
+
+[![Gameplay Demo](https://img.youtube.com/vi/JkqvxQ03Izo/0.jpg)](https://www.youtube.com/watch?v=JkqvxQ03Izo)
+
+Contributor instructions:
+- To submit a gameplay video, add a comment to issue #3 with the YouTube link, or open a PR updating the README with your embed.
+- For short clips, GIFs are fine — keep them under 5 MB or host externally and link.
+- When submitting, include a short caption describing what the clip demonstrates (e.g., "Stealth mechanic demo — v0.4").
 
 ## Installation
 
@@ -76,6 +90,8 @@ To propose changes:
 - Fork the repo
 - Create a feature branch
 - Submit a pull request
+
+If you plan to contribute media (screenshots/videos), please follow the contributor instructions in the "Gameplay Video" section.
 
 ## License
 
