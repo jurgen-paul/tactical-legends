@@ -1,7 +1,7 @@
 import pygame
 
 class VaultStartMission:
-    """Cinematic start to the Vault mission with fade-in and voiceover."""
+    "Cinematic start to the Vault mission with fade-in and voiceover."""
     def __init__(self, screen, scene_manager):
         self.screen = screen
         self.scene_manager = scene_manager
@@ -17,7 +17,7 @@ class VaultStartMission:
             self.voice_clip = None
 
     def update(self, dt):
-        self.timer += dt
+        self. timer += dt
         if self.timer > 0.5 and not self.voice_played and self.voice_clip:
             self.voice_clip.play()
             self.voice_played = True
@@ -40,7 +40,7 @@ class VaultStartMission:
         pass  # No interaction; it's a cinematic
 
 class VaultFantasticEnd:
-    """Cinematic end scene with Zoe, emotional music, and legacy display."""
+    "Cinematic end scene with Zoe, emotional music, and legacy display."""
     def __init__(self, screen, scene_manager):
         self.screen = screen
         self.scene_manager = scene_manager
@@ -62,8 +62,8 @@ class VaultFantasticEnd:
         self.music_played = False
 
     def update(self, dt):
-        self.timer += dt
-        if not self.music_played and self.music:
+        self. timer += dt
+        if not self.music_played and self. music:
             self.music.play()
             self.music_played = True
         if self.timer > 3 and self.phase < len(self.zoe_texts) - 1:
@@ -211,7 +211,7 @@ class EchoInfiltrationAnimation:
         self.mission_text = "Infiltrating Vault with Mossad clearance..."
 
     def update(self, dt):
-        self.timer += dt
+        self. timer += dt
         if self.timer > 0.2:
             self.current_frame = (self.current_frame + 1) % len(self.bg_frames)
             self.timer = 0
@@ -242,7 +242,7 @@ class ShardChamberScene:
         self.played_clip = False
 
     def update(self, dt):
-        self.timer += dt
+        self. timer += dt
         if self.timer > 0.3:
             self.current_frame = (self.current_frame + 1) % len(self.bg_frames)
             self.timer = 0
@@ -266,7 +266,7 @@ OISTARIAN, embedded with Mossad and IDF tactical units
 🎞️ Scene Flow
 1. Insertion
 - Daylight breach into Nuseirat under Mossad clearance
-- OISTARIAN syncs with Yamam unit via encrypted neural link
+- OISTARIAN syncs with the Yamam unit via encrypted neural link
 - Feint operations launched in Bureij and Deir al-Balah to divert Hamas defenses
 2. Split Extraction
 - Hostages held in two separate civilian buildings
@@ -278,7 +278,7 @@ OISTARIAN, embedded with Mossad and IDF tactical units
 - Hostages extracted under fire; rescue vehicle disabled mid-evac
 4. Final Echo
 - OISTARIAN wounded but activates “Final Liberation” protocol
-- Zoe’s memory shard pulses in sync with evac heartbeat monitor
+- Zoe’s memory shard pulses in sync with the evac heartbeat monitor
 - Mission ends with emotional reunion and encrypted log entry: “The silence is broken.”
 mission_logs = [
     "Vault breach initiated: Nuseirat sector",
@@ -292,7 +292,7 @@ mission_logs = [
 🧩 Gameplay Concept
 - Objective: Decode Zoe’s encrypted memory shard
 - Mechanic: Rotate neural glyphs to align emotional frequencies
-- Timer: 60 seconds before shard destabilizes
+- Timer: 60 seconds before the shard destabilizes
 - Feedback: Zoe’s voice grows clearer with each correct alignment
 import pygame
 import random
@@ -313,7 +313,7 @@ def draw_ui():
     screen.fill((10, 10, 30))
     for i, val in enumerate(glyphs):
         color = (0, 255, 180) if i == selected else (100, 100, 100)
-        pygame.draw.rect(screen, color, (100 + i*120, 250, 80, 80))
+        pygame. draw.rect(screen, color, (100 + i*120, 250, 80, 80))
         text = font.render(str(val), True, (255, 255, 255))
         screen.blit(text, (120 + i*120, 270))
     timer_text = font.render(f"Time: {int(timer)}s", True, (255, 100, 100))
@@ -326,7 +326,7 @@ while running:
     if timer <= 0:
         running = False
 
-    for event in pygame.event.get():
+    for event in pygame. event.get():
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.KEYDOWN:
@@ -344,7 +344,7 @@ while running:
         running = False
 
     draw_ui()
-    pygame.display.update()
+    pygame. display.update()
 
 if success:
     print("Decryption successful. Zoe’s echo unlocked.")
@@ -367,7 +367,7 @@ class YamamBreach:
         self.font = pygame.font.Font(None, 28)
 
     def update(self, dt):
-        self.timer += dt
+        self. timer += dt
         if self.timer > 0.2:
             self.current = (self.current + 1) % len(self.frames)
             self.timer = 0
@@ -396,7 +396,7 @@ def draw_ui():
     screen.fill((10, 10, 30))
     for i, val in enumerate(glyphs):
         color = (0, 255, 180) if i == selected else (100, 100, 100)
-        pygame.draw.rect(screen, color, (100 + i*120, 250, 80, 80))
+        pygame. draw.rect(screen, color, (100 + i*120, 250, 80, 80))
         text = font.render(str(val), True, (255, 255, 255))
         screen.blit(text, (120 + i*120, 270))
     timer_text = font.render(f"Time: {int(timer)}s", True, (255, 100, 100))
@@ -409,7 +409,7 @@ while running:
     if timer <= 0:
         running = False
 
-    for event in pygame.event.get():
+    for event in pygame. event.get():
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.KEYDOWN:
@@ -427,7 +427,7 @@ while running:
         running = False
 
     draw_ui()
-    pygame.display.update()
+    pygame. display.update()
 
 if success:
     print("Decryption successful. Zoe’s echo unlocked.")
@@ -449,7 +449,7 @@ class YamamBreach:
         self.font = pygame.font.Font(None, 28)
 
     def update(self, dt):
-        self.timer += dt
+        self. timer += dt
         if self.timer > 0.2:
             self.current = (self.current + 1) % len(self.frames)
             self.timer = 0
@@ -468,7 +468,7 @@ class YamamBreach:
         self.font = pygame.font.Font(None, 28)
 
     def update(self, dt):
-        self.timer += dt
+        self. timer += dt
         if self.timer > 0.2:
             self.current = (self.current + 1) % len(self.frames)
             self.timer = 0
@@ -527,7 +527,7 @@ class HostageReunion:
         self.font = pygame.font.Font(None, 28)
 
     def update(self, dt):
-        self.timer += dt
+        self. timer += dt
         if self.timer > 0.25:
             self.current = (self.current + 1) % len(self.frames)
             self.timer = 0
@@ -638,7 +638,7 @@ class LegacyArchive:
         self.timer = 0
 
     def update(self, dt):
-        self.timer += dt
+        self. timer += dt
         if self.timer > 1 and self.index < len(self.logs) - 1:
             self.index += 1
             self.timer = 0
@@ -665,7 +665,7 @@ class EchoReversalScene:
         self.timer = 0
 
     def update(self, dt):
-        self.timer += dt
+        self. timer += dt
         if self.timer > 2 and self.index < len(self.dialogue) - 1:
             self.index += 1
             self.timer = 0
@@ -691,7 +691,7 @@ class ZoeTacticalUI:
         self.timer = 0
 
     def update(self, dt):
-        self.timer += dt
+        self. timer += dt
         if self.timer > 1 and self.index < len(self.modules) - 1:
             self.index += 1
             self.timer = 0
@@ -717,7 +717,7 @@ import json
 from typing import Dict, List, Optional
 
 class GameState:
-    """Central game state management"""
+    "Central game state management"
     def __init__(self):
         self.trust_score = 82
         self.voice_heard = False
@@ -727,7 +727,7 @@ class GameState:
         self.current_scene = "VaultOfEchoes"
         
     def save_state(self, filename: str):
-        """Save game state to JSON"""
+        "Save game state to JSON"
         state_data = {
             'trust_score': self.trust_score,
             'voice_heard': self.voice_heard,
@@ -740,7 +740,7 @@ class GameState:
             json.dump(state_data, f, indent=2)
     
     def load_state(self, filename: str):
-        """Load game state from JSON"""
+        "Load game state from JSON"
         try:
             with open(filename, 'r') as f:
                 state_data = json.load(f)
@@ -749,7 +749,7 @@ class GameState:
             print(f"Save file {filename} not found. Using default state.")
 
 class SceneManager:
-    """Manages scene transitions and game flow"""
+    """ Manages scene transitions and game flow."
     def __init__(self, screen):
         self.screen = screen
         self.scenes = {}
@@ -757,11 +757,11 @@ class SceneManager:
         self.game_state = GameState()
         
     def register_scene(self, name: str, scene):
-        """Register a scene with the manager"""
+        """ Register a scene with the manager"""
         self.scenes[name] = scene
         
     def switch_scene(self, scene_name: str):
-        """Switch to a different scene"""
+        "Switch to a different scene."
         if scene_name in self.scenes:
             self.current_scene = self.scenes[scene_name]
             self.game_state.current_scene = scene_name
@@ -771,24 +771,24 @@ class SceneManager:
             print(f"Scene '{scene_name}' not found!")
             
     def update(self, dt):
-        """Update current scene"""
+        """ Update current scene"""
         if self.current_scene:
             if hasattr(self.current_scene, 'update'):
                 self.current_scene.update(dt)
                 
     def render(self):
-        """Render current scene"""
+        "Render current scene"
         if self.current_scene:
             self.current_scene.render()
             
     def handle_event(self, event):
-        """Handle events for current scene"""
+        "Handle events for current scene"
         if self.current_scene:
             if hasattr(self.current_scene, 'handle_event'):
                 self.current_scene.handle_event(event)
 
 class VaultOfEchoesScene:
-    """Main vault infiltration scene"""
+    "Main vault infiltration scene"
     def __init__(self, screen, scene_manager):
         self.screen = screen
         self.scene_manager = scene_manager
@@ -796,23 +796,23 @@ class VaultOfEchoesScene:
         self.setup_complete = False
 
     def setup(self):
-        """Initialize scene resources"""
+        """ Initialize scene resources"""
         try:
             self.bg = pygame.image.load("assets/vault_bg.jpg").convert()
             self.voice_clip = pygame.mixer.Sound("assets/voice_whisper.wav")
             self.setup_complete = True
-        except pygame.error as e:
+        except pygame. error as e:
             print(f"Asset loading error: {e}")
             # Create fallback background
             self.bg = pygame.Surface((800, 600))
             self.bg.fill((20, 20, 50))
 
     def update(self, dt):
-        """Dynamic lighting effects could go here"""
+        "Dynamic lighting effects could go here."
         pass
 
     def render(self):
-        """Render the vault scene"""
+        "Render the vault scene"
         if self.setup_complete:
             self.screen.blit(self.bg, (0, 0))
         else:
@@ -833,7 +833,7 @@ class VaultOfEchoesScene:
             self.screen.blit(inst_text, (100, 200 + i * 30))
 
     def handle_event(self, event):
-        """Handle vault scene interactions"""
+        "Handle vault scene interactions"
         if event.type == pygame.KEYDOWN:
             trust_score = self.scene_manager.game_state.trust_score
             
@@ -849,7 +849,7 @@ class VaultOfEchoesScene:
                 self.scene_manager.switch_scene("ZoesSilence")
 
 class ZoesSilenceScene:
-    """Emotional corridor scene with Zoe's memory"""
+    "Emotional corridor scene with Zoe's memory"
     def __init__(self, screen, scene_manager):
         self.screen = screen
         self.scene_manager = scene_manager
@@ -858,18 +858,18 @@ class ZoesSilenceScene:
         self.setup_complete = False
 
     def setup(self):
-        """Initialize scene resources"""
+        """ Initialize scene resources"""
         try:
             self.bg = pygame.image.load("assets/zoe_corridor.jpg").convert()
             self.voice_clip = pygame.mixer.Sound("assets/zoe_voicemail.wav")
             self.setup_complete = True
-        except pygame.error as e:
+        except pygame. error as e:
             print(f"Asset loading error: {e}")
             self.bg = pygame.Surface((800, 600))
             self.bg.fill((50, 30, 30))
 
     def render(self):
-        """Render Zoe's corridor scene"""
+        "Render Zoe's corridor scene"
         if self.setup_complete:
             self.screen.blit(self.bg, (0, 0))
         else:
@@ -888,7 +888,7 @@ class ZoesSilenceScene:
             self.screen.blit(inst_text, (80, 150))
 
     def handle_event(self, event):
-        """Handle corridor interactions"""
+        "Handle corridor interactions"
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_v and not self.played_clip:
                 if self.setup_complete:
@@ -900,7 +900,7 @@ class ZoesSilenceScene:
                 self.scene_manager.switch_scene("EchoProtocol")
 
 class GearUpgradeUI:
-    """Tactical gear management interface"""
+    "Tactical gear management interface"
     def __init__(self, screen):
         self.screen = screen
         self.font = pygame.font.Font(None, 28)
@@ -916,7 +916,7 @@ class GearUpgradeUI:
         }
 
     def render(self):
-        """Render gear upgrade interface"""
+        "Render gear upgrade interface"
         self.screen.fill((10, 10, 30))
         
         # Title
@@ -924,7 +924,7 @@ class GearUpgradeUI:
         self.screen.blit(title, (200, 50))
         
         y = 150
-        for gear_name, stats in self.gear.items():
+        for gear_name, stats in self. gear.items():
             # Gear name and level
             label = f"{gear_name} - Level {stats['level']}"
             rendered = self.font.render(label, True, (255, 255, 255))
@@ -938,7 +938,7 @@ class GearUpgradeUI:
             y += 80
 
 class NeuralGlassDecryption:
-    """Mini-game for decrypting Zoe's memory shard"""
+    """ Mini-game for decrypting Zoe's memory shard"
     def __init__(self, screen):
         self.screen = screen
         self.font = pygame.font.Font(None, 36)
@@ -950,7 +950,7 @@ class NeuralGlassDecryption:
         self.game_over = False
 
     def update(self, dt):
-        """Update decryption mini-game"""
+        """ Update decryption mini-game"
         if not self.game_over:
             self.timer -= dt
             if self.timer <= 0:
@@ -961,7 +961,7 @@ class NeuralGlassDecryption:
                 self.game_over = True
 
     def render(self):
-        """Render decryption interface"""
+        "Render decryption interface"
         self.screen.fill((10, 10, 30))
         
         # Title
@@ -969,7 +969,7 @@ class NeuralGlassDecryption:
         self.screen.blit(title, (200, 50))
         
         # Instructions
-        inst = pygame.font.Font(None, 24).render("Use arrow keys to select and adjust glyphs", True, (180, 180, 180))
+        inst = pygame.font.Font(None, 24) render ("Use arrow keys to select and adjust glyphs", True, (180, 180, 180))
         self.screen.blit(inst, (200, 100))
         
         # Glyphs
@@ -1005,7 +1005,7 @@ class NeuralGlassDecryption:
             self.screen.blit(result_text, result_rect)
 
     def handle_event(self, event):
-        """Handle decryption controls"""
+        "Handle decryption controls"
         if event.type == pygame.KEYDOWN and not self.game_over:
             if event.key == pygame.K_LEFT:
                 self.selected = (self.selected - 1) % len(self.glyphs)
@@ -1017,7 +1017,7 @@ class NeuralGlassDecryption:
                 self.glyphs[self.selected] = (self.glyphs[self.selected] - 1) % 10
 
 class AnimationSystem:
-    """Handles frame-based animations for cutscenes"""
+    """ Handles frame-based animations for cutscenes"""
     def __init__(self, frame_paths: List[str], frame_duration: float = 0.3):
         self.frames = []
         self.frame_duration = frame_duration
@@ -1038,8 +1038,8 @@ class AnimationSystem:
                 self.frames.append(placeholder)
     
     def update(self, dt):
-        """Update animation frame"""
-        if not self.playing or not self.frames:
+        """ Update animation frame"""
+        if not self. playing or not self.frames:
             return
             
         self.timer += dt
@@ -1055,19 +1055,19 @@ class AnimationSystem:
                     self.playing = False
     
     def get_current_frame(self):
-        """Get current animation frame"""
+        "Get current animation frame"
         if self.frames and 0 <= self.current_frame < len(self.frames):
             return self.frames[self.current_frame]
         return None
     
     def reset(self):
-        """Reset animation to beginning"""
+        """ Reset animation to beginning"
         self.current_frame = 0
         self.timer = 0.0
         self.playing = True
 
 class DialogueSystem:
-    """Manages dialogue sequences with timing"""
+    """ Manages dialogue sequences with timing"
     def __init__(self, dialogue_lines: List[str], line_duration: float = 2.5):
         self.dialogue_lines = dialogue_lines
         self.line_duration = line_duration
@@ -1076,7 +1076,7 @@ class DialogueSystem:
         self.complete = False
     
     def update(self, dt):
-        """Update dialogue progression"""
+        """ Update dialogue progression"
         if self.complete:
             return
             
@@ -1090,13 +1090,13 @@ class DialogueSystem:
                 self.current_line = len(self.dialogue_lines) - 1
     
     def get_current_line(self) -> str:
-        """Get current dialogue line"""
+        "Get current dialogue line"
         if 0 <= self.current_line < len(self.dialogue_lines):
             return self.dialogue_lines[self.current_line]
         return ""
     
     def skip_to_next(self):
-        """Manually advance dialogue"""
+        """ Manually advance dialogue"
         if not self.complete:
             self.current_line += 1
             self.timer = 0.0
@@ -1105,7 +1105,7 @@ class DialogueSystem:
                 self.current_line = len(self.dialogue_lines) - 1
 
 class YamamBreachScene:
-    """Tactical breach sequence with Yamam unit"""
+    "Tactical breach sequence with Yamam unit"
     def __init__(self, screen, scene_manager):
         self.screen = screen
         self.scene_manager = scene_manager
@@ -1117,10 +1117,10 @@ class YamamBreachScene:
         self.phase_timer = 0.0
         
     def setup(self):
-        """Initialize breach scene"""
+        """ Initialise breach scene"""
         try:
             # Setup animations for each phase
-            self.thermal_anim = AnimationSystem([f"assets/thermal_scan_{i}.png" for i in range(1, 4)], 0.5)
+            .thermal_anim = AnimationSystem([f"assets/thermal_scan_{i}.png" for i in range(1, 4)], 0.5)
             self.breach_anim = AnimationSystem([f"assets/yamam_breach_{i}.png" for i in range(1, 6)], 0.2)
             self.extraction_anim = AnimationSystem([f"assets/extraction_{i}.png" for i in range(1, 4)], 0.4)
             
@@ -1129,7 +1129,7 @@ class YamamBreachScene:
             self.breach_sound = pygame.mixer.Sound("assets/breach_audio.wav")
             
             self.setup_complete = True
-        except pygame.error as e:
+        except pygame. error as e:
             print(f"Asset loading error: {e}")
             # Fallback setup
             self.thermal_anim = AnimationSystem([""], 0.5)
@@ -1137,7 +1137,7 @@ class YamamBreachScene:
             self.extraction_anim = AnimationSystem([""], 0.4)
     
     def update(self, dt):
-        """Update breach sequence"""
+        """ Update breach sequence"""
         self.phase_timer += dt
         
         if self.phase == "thermal_scan":
@@ -1167,7 +1167,7 @@ class YamamBreachScene:
                 self.scene_manager.switch_scene("HostageReunion")
     
     def render(self):
-        """Render breach sequence"""
+        "Render breach sequence"
         if self.phase == "thermal_scan":
             frame = self.thermal_anim.get_current_frame()
             if frame:
@@ -1184,7 +1184,7 @@ class YamamBreachScene:
             
         elif self.phase == "flashbang":
             # White flash effect
-            self.screen.fill((255, 255, 255))
+            self. screen.fill((255, 255, 255))
             text = "FLASHBANG DEPLOYED"
             
         elif self.phase == "breach":
@@ -1215,7 +1215,7 @@ class YamamBreachScene:
         self.screen.blit(timer_rendered, (650, 50))
 
 class FinalLiberationScene:
-    """Climactic final scene with Zoe reunion"""
+    """ Climactic final scene with Zoe reunion"
     def __init__(self, screen, scene_manager):
         self.screen = screen
         self.scene_manager = scene_manager
@@ -1223,7 +1223,7 @@ class FinalLiberationScene:
         self.setup_complete = False
         
     def setup(self):
-        """Initialize final liberation scene"""
+        """ Initialise final liberation scene"""
         dialogue_lines = [
             "OISTARIAN: The silence ends here.",
             "Zoe: You were never just a shadow.",
@@ -1243,7 +1243,7 @@ class FinalLiberationScene:
         self.setup_complete = True
     
     def update(self, dt):
-        """Update final liberation scene"""
+        """ Update final liberation scene"""
         self.dialogue.update(dt)
         self.animation.update(dt)
         
@@ -1252,7 +1252,7 @@ class FinalLiberationScene:
             self.scene_manager.switch_scene("LegacyArchive")
     
     def render(self):
-        """Render final liberation scene"""
+        "Render final liberation scene"
         # Background animation
         frame = self.animation.get_current_frame()
         if frame:
@@ -1278,13 +1278,13 @@ class FinalLiberationScene:
             self.screen.blit(text, text_rect)
     
     def handle_event(self, event):
-        """Handle final liberation interactions"""
+        "Handle final liberation interactions"
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 self.dialogue.skip_to_next()
 
 class VaultMapInterface:
-    """Interactive map of all 5 vault locations"""
+    """ Interactive map of all 5 vault locations"
     def __init__(self, screen, scene_manager):
         self.screen = screen
         self.scene_manager = scene_manager
@@ -1333,9 +1333,9 @@ class VaultMapInterface:
         self.vault_list = list(self.vaults.keys())
     
     def render(self):
-        """Render vault map interface"""
+        "Render vault map interface"
         # Background
-        self.screen.fill((5, 10, 25))
+        self. screen.fill((5, 10, 25))
         
         # Title
         title = self.title_font.render("OISTARIAN VAULT NETWORK", True, (0, 255, 180))
@@ -1376,7 +1376,7 @@ class VaultMapInterface:
             pygame.draw.circle(self.screen, (255, 255, 255), pos, 25, 2)
             
             # Vault label
-            label = pygame.font.Font(None, 16).render(vault_name.split()[-1], True, (255, 255, 255))
+            label = pygame.font.Font(None, 16) render (vault_name.split()[-1], True, (255, 255, 255))
             label_rect = label.get_rect(center=(pos[0], pos[1] + 40))
             self.screen.blit(label, label_rect)
         
@@ -1409,7 +1409,7 @@ class VaultMapInterface:
         self.screen.blit(inst_text, inst_rect)
     
     def handle_event(self, event):
-        """Handle vault map navigation"""
+        "Handle vault map navigation"
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 self.selected_vault = (self.selected_vault - 1) % len(self.vault_list)
@@ -1427,7 +1427,7 @@ class VaultMapInterface:
                 self.scene_manager.switch_scene("TacticalBriefing")
 
 class TacticalBriefingUI:
-    """Mission briefing interface with intel and objectives"""
+    """ Mission briefing interface with intel and objectives"
     def __init__(self, screen, scene_manager):
         self.screen = screen
         self.scene_manager = scene_manager
@@ -1462,7 +1462,7 @@ class TacticalBriefingUI:
         self.current_section = "overview"  # overview, intel, assets, risks
         
     def render(self):
-        """Render tactical briefing interface"""
+        "Render tactical briefing interface"
         # Background with tactical grid
         self.screen.fill((5, 5, 15))
         
@@ -1521,14 +1521,14 @@ class TacticalBriefingUI:
         self.screen.blit(control_text, (20, 585))
     
     def _render_overview(self):
-        """Render mission overview"""
+        "Render mission overview"
         y_offset = 150
         
         objective_title = self.font.render("PRIMARY OBJECTIVE", True, (255, 100, 100))
         self.screen.blit(objective_title, (40, y_offset))
         y_offset += 30
         
-        objective_text = pygame.font.Font(None, 24).render(self.mission_data["objective"], True, (255, 255, 255))
+        objective_text = pygame.font.Font(None, 24) render (self.mission_data["objective"], True, (255, 255, 255))
         self.screen.blit(objective_text, (60, y_offset))
         y_offset += 50
         
@@ -1537,7 +1537,7 @@ class TacticalBriefingUI:
         y_offset += 30
         
         for hostage in self.mission_data["hostages"]:
-            hostage_text = pygame.font.Font(None, 22).render(f"• {hostage}", True, (200, 255, 200))
+            hostage_text = pygame.font.Font(None, 22) render (f"• {hostage}", True, (200, 255, 200))
             self.screen.blit(hostage_text, (60, y_offset))
             y_offset += 25
         
@@ -1561,7 +1561,7 @@ class TacticalBriefingUI:
             y_offset += 22
     
     def _render_intel(self):
-        """Render intelligence section"""
+        "Render intelligence section"
         y_offset = 150
         
         intel_title = self.font.render("OPERATIONAL INTELLIGENCE", True, (255, 200, 100))
@@ -1596,7 +1596,7 @@ class TacticalBriefingUI:
             y_offset += 25
     
     def _render_assets(self):
-        """Render available assets"""
+        "Render available assets"
         y_offset = 150
         
         assets_title = self.font.render("AVAILABLE ASSETS", True, (100, 255, 100))
@@ -1631,7 +1631,7 @@ class TacticalBriefingUI:
             y_offset += 25
     
     def _render_risks(self):
-        """Render risk assessment"""
+        "Render risk assessment"
         y_offset = 150
         
         risks_title = self.font.render("RISK ASSESSMENT", True, (255, 100, 100))
@@ -1667,10 +1667,10 @@ class TacticalBriefingUI:
 # Example usage and main game loop structure
 def main():
     pygame.init()
-    pygame.mixer.init()
+    pygame. mixer.init()
     
     screen = pygame.display.set_mode((800, 600))
-    pygame.display.set_caption("ZOE-FILE: Rise of OISTARIAN")
+    pygame. display.set_caption("ZOE-FILE: Rise of OISTARIAN")
     clock = pygame.time.Clock()
     
     # Initialize scene manager
@@ -1692,7 +1692,7 @@ def main():
         dt = clock.tick(60) / 1000.0  # Delta time in seconds
         
         # Handle events
-        for event in pygame.event.get():
+        for event in pygame. event.get():
             if event.type == pygame.QUIT:
                 running = False
             else:
@@ -1703,9 +1703,96 @@ def main():
         
         # Render
         scene_manager.render()
-        pygame.display.flip()
+        pygame. display.flip()
     
     pygame.quit()
 
 if __name__ == "__main__":
     main()
+import pygame
+import time
+import random
+
+class HUDOverlay:
+    def __init__(self, width=800, height=600, operation_name="HYBRID SOLVER OPS"):
+        pygame.init()
+        self.screen = pygame.display.set_mode((width, height))
+        pygame. display.set_caption(operation_name)
+        self.clock = pygame.time.Clock()
+        self.font = pygame.font.SysFont("consolas", 20)
+        self.big_font = pygame.font.SysFont("consolas", 28, bold=True)
+        self.events = []
+        self.max_events = 8
+        self.running = True
+
+    def add_event(self, code, message, sympy_conf, torch_conf, final_choice):
+        timestamp = time.strftime("%H:%M:%S")
+        entry = {
+            "time": timestamp,
+            "code": code,
+            "message": message,
+            "sympy_conf": sympy_conf,
+            "torch_conf": torch_conf,
+            "final_choice": final_choice
+        }
+        self.events.append(entry)
+        if len(self.events) > self.max_events:
+            self.events.pop(0)
+
+    def draw_feed(self):
+        y = 50
+        header = self.big_font.render(">>> SYSTEM LOG", True, (255, 255, 0))
+        self.screen.blit(header, (20, 10))
+        for e in self.events[::-1]:
+            text = f"[{e['time']}] [{e['code']}] {e['message']} → Final: {e['final_choice']}"
+            surf = self.font.render(text, True, (200, 200, 200))
+            self.screen.blit(surf, (20, y))
+            y += 25
+
+    def draw_confidence_bars(self):
+        # SymPy bar
+        sympy_height = int(200 * self.events[-1]["sympy_conf"]) if self.events else 0
+        torch_height = int(200 * self.events[-1]["torch_conf"]) if self.events else 0
+
+        # glowing effect by color intensity
+        sympy_color = (0, 255, min(255, 100 + sympy_height))
+        torch_color = (255, 140, min(255, 100 + torch_height))
+
+        pygame.draw.rect(self.screen, sympy_color, (600, 300 - sympy_height, 60, sympy_height))
+        pygame.draw.rect(self.screen, torch_color, (700, 300 - torch_height, 60, torch_height))
+
+        label1 = self.font.render("SymPy", True, (0, 255, 255))
+        label2 = self.font.render("Torch", True, (255, 165, 0))
+        self.screen.blit(label1, (600, 310))
+        self.screen.blit(label2, (700, 310))
+
+    def run(self):
+        while self.running:
+            for event in pygame. event.get():
+                if event.type == pygame.QUIT:
+                    self.running = False
+
+            self.screen.fill((0, 0, 30))  # dark background
+            self.draw_feed()
+            if self.events:
+                self.draw_confidence_bars()
+
+            pygame. display.flip()
+            self.clock.tick(30)
+
+        pygame.quit()
+
+
+# ============================================================
+# Example usage (simulate solver events)
+# ============================================================
+hud = HUDOverlay()
+
+for i in range(10):
+    sympy_conf = random.uniform(0, 1)
+    torch_conf = random.uniform(0, 1)
+    final_choice = "SymPy" if sympy_conf > torch_conf else "Torch"
+    hud.add_event("SOLVE", f"Problem {i+1} processed", sympy_conf, torch_conf, final_choice)
+    time.sleep(0.5)
+
+hud.run()
