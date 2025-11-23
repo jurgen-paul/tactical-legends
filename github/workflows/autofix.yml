@@ -1,18 +1,229 @@
-name: autofix.ci  github/workflows/autofix.yml
+name: autofix.ci
 
 on:
+  workflow_call:
   pull_request:
   push:
     branches: [ "main" ]
+
 permissions:
   contents: read
 
 jobs:
   autofix:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - target: python
+            cache_prefix: python
+            uv_version: "0.4.20"
+          - target: node
+            cache_prefix: node
+            node_version: "20.x"
+          - target: rust
+            cache_prefix: rust
+            rust_version: "1.65"
+          - target: go
+            cache_prefix: go
+            go_version: "1.17"
+          - target: images
+            cache_prefix: images
+          - target: precommit
+            cache_prefix: precommit
+
     steps:
       - uses: actions/checkout@v5
 
-      # TODO: add all code-fixing here.
+      # --- Cache per target using cache_prefix alias ---
+      - name: Setup cache
+        uses: actions/cache@v4
+        if: matrix.target == 'python'
+        with:
+          path: ~/.cache/uv
+          key: ${{ matrix.cache_prefix }}-${{ runner.os }}-${{ matrix.uv_version }}-${{ hashFiles('**/requirements*.txt') }}
+          restore-keys: |
+            ${{ matrix.cache_prefix }}-${{ runner.os }}-${{ matrix.uv_version }}-
+            ${{ matrix.cache_prefix }}-${{ runner.os }}-
+            ${{ matrix.cache_prefix }}-
+
+      - name: Setup cache
+        uses: actions/cache@v4
+        if: matrix.target == 'node'
+        with:
+          path: ~/.npm
+          key: ${{ matrix.cache_prefix }}-${{ runner.os }}-${{ matrix.node_version }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ matrix.cache_prefix }}-${{ runner.os }}-${{ matrix.node_version }}-
+            ${{ matrix.cache_prefix }}-${{ runner.os }}-
+            ${{ matrix.cache_prefix }}-
+
+      - name: Setup cache
+        uses: actions/cache@v4
+        if: matrix.target == 'rust'
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ matrix.cache_prefix }}-${{ runner.os }}-${{ matrix.rust_version }}-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ matrix.cache_prefix }}-${{ runner.os }}-${{ matrix.rust_version }}-
+            ${{ matrix.cache_prefix }}-${{ runner.os }}-
+            ${{ matrix.cache_prefix }}-
+
+      - name: Setup cache
+        uses: actions/cache@v4
+        if: matrix.target == 'go'
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ matrix.cache_prefix }}-${{ runner.os }}-${{ matrix.go_version }}-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ matrix.cache_prefix }}-${{ runner.os }}-${{ matrix.go_version }}-
+            ${{ matrix.cache_prefix }}-${{ runner.os }}-
+            ${{ matrix.cache_prefix }}-
+
+      # --- Python autofix ---
+      - if: matrix.target == 'python'
+        uses: astral-sh/setup-uv@85856786d1ce8acfbcc2f13a5f3fbd6b938f9f41
+        with:
+          version: ${{ matrix.uv_version }}
+      - if: matrix.target == 'python'
+        run: uv run ruff check --fix-only .
+      - if: matrix.target == 'python'
+        run: uv run ruff format .
+
+      # --- Node autofix ---
+      - if: matrix.target == 'node'
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node_version }}
+      - if: matrix.target == 'node'
+        run: npm ci
+      - if: matrix.target == 'node'
+        run: npx prettier --write.
+
+      # --- Rust autofix ---
+      - if: matrix.target == 'rust'
+        run: rustup toolchain install ${{ matrix.rust_version }} --profile minimal --component rustfmt --component clippy
+      - if: matrix.target == 'rust'
+        run: rustup default ${{ matrix.rust_version }}
+      - if: matrix.target == 'rust'
+        run: cargo clippy --fix --workspace
+      - if: matrix.target == 'rust'
+        run: cargo fmt --all
+
+      # --- Go autofix ---
+      - if: matrix.target == 'go'
+        uses: actions/setup-go@v6
+        with:
+          go-version: ${{ matrix.go_version }}
+      - if: matrix.target == 'go'
+        run: go install golang.org/x/tools/cmd/goimports@latest
+      - if: matrix.target == 'go'
+        run: goimports -w.
+
+      # --- Images autofix ---
+      - if: matrix.target == 'images'
+        run: sudo apt-get update && sudo apt-get install -y pngquant
+      - if: matrix.target == 'images'
+        run: |
+          shopt -s globstar
+          pngquant -f --ext .png --skip-if-larger -- **/*.png
+
+      # --- Pre-commit autofix ---
+      - if: matrix.target == 'precommit'
+        run: pip install pre-commit
+      - if: matrix.target == 'precommit'
+        run: pre-commit run --all-files
+
+      # --- Final autofix commit step ---
+      - uses: autofix-ci/action@635ffb0c9798bd160680f18fd73371e355b85f27
+      name: "Cache Setup"
+description: "Reusable cache step for language/tool dependencies"
+inputs:
+  cache_prefix:
+    description: "Prefix for cache key (e.g. python, node, rust, go)"
+    required: true
+  version:
+    description: "Language/tool version (optional)"
+    required: false
+    default: ""
+  lockfile:
+    description: "Lockfile glob pattern (optional)"
+    required: false
+    default: ""
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup cache
+      uses: actions/cache@v4
+      with:
+        path: |
+          ${{ inputs.cache_prefix == 'python' && '~/.cache/uv' || '' }}
+          ${{ inputs.cache_prefix == 'node' && '~/.npm' || '' }}
+          ${{ inputs.cache_prefix == 'rust' && '~/.cargo/bin/
+          ~/.cargo/registry/index/
+          ~/.cargo/registry/cache/
+          ~/.cargo/git/db/
+          target/' || '' }}
+          ${{ inputs.cache_prefix == 'go' && '~/go/pkg/mod' || '' }}
+        key: ${{ inputs.cache_prefix }}-${{ runner.os }}-${{ inputs.version }}-${{ hashFiles(inputs.lockfile) }}
+        restore-keys: |
+          ${{ inputs.cache_prefix }}-${{ runner.os }}-${{ inputs.version }}-
+          ${{ inputs.cache_prefix }}-${{ runner.os }}-
+          ${{ inputs.cache_prefix }}-
+          jobs:
+  autofix:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - target: python
+            cache_prefix: python
+            uv_version: "0.4.20"
+            lockfile: "**/requirements*.txt"
+          - target: node
+            cache_prefix: node
+            node_version: "20.x"
+            lockfile: "**/package-lock.json"
+          - target: rust
+            cache_prefix: rust
+            rust_version: "1.65"
+            lockfile: "**/Cargo.lock"
+          - target: go
+            cache_prefix: go
+            go_version: "1.17"
+            lockfile: "**/go.sum"
+          - target: images
+            cache_prefix: images
+          - target: precommit
+            cache_prefix: precommit
+
+    steps:
+      - uses: actions/checkout@v5
+
+      # Reusable cache setup
+      - uses: ./.github/actions/cache-setup
+        with:
+          cache_prefix: ${{ matrix.cache_prefix }}
+          version: ${{ matrix.uv_version || matrix.node_version || matrix.rust_version || matrix.go_version }}
+          lockfile: ${{ matrix.lockfile }}
+
+      # Then your language/tool-specific steps...
+      - if: matrix.target == 'python'
+        uses: astral-sh/setup-uv@85856786d1ce8acfbcc2f13a5f3fbd6b938f9f41
+        with:
+          version: ${{ matrix.uv_version }}
+      - if: matrix.target == 'python'
+        run: uv run ruff check --fix-only.
+      - if: matrix.target == 'python'
+        run: uv run ruff format.
+
+      # ... etc for node, rust, go, images, precommit
 
       - uses: autofix-ci/action@635ffb0c9798bd160680f18fd73371e355b85f27
+      
