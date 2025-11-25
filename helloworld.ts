@@ -1,122 +1,178 @@
-@startjson.
-  {
-  "transmissionID": "TL-HELLO-0001",
-  "origin": "Vault Beacon Node 7",
-  "timestamp": "2525-08-25T16:44:00Z",
-  "sender": {
-    "callSign": "Echo-27",
-    "faction": "Oistarian Vanguard"
-  },
-  "message": {
-    "type": "EncryptedBroadcast",
-    "content": "Hello world!",
-    "priority": "Low",
-    "status": "Declassified"
-  },
-  "routing": {
-    "targetSector": "Eden-Prime",
-    "relayNodes": ["Grid-Alpha", "Vault-Spire", "IDF Command"]
-  }
+// hello.ts
+// Tactical Legends Character Management System v3.0
+// Run: npm install chalk
+
+import chalk from "chalk";
+
+/**
+ * Represents a Tactical Legends operative with combat specifications
+ */
+interface Character {
+  codename: string;
+  specialization: string;
+  gear: string[];
+  faction?: string;
+  rank?: string;
+  stats?: CharacterStats;
 }
-{
-  "transmissionID": "TL-ALPHA-PRIME-0001",
-  "protocol": "QUANTUM-ENCRYPTED-v4.7",
-  "origin": {
-    "facility": "Vault Beacon Node 7",
-    "coordinates": {
-      "sector": "Outer Rim - Sector 7G",
-      "grid": "47.2381°N, 122.4421°W",
-      "elevation": "12,450m"
-    },
-    "securityLevel": "ULTRA-CLASSIFIED"
-  },
-  "timestamp": {
-    "utc": "2525-08-25T16:44:00Z",
-    "missionTime": "T+00:14:32",
-    "stardate": "102525.44"
-  },
-  "sender": {
-    "callSign": "Echo-27",
-    "operatorID": "OV-27-DELTA-9",
-    "faction": "Oistarian Vanguard",
-    "rank": "Field Commander",
-    "clearanceLevel": "OMEGA-7",
-    "biometricHash": "a3f8b92c7e1d4f6a8b2c9e4f7a1b8d3c"
-  },
-  "message": {
-    "type": "EncryptedBroadcast",
-    "classification": "DECLASSIFIED",
-    "content": "Hello world! All systems are operational. Initiating first contact protocol.",
-    "priority": "LOW",
-    "urgency": "ROUTINE",
-    "status": "TRANSMITTED",
-    "encryption": {
-      "algorithm": "AES-512-QUANTUM",
-      "keyRotation": "ENABLED",
-      "integrityCheck": "SHA3-512"
-    },
-    "metadata": {
-      "wordCount": 8,
-      "language": "EN-STANDARD",
-      "audioAttached": false,
-      "attachmentCount": 0
-    }
-  },
-  "routing": {
-    "targetSector": "Eden-Prime",
-    "destinationFacility": "Central Command HQ",
-    "broadcastRange": "LONG-RANGE",
-    "relayNodes": [
-      {
-        "nodeID": "RN-001",
-        "name": "Grid-Alpha",
-        "status": "ACTIVE",
-        "latency": "47ms"
-      },
-      {
-        "nodeID": "RN-002",
-        "name": "Vault-Spire",
-        "status": "ACTIVE",
-        "latency": "89ms"
-      },
-      {
-        "nodeID": "RN-003",
-        "name": "IDF Command",
-        "status": "ACTIVE",
-        "latency": "124ms"
-      }
-    ],
-    "totalHops": 3,
-    "estimatedDelivery": "2525-08-25T16:44:03Z",
-    "redundancyLevel": "TRIPLE",
-    "fallbackRoute": ["Grid-Beta", "Nexus-Hub", "Command-Relay-9"]
-  },
-  "security": {
-    "authenticationToken": "Bearer eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9...",
-    "signatureVerified": true,
-    "tamperDetection": "ENABLED",
-    "autoDestruct": false,
-    "readReceipt": true
-  },
-  "systemStatus": {
-    "signalStrength": 94,
-    "bandwidth": "10Gbps",
-    "packetLoss": 0.02,
-    "nodeHealth": "OPTIMAL",
-    "powerLevel": 87,
-    "temperatureC": 23.4
-  },
-  "acknowledgment": {
-    "required": true,
-    "timeout": 300,
-    "retryAttempts": 3,
-    "callbackURL": "https://vault-beacon-7.oistarian.mil/ack"
-  },
-  "compliance": {
-    "retentionPeriod": "30 DAYS",
-    "auditLogged": true,
-    "gdprCompliant": true,
-    "militaryProtocol": "NATO-STANAG-5066"
-  }
+
+/**
+ * Character combat and performance statistics
+ */
+interface CharacterStats {
+  health: number;
+  armor: number;
+  speed: number;
+  stealth: number;
+  combatRating: number;
 }
-@endjson
+
+/**
+ * Mission briefing structure
+ */
+interface MissionBriefing {
+  character: Character;
+  greeting: string;
+  status: 'READY' | 'STANDBY' | 'DEPLOYED' | 'OFF-DUTY';
+  timestamp: string;
+}
+
+// Utility: Draw a section header with color
+function sectionHeader(title: string): void {
+  console.log(chalk.bgBlue.white.bold(`\n╔════════════════════════════════════════════════╗`));
+  console.log(chalk.bgBlue.white.bold(`║  ${title.padEnd(44)} ║`));
+  console.log(chalk.bgBlue.white.bold(`╚════════════════════════════════════════════════╝\n`));
+}
+
+// Create a sample character with a full profile
+const oistarian: Character = {
+  codename: "OISTARIAN",
+  specialization: "Emotional Recon Specialist",
+  faction: "Oistarian Vanguard",
+  rank: "Field Operative",
+  gear: [
+    "Whisper & Roar",
+    "NeuroPulse Arm Module",
+    "Quantum Comms Device",
+    "Tactical HUD Visor"
+  ],
+  stats: {
+    health: 150,
+    armor: 75,
+    speed: 12,
+    stealth: 88,
+    combatRating: 82
+  }
+};
+
+/**
+ * Generate a personalized greeting for the operative
+ */
+function greet(character: Character): string {
+  const rankTitle = character.rank? `${character.rank} ` : '';
+  return chalk. bold.blueBright(
+`╔════════════════════════════════════════════════╗
+║  TACTICAL LEGENDS - MISSION BRIEFING          ║
+╚════════════════════════════════════════════════╝
+
+Hello, ${chalk.yellow(rankTitle + character.codename)}!
+Ready for your mission as a ${chalk.green(character.specialization)}?
+
+Status: ${chalk.greenBright("OPERATIONAL")}
+Clearance: ${chalk.cyanBright("GRANTED.")}`
+  );
+}
+
+/**
+ * Display the operative's equipment loadout
+ */
+function showGear(character: Character): void {
+  sectionHeader(`EQUIPMENT LOADOUT: ${character.codename}`);
+  character.gear.forEach((item, index) => {
+    console.log(chalk.white(`  [${index + 1}] ${chalk.magenta(item)}`));
+  });
+  console.log(chalk.yellow(`\n  Total Items: ${character.gear.length}`));
+}
+
+/**
+ * Display character statistics
+ */
+function showStats(character: Character): void {
+  if (!character.stats) {
+    console.log(chalk.red("\n[!] No stats available for this operative."));
+    return;
+  }
+
+  sectionHeader("OPERATIVE STATISTICS");
+
+  const { health, armor, speed, stealth, combatRating } = character.stats;
+
+  console.log(`  Health:        ${chalk.green(`${health} HP`)}       ${chalk.green('█'.repeat(Math.floor(health / 10)))}`);
+  console.log(`  Armor:         ${chalk.cyan(`${armor}%`)}         ${chalk.cyan('█'.repeat(Math.floor(armor / 10)))}`);
+  console.log(`  Speed:         ${chalk.yellow(`${speed} m/s`)}      ${chalk.yellow('█'.repeat(speed))}`);
+  console.log(`  Stealth:       ${chalk.magenta(`${stealth}%`)}        ${chalk.magenta('█'.repeat(Math.floor(stealth / 10)))}`);
+  console.log(`  Combat Rating: ${chalk.redBright(`${combatRating}%`)}        ${chalk.redBright('█'.repeat(Math.floor(combatRating / 10)))}`);
+}
+
+/**
+ * Generate complete mission briefing
+ */
+function generateMissionBriefing(character: Character): MissionBriefing {
+  return {
+    character,
+    greeting: greet(character),
+    status: 'READY',
+    timestamp: new Date().toISOString()
+  };
+}
+
+/**
+ * Add equipment to character loadout
+ */
+function addGear(character: Character, item: string): void {
+  character.gear.push(item);
+  console.log(chalk.greenBright(`\n[+] Added "${item}" to ${character.codename}'s loadout.`));
+}
+
+/**
+ * Display complete character profile
+ */
+function displayProfile(character: Character): void {
+  sectionHeader("OPERATIVE DOSSIER");
+  console.log(`  Codename:       ${chalk.yellow(character.codename)}`);
+  console.log(`  Specialization: ${chalk.green(character.specialization)}`);
+  if (character.faction) console.log(`  Faction:        ${chalk.cyan(character.faction)}`);
+  if (character.rank) console.log(`  Rank:           ${chalk.blueBright(character.rank)}`);
+  console.log(`  Equipment:      ${chalk.magenta(`${character.gear.length} items`)}`);
+}
+
+// ═══════════════════════════════════════════════════════
+//  DEMO EXECUTION
+// ═══════════════════════════════════════════════════════
+
+console.log(chalk.bold("\n" + "=".repeat(50)));
+console.log(chalk.bold.blueBright("  TACTICAL LEGENDS - CHARACTER SYSTEM v3.0"));
+console.log(chalk.bold("=".repeat(50) + "\n"));
+
+// Display greeting
+console.log(greet(oistarian));
+
+// Show complete profile
+displayProfile(oistarian);
+
+// Show equipment loadout
+showGear(oistarian);
+
+// Display stats
+showStats(oistarian);
+
+// Demo: Add new gear
+addGear(oistarian, "EMP Grenade");
+
+// Generate mission briefing
+const briefing = generateMissionBriefing(oistarian);
+sectionHeader("MISSION STATUS");
+console.log(`  Status:    ${chalk.greenBright(briefing.status)}`);
+console.log(`  Timestamp: ${chalk.cyan(briefing.timestamp)}`);
+
+console.log(chalk.greenBright("\n[✓] All systems operational. Ready for deployment.\n"));
