@@ -370,7 +370,7 @@ choices = [
 ]
 
 Node 4: Forgiveness Path
-speaker = "Mira"
+speaker = "Mira."
 text = "I don’t know if I can forgive you."
 emotion = "sadness"
 choices = [
@@ -378,7 +378,7 @@ choices = [
 ]
 
 Node 6: Bonding Moment
-speaker = "Mira"
+speaker = "Mira."
 text = "He believed in you. Maybe I should try."
 emotion = "bonding"
 choices = [
@@ -611,8 +611,7 @@ Influence: +Trust, -Resentment
 Projected Evolution: Echo Reverb
 
 
-
-🧬 Evolution Forecasting
+Evolution Forecasting
 Mentorship reveals Projected Paths:
 - Echo Strike → Echo Reverb → Echo Resonance
 - Shield of Silence → Silent Aegis → Voidguard
