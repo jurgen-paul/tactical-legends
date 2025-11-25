@@ -182,3 +182,71 @@ console.log(`║  Timestamp: ${briefing.timestamp.padEnd(35)} ║`);
 console.log(`╚════════════════════════════════════════════════╝\n`);
 
 console.log("\n[✓] All systems operational. Ready for deployment.\n");
+// transmission-log.ts
+// Tactical-Legend: The Rise of the Oistarian
+// Run: npm install chalk
+
+import chalk from "chalk";
+
+// Transmission data (simplified from your JSON)
+const transmission = {
+  transmissionID: "TL-RISE-HELLO-0001",
+  origin: "Vault Beacon Node 7",
+  timestamp: "2525-08-25T16:44:00Z",
+  sender: {
+    callSign: "Echo-27",
+    faction: "Oistarian Vanguard",
+    rank: "Field Commander."
+  },
+  message: {
+    content: "Hello world! Tactical-Legend awakens. The Rise of the Oistarian begins.",
+    status: "TRANSMITTED",
+    priority: "HIGH."
+  },
+  routing: {
+    targetSector: "Eden-Prime",
+    relayNodes: ["Grid-Alpha", "Vault-Spire", "IDF Command"]
+  }
+};
+
+// Utility: draw section headers
+function sectionHeader(title: string): void {
+  console.log(chalk.bgBlue.white.bold(`\n╔════════════════════════════════════════════════╗`));
+  console.log(chalk.bgBlue.white.bold(`║  ${title.padEnd(44)} ║`));
+  console.log(chalk.bgBlue.white.bold(`╚════════════════════════════════════════════════╝\n`));
+}
+
+// Styled console output
+console.clear();
+console.log(chalk.greenBright("=".repeat(60)));
+console.log(chalk.greenBright.bold("   TACTICAL-LEGEND: THE RISE OF THE OISTARIAN"));
+console.log(chalk.greenBright("=".repeat(60)));
+
+// Transmission ID
+sectionHeader("TRANSMISSION HEADER");
+console.log(`  ID: ${chalk.yellow(transmission.transmissionID)}`);
+console.log(`  Origin: ${chalk.cyan(transmission.origin)}`);
+console.log(`  Timestamp: ${chalk.magenta(transmission.timestamp)}`);
+
+// Sender
+sectionHeader("SENDER PROFILE");
+console.log(`  CallSign: ${chalk.yellow(transmission.sender.callSign)}`);
+console.log(`  Faction:  ${chalk.green(transmission.sender.faction)}`);
+console.log(`  Rank:     ${chalk.blueBright(transmission.sender.rank)}`);
+
+// Message
+sectionHeader("MESSAGE PAYLOAD");
+console.log(chalk.whiteBright(`  Content: ${chalk.bold(transmission.message.content)}`));
+console.log(`  Status:  ${chalk.greenBright(transmission.message.status)}`);
+console.log(`  Priority:${chalk.redBright(transmission.message.priority)}`);
+
+// Routing
+sectionHeader("ROUTING DATA");
+console.log(`  Target Sector: ${chalk.cyanBright(transmission.routing.targetSector)}`);
+console.log(`  Relay Nodes:`);
+transmission.routing.relayNodes.forEach((node, i) => {
+  console.log(`    [${i + 1}] ${chalk.magenta(node)}`);
+});
+
+// Footer
+console.log(chalk.greenBright("\n[✓] Transmission complete. All systems operational.\n"));
