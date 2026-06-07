@@ -1,3 +1,42 @@
+//pip install pygame
+
+cd tactical-legends
+python tactical_legends_video_presentation.py
+
+================================================================================
+TACTICAL LEGENDS - RISE OF OISTARIAN
+Video Presentation Generator
+================================================================================
+Hello World! Starting presentation...
+================================================================================
+
+  ████████╗ █████╗  ██████╗████████╗██╗ ██████╗ █████╗ ██╗     
+  ╚══██╔══╝██╔══██╗██╔════╝╚══██╔══╝██║██╔════╝██╔══██╗██║     
+     ██║   ███████║██║        ██║   ██║██║     ███████║██║     
+     ██║   ██╔══██║██║        ██║   ██║██║     ██╔══██║██║     
+     ██║   ██║  ██║╚██████╗   ██║   ██║╚██████╗██║  ██║███████╗
+     ╚═╝   ╚═╝  ╚═╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝
+           LEGENDS - RISE OF OISTARIAN
+
+Presentation Starting...
+Press SPACE to skip scenes, ESC to exit
+--------------------------------------------------------------------------------
+Scene Changed: Opening - Black Screen
+Scene Changed: Flash Cuts
+Scene Changed: Combat Sequence
+Scene Changed: Fast Montage
+Scene Changed: Final Reveal
+Scene Changed: Tagline
+--------------------------------------------------------------------------------
+Presentation Finished!
+================================================================================
+
+
+ Add audio support (background music/narration)?
+✅ Create a CI/CD workflow to run this in GitHub Actions?
+✅ Export the presentation to a video file (MP4)?
+✅ Modify scene timings or effects?
+
 // hello.ts
 // Tactical Legends Character Management System
 
