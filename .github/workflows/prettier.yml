@@ -7,12 +7,12 @@ jobs:
   prettier:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be0f245cb3b611b198
+      - uses: actions/setup-node@60edb5dd545a775178f62b6d4be3a48e7c1d480f
       - run: |
           yarn
           yarn prettier --write .
-      - uses: autofix-ci/action@v1
+      - uses: autofix-ci/action@5dd2e61c76c371b118ee17b988851ce6e631fbb9
         with:
           commit-message: "Apply Prettier format"
       - name: 'notify vercel'
