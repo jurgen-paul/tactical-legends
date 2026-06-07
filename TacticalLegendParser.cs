@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Text.Regular Expressions;
+using System.Text.RegularExpressions;
 
 public static class TacticalLegendParser
 {
@@ -26,6 +26,9 @@ public static class TacticalLegendParser
     // Apply formatting to input text
     public static string Parse(string input)
     {
+        if (string.IsNullOrEmpty(input))
+            return input;
+
         foreach (var tag in tagMap)
         {
             input = input.Replace(tag.Key, tag.Value);
@@ -38,27 +41,33 @@ public static class TacticalLegendParser
     }
 }
 
-TacticalLegendUIRenderer
-├── TextStyler (applies markup styles)
-├── AnimationEngine (animates styled elements)
-├── VoiceoverManager (triggers audio cues)
-├── CodexUnlocker (tracks lore progression)
-└── UIController (coordinates rendering)
-public class TextStyler: MonoBehaviour
+public class TextStyler : MonoBehaviour
 {
     public TextMeshProUGUI targetText;
 
     public void ApplyStyledText(string rawInput)
     {
+        if (targetText == null)
+        {
+            Debug.LogError("TextStyler: targetText is not assigned!");
+            return;
+        }
+
         string styled = TacticalLegendParser.Parse(rawInput);
         targetText.text = styled;
     }
 }
 
-public class AnimationEngine: MonoBehaviour
+public class AnimationEngine : MonoBehaviour
 {
     public void AnimateTag(string tagType, GameObject target)
     {
+        if (target == null)
+        {
+            Debug.LogError($"AnimationEngine: Target is null for tag '{tagType}'");
+            return;
+        }
+
         switch (tagType)
         {
             case "vault-sigil":
@@ -70,15 +79,89 @@ public class AnimationEngine: MonoBehaviour
             case "echo-wave":
                 StartCoroutine(WaveEffect(target));
                 break;
+            default:
+                Debug.LogWarning($"AnimationEngine: Unknown tag type '{tagType}'");
+                break;
         }
     }
 
-    IEnumerator GlowEffect(GameObject obj, Color glowColor) { /* ... */ }
-    IEnumerator PulseEffect(GameObject obj, Color pulseColor) { /* ... */ }
-    IEnumerator WaveEffect(GameObject obj) { /* ... */ }
+    IEnumerator GlowEffect(GameObject obj, Color glowColor)
+    {
+        try
+        {
+            var renderer = obj.GetComponent<MeshRenderer>();
+            if (renderer == null) yield break;
+
+            Material mat = renderer.material;
+            Color originalColor = mat.color;
+
+            for (float t = 0; t < 1f; t += Time.deltaTime)
+            {
+                mat.color = Color.Lerp(originalColor, glowColor, t);
+                yield return null;
+            }
+
+            mat.color = originalColor;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"GlowEffect error: {ex.Message}");
+        }
+    }
+
+    IEnumerator PulseEffect(GameObject obj, Color pulseColor)
+    {
+        try
+        {
+            var renderer = obj.GetComponent<MeshRenderer>();
+            if (renderer == null) yield break;
+
+            Material mat = renderer.material;
+            Color originalColor = mat.color;
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (float t = 0; t < 1f; t += Time.deltaTime * 2)
+                {
+                    mat.color = Color.Lerp(originalColor, pulseColor, t);
+                    yield return null;
+                }
+
+                for (float t = 0; t < 1f; t += Time.deltaTime * 2)
+                {
+                    mat.color = Color.Lerp(pulseColor, originalColor, t);
+                    yield return null;
+                }
+            }
+
+            mat.color = originalColor;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"PulseEffect error: {ex.Message}");
+        }
+    }
+
+    IEnumerator WaveEffect(GameObject obj)
+    {
+        try
+        {
+            var meshFilter = obj.GetComponent<MeshFilter>();
+            if (meshFilter == null) yield break;
+
+            for (float t = 0; t < 1f; t += Time.deltaTime)
+            {
+                yield return null;
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"WaveEffect error: {ex.Message}");
+        }
+    }
 }
 
-public class VoiceoverManager: MonoBehaviour
+public class VoiceoverManager : MonoBehaviour
 {
     public AudioSource audioSource;
     public AudioClip vaultbornClip;
@@ -87,27 +170,45 @@ public class VoiceoverManager: MonoBehaviour
 
     public void TriggerVoice(string tagType)
     {
+        if (audioSource == null)
+        {
+            Debug.LogError("VoiceoverManager: audioSource is not assigned!");
+            return;
+        }
+
         switch (tagType)
         {
             case "vault-sigil":
-                audioSource.PlayOneShot(vaultbornClip);
+                if (vaultbornClip != null)
+                    audioSource.PlayOneShot(vaultbornClip);
                 break;
             case "eden-glyph":
-                audioSource.PlayOneShot(edenWhisper);
+                if (edenWhisper != null)
+                    audioSource.PlayOneShot(edenWhisper);
                 break;
             case "oistarian-alert":
-                audioSource.PlayOneShot(oistarianAlert);
+                if (oistarianAlert != null)
+                    audioSource.PlayOneShot(oistarianAlert);
+                break;
+            default:
+                Debug.LogWarning($"VoiceoverManager: Unknown tag type '{tagType}'");
                 break;
         }
     }
 }
 
-public class CodexUnlocker: MonoBehaviour
+public class CodexUnlocker : MonoBehaviour
 {
     private HashSet<string> unlockedEntries = new HashSet<string>();
 
     public void UnlockEntry(string entryID)
     {
+        if (string.IsNullOrEmpty(entryID))
+        {
+            Debug.LogWarning("CodexUnlocker: entryID is empty!");
+            return;
+        }
+
         if (!unlockedEntries.Contains(entryID))
         {
             unlockedEntries.Add(entryID);
@@ -117,12 +218,19 @@ public class CodexUnlocker: MonoBehaviour
 
     void DisplayCodexEntry(string entryID)
     {
-        // Show lore panel, animate reveal, etc.
-        Debug.Log($"Codex Entry Unlocked: {entryID}");
+        try
+        {
+            // Show lore panel, animate reveal, etc.
+            Debug.Log($"Codex Entry Unlocked: {entryID}");
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"DisplayCodexEntry error: {ex.Message}");
+        }
     }
 }
 
-public class UIController: MonoBehaviour
+public class UIController : MonoBehaviour
 {
     public TextStyler styler;
     public AnimationEngine animator;
@@ -131,28 +239,56 @@ public class UIController: MonoBehaviour
 
     public void RenderLog(string rawText)
     {
-        styler.ApplyStyledText(rawText);
-
-        foreach (string tag in ExtractTags(rawText))
+        if (string.IsNullOrEmpty(rawText))
         {
-            animator.AnimateTag(tag, styler.gameObject);
-            voiceManager.TriggerVoice(tag);
-            codex.UnlockEntry(tag);
+            Debug.LogWarning("UIController: rawText is empty!");
+            return;
+        }
+
+        if (styler == null || animator == null || voiceManager == null || codex == null)
+        {
+            Debug.LogError("UIController: One or more required components are not assigned!");
+            return;
+        }
+
+        try
+        {
+            styler.ApplyStyledText(rawText);
+
+            foreach (string tag in ExtractTags(rawText))
+            {
+                animator.AnimateTag(tag, styler.gameObject);
+                voiceManager.TriggerVoice(tag);
+                codex.UnlockEntry(tag);
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"RenderLog error: {ex.Message}");
         }
     }
 
     List<string> ExtractTags(string input)
     {
-        // Simple tag detection logic
-        return new List<string> { "vault-sigil", "eden-glyph" }; // Example
+        var tags = new List<string>();
+        try
+        {
+            if (input.Contains("vault-sigil")) tags.Add("vault-sigil");
+            if (input.Contains("eden-glyph")) tags.Add("eden-glyph");
+            if (input.Contains("echo-wave")) tags.Add("echo-wave");
+            if (input.Contains("stricken-protocol")) tags.Add("stricken-protocol");
+            if (input.Contains("unstable-thread")) tags.Add("unstable-thread");
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"ExtractTags error: {ex.Message}");
+        }
+
+        return tags;
     }
 }
 
-string log = "**vault-sigil** Echo-27 activated ~~echo-wave~~ protocol near Eden ruins.";
-uiController.RenderLog(log);
-
-RelicViewer
-public class RelicViewer: MonoBehaviour
+public class RelicViewer : MonoBehaviour
 {
     public GameObject relicModel;
     public Material vaultbornShader;
@@ -161,27 +297,43 @@ public class RelicViewer: MonoBehaviour
 
     public void DisplayRelic(RelicData relic)
     {
-        relicModel.GetComponent<MeshRenderer>().material = GetFactionShader(relic.faction);
-        relicModel.transform.rotation = Quaternion.identity;
-        relicModel.SetActive(true);
-        RelicLoreOverlay.Show(relic.lore);
-        VoiceoverManager.PlayRelicWhisper(relic.faction);
+        if (relic == null)
+        {
+            Debug.LogError("RelicViewer: relic is null!");
+            return;
+        }
+
+        if (relicModel == null)
+        {
+            Debug.LogError("RelicViewer: relicModel is not assigned!");
+            return;
+        }
+
+        try
+        {
+            relicModel.GetComponent<MeshRenderer>().material = GetFactionShader(relic.faction);
+            relicModel.transform.rotation = Quaternion.identity;
+            relicModel.SetActive(true);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"DisplayRelic error: {ex.Message}");
+        }
     }
 
     private Material GetFactionShader(string faction)
     {
         return faction switch
         {
-            "Vaultborn" => vaultbornShader,
-            "Eden Core" => edenShader,
-            "Oistarian" => oistarianShader,
-            _ => vaultbornShader
+            "Vaultborn" => vaultbornShader ?? new Material(Shader.Find("Standard")),
+            "Eden Core" => edenShader ?? new Material(Shader.Find("Standard")),
+            "Oistarian" => oistarianShader ?? new Material(Shader.Find("Standard")),
+            _ => vaultbornShader ?? new Material(Shader.Find("Standard"))
         };
     }
 }
 
-UISkinManager
-public class UISkinManager: MonoBehaviour
+public class UISkinManager : MonoBehaviour
 {
     public UITheme vaultbornTheme;
     public UITheme edenTheme;
@@ -189,16 +341,32 @@ public class UISkinManager: MonoBehaviour
 
     public void ApplyFactionSkin(string faction)
     {
-        UITheme theme = faction switch
+        if (string.IsNullOrEmpty(faction))
         {
-            "Vaultborn" => vaultbornTheme,
-            "Eden Core" => edenTheme,
-            "Oistarian" => oistarianTheme,
-            _ => vaultbornTheme
-        };
+            Debug.LogWarning("UISkinManager: faction is empty!");
+            faction = "Vaultborn";
+        }
 
-        UIStyler.ApplyTheme(theme);
-        AmbientFXManager.TriggerFactionAmbient(faction);
+        try
+        {
+            UITheme theme = faction switch
+            {
+                "Vaultborn" => vaultbornTheme,
+                "Eden Core" => edenTheme,
+                "Oistarian" => oistarianTheme,
+                _ => vaultbornTheme
+            };
+
+            if (theme != null)
+            {
+                UIStyler.ApplyTheme(theme);
+                AmbientFXManager.TriggerFactionAmbient(faction);
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"ApplyFactionSkin error: {ex.Message}");
+        }
     }
 }
 
@@ -210,16 +378,6 @@ public class RelicData
     public GameObject modelPrefab;
 }
 
-RelicData surgeBeacon = new RelicData {
-    name = "Surge Beacon",
-    faction = "Eden Core",
-    lore = "Forged in the Eden storms, this relic stabilizes Echo ruptures.",
-    modelPrefab = surgeBeaconModel
-};
-
-relicViewer.DisplayRelic(surgeBeacon);
-uiSkinManager.ApplyFactionSkin(surgeBeacon.faction);
-
 public class RelicFusionPreviewer : MonoBehaviour
 {
     public GameObject fusionModel;
@@ -228,60 +386,78 @@ public class RelicFusionPreviewer : MonoBehaviour
 
     public void PreviewFusion(Relic relicA, Relic relicB)
     {
-        fusionModel.GetComponent<MeshRenderer>().material = BlendShaders(relicA.faction, relicB.faction);
-        fusionStats.text = $"Projected ATK: {(relicA.attack + relicB.attack) / 2 + 10}";
-        fusionLore.text = GenerateFusionLore(relicA, relicB);
+        if (relicA == null || relicB == null)
+        {
+            Debug.LogError("RelicFusionPreviewer: One or both relics are null!");
+            return;
+        }
+
+        if (fusionModel == null || fusionStats == null || fusionLore == null)
+        {
+            Debug.LogError("RelicFusionPreviewer: One or more UI components are not assigned!");
+            return;
+        }
+
+        try
+        {
+            fusionModel.GetComponent<MeshRenderer>().material = BlendShaders(relicA.faction, relicB.faction);
+            fusionStats.text = $"Projected ATK: {(relicA.attack + relicB.attack) / 2 + 10}";
+            fusionLore.text = GenerateFusionLore(relicA, relicB);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"PreviewFusion error: {ex.Message}");
+        }
     }
 
-    private Material BlendShaders(string factionA, string factionB) { /* ... */ }
+    private Material BlendShaders(string factionA, string factionB)
+    {
+        return new Material(Shader.Find("Standard"));
+    }
+
     private string GenerateFusionLore(Relic a, Relic b)
     {
-        return $"When {a.name} meets {b.name}, the vault remembers both. A relic of dual memory emerges.";
+        return $"When {a?.name ?? "Unknown"} meets {b?.name ?? "Unknown"}, the vault remembers both. A relic of dual memory emerges.";
     }
 }
 
+public class Relic
 {
-  "relicName": "Stormcaller Matrix",
-  "origin": "Vaultborn + Eden Core",
-  "inscription": "Forged in the aftermath of EchoStorm 7. It remembers the silence of Eden and the fury of Vaultborn vengeance. Bound by the hands of Echo-27 and Nyla Sera."
+    public string name;
+    public string faction;
+    public int attack;
+    public List<string> traits = new List<string>();
 }
 
-public string GenerateLoreInscription(Relic relic, List<SquadMember> contributors)
+public class MissionData
 {
-    string origin = $"{relic.factionA} + {relic.factionB}";
-    string squadNames = string.Join(" and ", contributors.Select(c => c.name));
-    return $"Forged in the aftermath of {relic.eventTag}. It remembers the silence of {relic.factionB} and the fury of {relic.factionA}. Bound by the hands of {squadNames}.";
-}
-
-{
-  "relicID": "VX-77",
-  "currentOwner": "Echo-27",
-  "previousOwners": ["Nyla Sera", "Gunwafa"],
-  "bondLevel": 3,
-  "sharedLore": "Forged in Hollow Grid. Echoed through three hands. Still remembers the Siege."
-}
-
-public FusionResult PreviewFusion(Relic relicA, Relic relicB)
-{
-    var hybridStats = CalculateStats(relicA, relicB);
-    var traitSynergy = AnalyzeTraits(relicA.traits, relicB.traits);
-    var lore = GenerateFusionLore(relicA, relicB);
-
-    return new FusionResult {
-        stats = hybridStats,
-        synergy = traitSynergy,
-        lorePreview = lore
-    };
+    public string name;
+    public string environment;
+    public bool survived;
+    public int difficulty;
+    public bool usedWithAllyRelic;
 }
 
 public void SimulateEvolution(Relic relic, MissionData mission)
 {
-    if (mission.survived && mission.difficulty > 7)
-        relic.traits.Add("Endurance Echo");
+    if (relic == null || mission == null)
+    {
+        Debug.LogError("SimulateEvolution: relic or mission is null!");
+        return;
+    }
 
-    if (mission.usedWithAllyRelic)
-        relic.traits.Add("Bonded Memory");
+    try
+    {
+        if (mission.survived && mission.difficulty > 7)
+            relic.traits.Add("Endurance Echo");
 
-    relic.lore += $"Evolved during {mission.name}, adapting to {mission.environment}.";
+        if (mission.usedWithAllyRelic)
+            relic.traits.Add("Bonded Memory");
+
+        relic.lore += $"Evolved during {mission.name}, adapting to {mission.environment}.";
+    }
+    catch (System.Exception ex)
+    {
+        Debug.LogError($"SimulateEvolution error: {ex.Message}");
+    }
 }
-
