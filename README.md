@@ -1,4 +1,4 @@
-<img width="1517" height="984" alt="badge tactical-legend" src="https://github.com/user-attachments/assets/f67d5892-1098-4b74-94b3-724b6e3b2bca" />
+<img width="1517" height="984" alt="tactical-legends badge" src="https://github.com/user-attachments/assets/f67d5892-1098-4b74-94b3-724b6e3b2bca" />
 
 
 [![CI](https://github.com/jurgen-paul/tactical-legends/actions/workflows/ci.yml/badge.svg)](https://github.com/jurgen-paul/tactical-legends/actions)
@@ -6,9 +6,9 @@
 
 # Tactical Legends
 
-> A turn-based tactical strategy game template built with [Engine/Framework, e.g., Unity / Godot / Unreal Engine].
+> A turn-based tactical strategy game template built with Unity / Godot / Unreal Engine (replace with the engine you used).
 
-![Banner/Screenshot Placeholder](https://via.placeholder.com/800x400)
+[![Tactical Legends banner — placeholder screenshot](https://via.placeholder.com/800x400)](https://play.google.com/store/apps/details?id=com.example.tacticallegends)
 
 # Tactical Legends
 
@@ -20,6 +20,7 @@ Welcome to **Tactical Legends**, an open-source tactical strategy game focused o
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Play Store Console — Store Listing & Release Checklist](#play-store-console)
 - [Testing](#testing)
 - [Contributing](#contributing)
 - [License](#license)
@@ -68,6 +69,89 @@ Run the game executable from the build directory:
 ./build/tactical_legends
 ```
 
+## Play Store Console — Store Listing & Release Checklist
+
+Use this checklist and the metadata templates below to prepare a Play Store release. Replace the placeholders with your real values (package name, URLs, images, email).
+
+1) App identifiers
+- Package name / App bundle ID: com.example.tacticallegends  <-- replace with your actual package name
+- Version code / version name: e.g., 100 (versionCode), 1.0.0 (versionName)
+- Build artifact: Upload Android App Bundle (.aab) built with targetSdkVersion >= 31
+
+2) Store listing metadata (fill these in Play Console)
+- App title: Tactical Legends — Rise of OISTARIAN
+- Short description (max 80 chars): Turn-based tactical strategy with deep squad customization.
+- Full description (max 4000 chars): Replace the paragraph below with game-specific marketing copy.
+
+  Tactical Legends is a turn-based tactical strategy game where you command a squad of heroes across branching missions. Customize loadouts, exploit terrain, and outsmart adaptive AI opponents. Featuring deep progression, mod-friendly systems, and replayable scenarios.
+
+- What’s new / Release notes: Add release-specific notes here.
+
+3) Store listing assets (required)
+- High-res icon: 512x512 PNG
+- Feature graphic: 1024x500 PNG (used on Play Store listing)
+- Screenshots: Phone screenshots (minimum 2, recommended 4–8), 16:9 or 9:16 ratios, PNG/JPEG. Include at least one landscape and one portrait where appropriate.
+- Promo video (optional): YouTube URL
+- Privacy policy URL: https://yourdomain.com/privacy (required if app collects personal data)
+- Contact email: privacy@yourdomain.com (required)
+
+4) App content & policies
+- Content rating questionnaire: complete honestly in Play Console
+- Target audience and content: declare if intended for children
+- Ads & in-app purchases: declare implementation
+- Permissions: Only request runtime permissions you need (e.g., INTERNET, READ_EXTERNAL_STORAGE) and document reasons in the Play Console
+
+5) Technical checklist
+- Build App Bundle (.aab) and sign with Play App Signing
+- Target Android API level required by Play Store (check current requirement)
+- Verify AAB installs on supported devices/emulators
+- Verify ProGuard/R8 rules and that native libraries are included
+- Test in internal/closed testing tracks before production
+
+6) Release tracks & testing
+- Create an internal test track for quick verification
+- Then a closed or open test track to test with a broader audience
+- Prepare release notes for each track
+
+7) Compliance
+- Verify privacy policy covers data collection, analytics, advertising, and payment processing
+- Ensure GDPR/CCPA compliance if applicable
+
+Metadata JSON template (fill and paste into your release notes or internal docs):
+
+```json
+{
+  "packageName": "com.example.tacticallegends",
+  "title": "Tactical Legends — Rise of OISTARIAN",
+  "shortDescription": "Turn-based tactical strategy with deep squad customization.",
+  "fullDescription": "Tactical Legends is a turn-based tactical strategy game where you command a squad of heroes across branching missions...",
+  "privacyPolicyUrl": "https://yourdomain.com/privacy",
+  "contactEmail": "privacy@yourdomain.com",
+  "featureGraphic": "assets/feature_graphic.png",
+  "highResIcon": "assets/icon_512.png",
+  "screenshots": ["assets/ss1.png","assets/ss2.png"]
+}
+```
+
+Helpful commands
+
+- Build Android AAB (example for Unity/Gradle):
+  - Unity: File > Build Settings > Android > Build App Bundle
+  - Gradle CLI: ./gradlew bundleRelease
+
+- Verify AAB locally with bundletool and install on device:
+```bash
+bundletool build-apks --bundle=app.aab --output=app.apks --mode=universal
+bundletool install-apks --apks=app.apks
+```
+
+Next steps
+- Replace all placeholders above (package name, URLs, images, email) with your real values
+- Add the Play Store assets to the repository under /store-assets/ (icons, feature graphic, screenshots)
+- Build and upload your signed .aab in Play Console, set up testing tracks, and roll out
+
+---
+
 ## Testing
 
 Run all unit tests with:
@@ -94,12 +178,12 @@ Diagram Highlights:
 • 	Data Layer using Prisma and JSON configs
 • 	Build & Deployment via CMake and YAML workflows
 • 	Testing supported by CTest
-<img width="1105" height="811" alt="tactical-legend diagram" src="https://github.com/user-attachments/assets/e6e160a1-1a7d-42f6-8991-63b6786e1112" />
+<img width="1105" height="811" alt="tactical-legend architecture diagram" src="https://github.com/user-attachments/assets/e6e160a1-1a7d-42f6-8991-63b6786e1112" />
 
 ## Contributing
 
 We welcome contributions! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
-<img width="950" height="657" alt="onboarding flow(tactical-legend)" src="https://github.com/user-attachments/assets/31835e2c-649f-4518-a8db-625105ac725b" />
+<img width="950" height="657" alt="onboarding flow — tactical-legend" src="https://github.com/user-attachments/assets/31835e2c-649f-4518-a8db-625105ac725b" />
 The flow is split into two main tracks:
 🔍 Discovery & Setup
 • 	Discover the project on GitHub
@@ -334,29 +418,6 @@ For issues and questions:
 - Check the [Stripe documentation](https://stripe.com/docs)
 - Review existing GitHub issues
 - Create a new issue with reproduction steps
-
-## 🔄 Changelog
-
-### Version 2.0.0
-- Migrated to TypeScript
-- Added comprehensive error handling
-- Implemented rate limiting
-- Enhanced logging with Winston
-- Added email notifications
-- Improved webhook processing
-- Better 3D Secure handling
-- Production-ready configuration
-
-### Version 1.0.0
-- Initial release with basic Stripe integration
-
-## License
-
-Apache License 2.0. See [LICENSE](LICENSE).
-
-## Support
-
-Open an issue on our [GitHub issue tracker](https://github.com/jurgen-paul/tactical-legends/issues) or contact [jurgen-paul](https://github.com/jurgen-paul).
 
 ---
 
