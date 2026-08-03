@@ -8,11 +8,11 @@
 
 > A turn-based tactical strategy game template built with Unity / Godot / Unreal Engine (replace with the engine you used).
 
-[![Tactical Legends banner — placeholder screenshot](https://via.placeholder.com/800x400)](https://play.google.com/store/apps/details?id=com.example.tacticallegends)
+[![Tactical Legends banner — placeholder screenshot (Hero: Image 1 - mystical vault) ](https://via.placeholder.com/800x400)](https://play.google.com/store/apps/details?id=com.example.tacticallegends)
 
 # Tactical Legends
 
-Welcome to **Tactical Legends**, an open-source tactical strategy game focused on turn-based combat, deep squad customization, and replayable missions. Whether you’re a strategist, developer, or [...]
+Welcome to **Tactical Legends**, an open-source tactical strategy game focused on turn-based combat, deep squad customization, and replayable missions. Whether you’re a strategist, developer, or[...]
 
 ## Table of Contents
 
@@ -21,6 +21,8 @@ Welcome to **Tactical Legends**, an open-source tactical strategy game focused o
 - [Installation](#installation)
 - [Usage](#usage)
 - [Play Store Console — Store Listing & Release Checklist](#play-store-console)
+- [Production page](docs/production-tactical-legend.md)
+- [Preview page](docs/preview-tactical-legend-page.md)
 - [Testing](#testing)
 - [Contributing](#contributing)
 - [License](#license)
@@ -83,7 +85,7 @@ Use this checklist and the metadata templates below to prepare a Play Store rele
 - Short description (max 80 chars): Turn-based tactical strategy with deep squad customization.
 - Full description (max 4000 chars): Replace the paragraph below with game-specific marketing copy.
 
-  Tactical Legends is a turn-based tactical strategy game where you command a squad of heroes across branching missions. Customize loadouts, exploit terrain, and outsmart adaptive AI opponents. Featuring deep progression, mod-friendly systems, and replayable scenarios.
+  Tactical Legends is a turn-based tactical strategy game where you command a squad of heroes across branching missions. Customize loadouts, exploit terrain, and outsmart adaptive AI opponents. Fe[...]
 
 - What’s new / Release notes: Add release-specific notes here.
 
@@ -178,12 +180,12 @@ Diagram Highlights:
 • 	Data Layer using Prisma and JSON configs
 • 	Build & Deployment via CMake and YAML workflows
 • 	Testing supported by CTest
-<img width="1105" height="811" alt="tactical-legend architecture diagram" src="https://github.com/user-attachments/assets/e6e160a1-1a7d-42f6-8991-63b6786e1112" />
+<img width="1105" height="811" alt="tactical-legend architecture diagram (Image 2 - soldier as unit art)" src="https://github.com/user-attachments/assets/e6e160a1-1a7d-42f6-8991-63b6786e1112" />
 
 ## Contributing
 
 We welcome contributions! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
-<img width="950" height="657" alt="onboarding flow — tactical-legend" src="https://github.com/user-attachments/assets/31835e2c-649f-4518-a8db-625105ac725b" />
+<img width="950" height="657" alt="onboarding flow — tactical-legend (Image 3 - poster thumbnail)" src="https://github.com/user-attachments/assets/31835e2c-649f-4518-a8db-625105ac725b" />
 The flow is split into two main tracks:
 🔍 Discovery & Setup
 • 	Discover the project on GitHub
