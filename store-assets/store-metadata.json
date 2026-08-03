@@ -1,0 +1,17 @@
+{
+  "packageName": "com.example.tacticallegends",
+  "title": "Tactical Legends — Rise of OISTARIAN",
+  "shortDescription": "Turn-based tactical strategy with deep squad customization.",
+  "fullDescription": "Tactical Legends is a turn-based tactical strategy game where you command a squad of heroes across branching missions. Customize loadouts, exploit terrain, and outsmart adaptive AI opponents. Featuring deep progression, mod-friendly systems, and replayable scenarios.",
+  "privacyPolicyUrl": "https://yourdomain.com/privacy",
+  "contactEmail": "privacy@yourdomain.com",
+  "featureGraphic": "store-assets/feature_graphic.png",
+  "highResIcon": "store-assets/icon_512.png",
+  "screenshots": [
+    "store-assets/screenshots/phone_ss1.png",
+    "store-assets/screenshots/phone_ss2.png"
+  ],
+  "promoVideo": "https://youtube.com/",
+  "versionName": "1.0.0",
+  "versionCode": 100
+}
