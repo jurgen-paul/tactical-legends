@@ -8,8 +8,9 @@
   "featureGraphic": "store-assets/feature_graphic.png",
   "highResIcon": "store-assets/icon_512.png",
   "screenshots": [
-    "store-assets/screenshots/phone_ss1.png",
-    "store-assets/screenshots/phone_ss2.png"
+    "https://via.placeholder.com/800x1280.png?text=Image+1+-+Vault+of+Eden",
+    "https://via.placeholder.com/800x1280.png?text=Image+2+-+Unit+Art+Soldier",
+    "https://via.placeholder.com/800x1280.png?text=Image+3+-+Poster+Thumbnail"
   ],
   "promoVideo": "https://youtube.com/",
   "versionName": "1.0.0",
