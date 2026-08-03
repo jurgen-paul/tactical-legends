@@ -70,6 +70,32 @@ Chapter selector: CH-02 // STORM DESCENT
 
 ---
 
+## New image captions (Images 8–11)
+
+Image 8 — Futuristic Rooftop Operative
+
+Short alt text: "Futuristic soldier with glowing visor fires a rifle over a neon city with VTOL craft overhead."
+
+Caption: "A heavily armored operative with a glowing orange visor fires a high-tech rifle from a rooftop command post as VTOL craft circle above a futuristic skyline. Monitors and supporting soldiers in the foreground emphasize a coordinated, high-stakes operation."
+
+Image 9 — Portrait Trooper
+
+Short alt text: "Front-facing soldier portrait wearing tactical vest with flags and headset."
+
+Caption: "Portrait of a frontline trooper in a tactical vest and helmet, displaying national patches. Portrait-style lighting and neutral background suitable for character bios."
+
+Image 10 — Unit Art: Masked Trooper
+
+Short alt text: "Masked and armored trooper standing full-body with rifle — unit art."
+
+Caption: "Full-body unit artwork showing a masked trooper in olive gear with weapon and modular pouches — useful as a roster unit card or art asset."
+
+Image 11 — Vault of Eden Hero Art
+
+Short alt text: "Cloaked figure in the Vault of Eden — mysterious hero art."
+
+Caption: "A mysterious cloaked figure standing before an ancient obelisk in a vault, glowing eyes and a teal aura — strong hero artwork for production listings."
+
 ## Steps to prepare preview build
 1. Update manifest/package name for the preview flavour (if using productFlavors)
 2. Increment versionCode and versionName
