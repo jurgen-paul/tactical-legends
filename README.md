@@ -6,7 +6,13 @@
 
 # Tactical Legends
 
-Welcome to **Tactical Legends**, an open-source tactical strategy game focused on turn-based combat, deep squad customization, and replayable missions. Whether you’re a strategist, developer, or gamer, our modular codebase lets you contribute, experiment, and play on your favorite platform.
+> A turn-based tactical strategy game template built with [Engine/Framework, e.g., Unity / Godot / Unreal Engine].
+
+![Banner/Screenshot Placeholder](https://via.placeholder.com/800x400)
+
+# Tactical Legends
+
+Welcome to **Tactical Legends**, an open-source tactical strategy game focused on turn-based combat, deep squad customization, and replayable missions. Whether you’re a strategist, developer, or [...]
 
 ## Table of Contents
 
@@ -23,7 +29,7 @@ Welcome to **Tactical Legends**, an open-source tactical strategy game focused o
 
 ## About
 
-Tactical Legends delivers engaging tactical gameplay built with C++ and SDL2, designed for extensibility and cross-platform support. Plan your moves, outwit adaptive AI, and enjoy a game that grows with community contributions.
+Tactical Legends delivers engaging tactical gameplay built with C++ and SDL2, designed for extensibility and cross-platform support. Plan your moves, outwit adaptive AI, and enjoy a game that grow[...]
 
 ## Features
 
@@ -77,7 +83,6 @@ Tactical Legends is a cross-platform game designed for strategic depth and repla
 • 	Cross-platform support (Windows, macOS, Linux)
 • 	SDL2-powered graphics and audio
 • 	Deep squad customization and branching campaign structure
-• 	Unit testing via CTest for robust development
 
 Tactical Legends Game Architecture Diagram
 Diagram Highlights:
