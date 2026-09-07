@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#00FFFF" />
+    </marker>
+    <style>
+      .label { font: bold 28px sans-serif; fill: #ffffff }
+      .box { fill: rgba(0,0,0,0.5); stroke: #00FFFF; stroke-width:2 }
+      .small { font: 16px sans-serif; fill: #ffffff }
+    </style>
+  </defs>
+
+  <!-- background placeholder image -->
+  <image href="https://via.placeholder.com/1600x700.png?text=Image+6+-+Cinematic+Quote" x="0" y="0" width="1600" height="700" />
+
+  <!-- quote highlight -->
+  <rect x="220" y="140" width="1160" height="280" class="box" rx="6" ry="6" />
+  <text x="240" y="180" class="label">Cinematic quote</text>
+  <line x1="400" y1="420" x2="300" y2="500" stroke="#00FFFF" stroke-width="4" marker-end="url(#arrow)" />
+  <rect x="260" y="480" width="280" height="80" fill="rgba(0,0,0,0.6)" stroke="#00FFFF" rx="4" ry="4" />
+  <text x="280" y="515" class="small">Attribution: SELA REYN — FINAL TRANSMISSION</text>
+
+  <!-- chapter selector highlight -->
+  <rect x="1380" y="120" width="180" height="220" class="box" rx="6" ry="6" />
+  <text x="1400" y="160" class="label">Chapter selector (CH-03)</text>
+
+  <!-- legend -->
+  <rect x="20" y="640" width="1560" height="40" fill="rgba(0,0,0,0.6)" />
+  <text x="40" y="664" class="small">Use these annotated SVGs as QA guides. Update with real screenshots when available.</text>
+</svg>
