@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#00FFFF" />
+    </marker>
+    <style>
+      .label { font: bold 20px sans-serif; fill: #ffffff }
+      .box { fill: rgba(0,0,0,0.5); stroke: #00FFFF; stroke-width:2 }
+      .small { font: 14px sans-serif; fill: #ffffff }
+    </style>
+  </defs>
+
+  <!-- background placeholder image -->
+  <image href="https://via.placeholder.com/1400x900.png?text=Image+5+-+Squad+Bay+UI" x="0" y="0" width="1400" height="900" />
+
+  <!-- left navigation highlight -->
+  <rect x="20" y="100" width="220" height="400" class="box" rx="6" ry="6" />
+  <text x="40" y="140" class="label">Main nav — Squad (highlighted)</text>
+  <line x1="240" y1="200" x2="420" y2="260" stroke="#00FFFF" stroke-width="4" marker-end="url(#arrow)" />
+
+  <!-- squad card highlight -->
+  <rect x="420" y="220" width="360" height="300" class="box" rx="6" ry="6" />
+  <text x="440" y="260" class="label">Squad card — Trooper ID & level</text>
+
+  <!-- stats highlight -->
+  <rect x="520" y="420" width="220" height="120" class="box" rx="6" ry="6" />
+  <text x="540" y="450" class="label">Stats (HP / AP / MOV / RNG)</text>
+
+  <!-- legend -->
+  <rect x="20" y="820" width="1360" height="60" fill="rgba(0,0,0,0.6)" />
+  <text x="40" y="848" class="small">Labels: explain UI elements for QA; replace placeholders with real screenshots for final docs.</text>
+</svg>

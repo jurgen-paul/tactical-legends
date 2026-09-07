@@ -1,0 +1,67 @@
+{
+  "packageName": "com.example.tacticallegends",
+  "title": "Tactical Legends — Rise of OISTARIAN",
+  "shortDescription": "Turn-based tactical strategy with deep squad customization.",
+  "fullDescription": "Tactical Legends is a turn-based tactical strategy game where you command a squad of heroes across branching missions. Customize loadouts, exploit terrain, and outsmart adaptive AI opponents. Featuring deep progression, mod-friendly systems, and replayable scenarios.",
+  "privacyPolicyUrl": "https://yourdomain.com/privacy",
+  "contactEmail": "privacy@yourdomain.com",
+  "featureGraphic": "store-assets/feature_graphic.png",
+  "highResIcon": "store-assets/icon_512.png",
+  "screenshots": [
+    "https://via.placeholder.com/800x1280.png?text=Image+1+-+Vault+of+Eden",
+    "https://via.placeholder.com/800x1280.png?text=Image+2+-+Unit+Art+Soldier",
+    "https://via.placeholder.com/800x1280.png?text=Image+3+-+Poster+Thumbnail"
+  ],
+  "promoVideo": "https://youtube.com/",
+  "versionName": "1.0.0",
+  "versionCode": 100,
+  "assetsMeta": {
+    "featureGraphic": {
+      "path": "store-assets/feature_graphic.png",
+      "alt": "Feature graphic for store listing",
+      "caption": "Feature graphic used on the Play Store listing. Replace with final art (1024x500 PNG)."
+    },
+    "highResIcon": {
+      "path": "store-assets/icon_512.png",
+      "alt": "App icon — Tactical Legends",
+      "caption": "High-resolution 512x512 app icon for the Play Store."
+    },
+    "screenshots": [
+      {
+        "src": "store-assets/screenshots/phone_ss1.png",
+        "alt": "Mysterious cloaked figure in an ancient vault, warm tones — hero art for production listing.",
+        "caption": "Hero art showing a cloaked figure in the Vault of Eden (use for feature or promotional screenshot)."
+      },
+      {
+        "src": "store-assets/screenshots/phone_ss2.png",
+        "alt": "Armored unit with modern gear holding a rifle — unit art used in preview builds.",
+        "caption": "Unit art or gameplay screenshot used for preview tracks."
+      },
+      {
+        "src": "store-assets/screenshots/phone_ss3.png",
+        "alt": "Cinematic poster-style portrait used for thumbnails and promo images.",
+        "caption": "Secondary promo screenshot or poster thumbnail."
+      },
+      {
+        "src": "store-assets/ss8.png",
+        "alt": "Futuristic soldier with glowing visor fires a rifle over a neon city with VTOL craft overhead.",
+        "caption": "Rooftop operative firing over a futuristic skyline — use as an action screenshot."
+      },
+      {
+        "src": "store-assets/ss9.png",
+        "alt": "Front-facing soldier portrait wearing tactical vest with flags and headset.",
+        "caption": "Portrait-style character art used for bios or roster cards."
+      },
+      {
+        "src": "store-assets/ss10.png",
+        "alt": "Masked and armored trooper standing full-body with rifle — unit art.",
+        "caption": "Full-body unit art suitable for roster cards."
+      },
+      {
+        "src": "store-assets/ss11.png",
+        "alt": "Cloaked figure in the Vault of Eden — mysterious hero art.",
+        "caption": "Hero artwork showing the Vault of Eden figure."
+      }
+    ]
+  }
+}
