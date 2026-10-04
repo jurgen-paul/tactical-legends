@@ -1,27 +1,4 @@
-@startuml
-title Tactical Legend: Relic Fusion Sequence
-
-actor RelicCrafter
-Participant "Fusion Engine" as Engine
-participant "Synergy Calculator" as Synergy
-participant "Mutation Selector" as Mutation
-Participant "Achievement Tracker" as Achievements
-participant "Glyph Visualizer" as Glyphs
-
-RelicCrafter -> Engine: Select Relic A & Relic B
-Engine -> Synergy: Calculate synergy score
-Synergy --> Engine: Return synergy score
-
-Engine -> Mutation: Determine mutation path (weighted)
-Mutation --> Engine: Return mutation path
-
-Engine -> Achievements: Check fusion history
-Achievements --> Engine: Return unlocked achievements
-
-Engine -> Glyphs: Generate animated glyph
-Glyphs --> Engine: Return glyph visual
-
-Engine --> RelicCrafter : Display fusion result\n(name, traits, lore, glyph, achievements)
-
-@enduml
-
+// PlantUML Architecture Diagram
+export const DIAGRAM_NAME = 'PlanTulm-diagram.ts';
+export const PLANTUML_SOURCE = '@startuml\ntitle Tactical Legend: Relic Fusion Sequence\n\nactor RelicCrafter\nParticipant "Fusion Engine" as Engine\nparticipant "Synergy Calculator" as Synergy\nparticipant "Mutation Selector" as Mutation\nParticipant "Achievement Tracker" as Achievements\nparticipant "Glyph Visualizer" as Glyphs\n\nRelicCrafter -> Engine: Select Relic A & Relic B\nEngine -> Synergy: Calculate synergy score\nSynergy --> Engine: Return synergy score\n\nEngine -> Mutation: Determine mutation path (weighted)\nMutation --> Engine: Return mutation path\n\nEngine -> Achievements: Check fusion history\nAchievements --> Engine: Return unlocked achievements\n\nEngine -> Glyphs: Generate animated glyph\nGlyphs --> Engine: Return glyph visual\n\nEngine --> RelicCrafter : Display fusion result\\n(name, traits, lore, glyph, achievements)\n\n@enduml\n\n';
+export default PLANTUML_SOURCE;

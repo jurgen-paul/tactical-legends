@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+"""
+Lore Teaser Styling - CSS and Generator
+"""
+
+CSS_CONTENT = """
 .lore {
   margin: 80px 0;
   text-align: center;
@@ -28,42 +34,27 @@
   display: inline-block;
   padding: 12px 24px;
   font-size: 1rem;
-  font-family: 'Rajdhani', sans-serif;
-  background: linear-gradient(45deg, #00ff88, #00ffff);
-  color: #000;
-  border-radius: 6px;
+  font-family: 'Orbitron', monospace;
+  background: #00ff88;
+  color: #0a0a0a;
+  border: none;
+  border-radius: 8px;
   text-decoration: none;
-  transition: background 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .cta-button:hover {
-  background: linear-gradient(45deg, #00ffff, #00ff88);
+  background: #00cc6a;
   transform: scale(1.05);
 }
-.footer {
-  text-align: center;
-  padding: 40px 20px;
-  color: #00ff88;
-  font-size: 0.9rem;
-  border-top: 1px solid #00ff88;
-  margin-top: 80px;
-}
+"""
 
-.socials {
-  margin-top: 20px;
-}
 
-.socials a {
-  margin: 0 10px;
-  color: #00ff88;
-  text-decoration: none;
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 1rem;
-  transition: color 0.3s ease, text-shadow 0.3s ease;
-}
+def get_css() -> str:
+    """Returns the CSS styling string for lore teasers."""
+    return CSS_CONTENT.strip()
 
-.socials a: hover {
-  color: #00ffff;
-  text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
-}
+
+if __name__ == "__main__":
+    print(get_css())

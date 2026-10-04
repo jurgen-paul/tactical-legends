@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "framework": null,
+  "buildCommand": "node build.js",
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/trailer", "destination": "/trailer.html" },
+    { "source": "/(.*)", "destination": "/$1" }
+  ]
+}

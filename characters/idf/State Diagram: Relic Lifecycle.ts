@@ -1,16 +1,4 @@
-@startuml
-title Tactical Legend: Relic Lifecycle State Diagram
-
-[*] --> Crafted: via Crafting Tree
-Crafted --> Infused: trait infusion
-Infused --> Factionalized: faction essence applied
-Factionalized --> Fused: combined with another relic
-Fused --> Mutated: mutation path selected
-Mutated --> Awakened: legendary synergy achieved
-Awakened --> Archived: stored in Relic Codex
-Archived --> [*]
-
-@enduml
-
-
-
+// PlantUML Architecture Diagram
+export const DIAGRAM_NAME = 'State Diagram: Relic Lifecycle.ts';
+export const PLANTUML_SOURCE = '@startuml\ntitle Tactical Legend: Relic Lifecycle State Diagram\n\n[*] --> Crafted: via Crafting Tree\nCrafted --> Infused: trait infusion\nInfused --> Factionalized: faction essence applied\nFactionalized --> Fused: combined with another relic\nFused --> Mutated: mutation path selected\nMutated --> Awakened: legendary synergy achieved\nAwakened --> Archived: stored in Relic Codex\nArchived --> [*]\n\n@enduml\n\n\n\n';
+export default PLANTUML_SOURCE;

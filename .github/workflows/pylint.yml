@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  # -----------------------------------------------
+  # PYTHON LINTING (Pylint)
+  # -----------------------------------------------
+  python-lint:
+    name: Python Lint (Pylint)
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pylint
+
+      - name: Run Pylint
+        run: |
+          echo "Running pylint..."
+          pylint $(git ls-files '*.py')
+
+  # -----------------------------------------------
+  # GO ENVIRONMENT SETUP
+  # -----------------------------------------------
+  go-setup:
+    name: Setup Go
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: "1.22"
+          check-latest: true
+          cache: true
+          cache-dependency-path: go.sum
+
+      - name: Verify Go installation
+        run: go version
+
+  # -----------------------------------------------
+  # NODE ENVIRONMENT SETUP
+  # -----------------------------------------------
+  node-setup:
+    name: Setup Node.js
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          check-latest: true
+          cache: "npm"
+
+      - name: Verify Node installation
+        run: node -v

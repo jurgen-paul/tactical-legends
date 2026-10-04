@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+"""
+CSS for Supporter Tiers - Stylesheet and Generator
+"""
+
+CSS_CONTENT = """
 .supporters {
   margin: 80px 0;
   text-align: center;
@@ -28,79 +34,41 @@
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
 }
 
-.tier: hover {
-  transform: scale(1.05);
+.tier:hover {
+  transform: translateY(-8px);
   box-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
 }
 
 .tier h3 {
   font-size: 1.8rem;
   font-family: 'Orbitron', monospace;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
-.tier p {
-  font-size: 1.2rem;
-  margin-bottom: 15px;
-  color: #00ffaa;
+.tier .price {
+  font-size: 1.5rem;
+  color: #38bdf8;
+  margin-bottom: 20px;
+  font-weight: 700;
 }
 
 .tier ul {
   list-style: none;
-  margin-bottom: 20px;
+  padding: 0;
+  margin-bottom: 25px;
 }
 
-.tier ul li {
-  margin: 8px 0;
-  font-size: 1rem;
+.tier li {
+  margin: 10px 0;
+  color: #94a3b8;
 }
+"""
 
-.tier button {
-  background: linear-gradient(45deg, #00ff88, #00ffff);
-  border: none;
-  padding: 10px 20px;
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 1rem;
-  color: #000;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
 
-.tier button: hover {
-  background: linear-gradient(45deg, #00ffff, #00ff88);
-}
-.trailer {
-  margin: 80px 0;
-  text-align: center;
-  color: #00ff88;
-}
+def get_css() -> str:
+    """Returns the CSS styling string for supporter tiers."""
+    return CSS_CONTENT.strip()
 
-.trailer h2 {
-  font-size: 2.5rem;
-  font-family: 'Orbitron', monospace;
-  margin-bottom: 30px;
-  text-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
-}
 
-.video-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  height: 0;
-  overflow: hidden;
-  border: 2px solid #00ff88;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
-}
-
-.video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-}
+if __name__ == "__main__":
+    print(get_css())

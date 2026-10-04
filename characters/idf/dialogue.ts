@@ -1,4 +1,10 @@
-export function getDynamicDialogue(member: SquadMember): string {
+/**
+ * Tactical Legends - Dynamic Squad Dialogue Module
+ */
+
+import { getMoraleLevel, SquadMemberMorale } from './Morale';
+
+export function getDynamicDialogue(member: SquadMemberMorale): string {
   const moraleLevel = getMoraleLevel(member.morale);
   switch (moraleLevel) {
     case "High":
@@ -9,6 +15,7 @@ export function getDynamicDialogue(member: SquadMember): string {
       return `${member.name}: “I’m not sure I can keep going.”`;
     case "Broken":
       return `${member.name}: “I’m done. Don’t count on me.”`;
+    default:
+      return `${member.name}: “Awaiting tactical orders.”`;
   }
 }
-

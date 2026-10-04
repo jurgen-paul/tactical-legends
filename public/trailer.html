@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tactical Legends: Rise of OISTARIAN - Cinematic AI Voice Trailer & Introduction</title>
+    <meta name="description" content="Cinematic prologue and AI Voice Trailer for Tactical Legends: Rise of OISTARIAN. Experience interactive sound design, dynamic narration, and tactical lore.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: radial-gradient(ellipse at center, #0a0e1a 0%, #030712 60%, #000000 100%);
+            color: #00ff88;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Neural Background Grid */
+        .neural-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 136, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 136, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 1;
+            animation: grid-pulse 6s ease-in-out infinite;
+        }
+
+        @keyframes grid-pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.15; }
+        }
+
+        /* Scanlines Overlay */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.35;
+        }
+
+        /* Navigation Header */
+        .top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(3, 7, 18, 0.88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: #00ff88;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .nav-link:hover {
+            color: #00ff88;
+        }
+
+        .nav-badge {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            color: #00ff88;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1350px;
+            margin: 0 auto;
+            padding: 30px 20px 80px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0, 255, 136, 0.12);
+            border: 1px solid rgba(0, 255, 136, 0.4);
+            color: #00ff88;
+            padding: 0.35rem 1rem;
+            border-radius: 9999px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.4rem, 6vw, 4.5rem);
+            font-weight: 900;
+            color: #00ff88;
+            text-shadow: 
+                0 0 20px rgba(0, 255, 136, 0.7),
+                0 0 40px rgba(0, 255, 136, 0.4);
+            margin-bottom: 12px;
+            letter-spacing: 3px;
+        }
+
+        .subtitle {
+            font-size: 1.35rem;
+            color: #ff6b6b;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .desc-lead {
+            max-width: 780px;
+            margin: 1rem auto 0;
+            color: #cbd5e1;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Grid Interface */
+        .main-interface {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* Podcast Player */
+        .podcast-player {
+            background: linear-gradient(145deg, rgba(8, 12, 22, 0.95), rgba(15, 23, 42, 0.85));
+            border: 2px solid rgba(0, 255, 136, 0.6);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 
+                0 0 40px rgba(0, 255, 136, 0.2),
+                inset 0 0 30px rgba(0, 255, 136, 0.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .track-info h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin-bottom: 0.2rem;
+        }
+
+        .track-info p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .play-button {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #00ff88, #00cc6a);
+            border: 3px solid #030712;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2.5rem;
+            color: #030712;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 0 35px rgba(0, 255, 136, 0.5),
+                0 8px 25px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+
+        .play-button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.8);
+        }
+
+        .status-display {
+            text-align: center;
+            margin: 15px 0 20px;
+            font-family: 'Orbitron', monospace;
+            color: #00ff88;
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            margin: 20px 0;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff88, #ff6b6b, #00ff88);
+            width: 0%;
+            transition: width 0.15s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.7);
+        }
+
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.05rem;
+            color: #00ff88;
+            margin-bottom: 20px;
+        }
+
+        .controls-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .volume-slider {
+            width: 130px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .control-btns {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            padding: 8px 18px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(0, 255, 136, 0.4);
+            border-radius: 6px;
+            color: #00ff88;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .control-btn:hover {
+            background: rgba(0, 255, 136, 0.15);
+            border-color: #00ff88;
+        }
+
+        .tts-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .tts-toggle input {
+            accent-color: #00ff88;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Soundboard & Voice Panel */
+        .ai-voice-panel {
+            background: linear-gradient(145deg, rgba(17, 24, 39, 0.95), rgba(8, 12, 22, 0.9));
+            border: 2px solid rgba(255, 107, 107, 0.45);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .ai-voice-panel h3 {
+            color: #ff6b6b;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.25rem;
+            text-align: center;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255, 107, 107, 0.2);
+            padding-bottom: 0.75rem;
+        }
+
+        .voice-generator-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .voice-generator-card {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 10px;
+            padding: 14px;
+            transition: all 0.25s;
+            text-decoration: none;
+            display: block;
+        }
+
+        .voice-generator-card:hover {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.05);
+            transform: translateX(4px);
+        }
+
+        .voice-generator-card h4 {
+            color: #00ff88;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .voice-generator-card p {
+            color: #94a3b8;
+            font-size: 0.82rem;
+            line-height: 1.4;
+        }
+
+        .voice-generator-card .badge {
+            font-size: 0.7rem;
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .action-btn-primary {
+            padding: 14px;
+            background: linear-gradient(145deg, #ff6b6b, #ef4444);
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+
+        .action-btn-primary:hover {
+            background: linear-gradient(145deg, #ef4444, #dc2626);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .sfx-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .sfx-btn {
+            padding: 10px 8px;
+            background: rgba(0, 212, 255, 0.08);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 6px;
+            color: #38bdf8;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .sfx-btn:hover {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: #00d4ff;
+            color: #ffffff;
+        }
+
+        /* Script Section */
+        .script-section {
+            background: linear-gradient(145deg, rgba(8, 12, 22, 0.9), rgba(15, 23, 42, 0.7));
+            border: 2px solid rgba(0, 255, 136, 0.35);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 40px 0;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.15);
+        }
+
+        .script-section h3 {
+            color: #00ff88;
+            font-family: 'Orbitron', monospace;
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .script-line {
+            margin: 18px 0;
+            padding: 18px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 4px solid transparent;
+        }
+
+        .script-line.active {
+            background: rgba(0, 255, 136, 0.1);
+            border-left: 4px solid #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+            transform: translateX(8px);
+        }
+
+        .character-name {
+            color: #00ff88;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+
+        .stage-direction {
+            color: #64748b;
+            font-style: italic;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .dialogue {
+            color: #f8fafc;
+            font-size: 1.25rem;
+            margin-top: 8px;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .tagline {
+            text-align: center;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.6rem;
+            color: #ff6b6b;
+            margin-top: 40px;
+            text-shadow: 0 0 20px rgba(255, 107, 107, 0.4);
+            padding: 25px;
+            background: rgba(255, 107, 107, 0.08);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            line-height: 1.5;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #0b1329;
+            border: 2px solid #00ff88;
+            border-radius: 16px;
+            max-width: 680px;
+            width: 100%;
+            padding: 30px;
+            box-shadow: 0 0 40px rgba(0, 255, 136, 0.3);
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .modal-title {
+            font-family: 'Orbitron', monospace;
+            color: #00ff88;
+            font-size: 1.25rem;
+        }
+
+        .close-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #ff6b6b;
+        }
+
+        .modal-body pre {
+            background: #030712;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            color: #38bdf8;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            margin-bottom: 20px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        /* Audio Visualizer Ring */
+        .audio-visualizer {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            height: 320px;
+            border: 2px solid #00ff88;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .audio-visualizer.active {
+            animation: visualizer-pulse 1.4s cubic-bezier(0.1, 0.8, 0.3, 1);
+        }
+
+        @keyframes visualizer-pulse {
+            0% {
+                opacity: 0.9;
+                transform: translate(-50%, -50%) scale(0.2);
+                border-color: #00ff88;
+            }
+            50% {
+                opacity: 0.6;
+                border-color: #ff6b6b;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.6);
+                border-color: #00d4ff;
+            }
+        }
+
+        @media (max-width: 968px) {
+            .main-interface {
+                grid-template-columns: 1fr;
+            }
+            .top-nav {
+                padding: 0.75rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="neural-grid" id="neuralGrid"></div>
+    <div class="scanlines"></div>
+    <div class="audio-visualizer" id="audioVisualizer"></div>
+
+    <!-- Navigation Header -->
+    <header class="top-nav">
+        <a href="/" class="nav-brand">
+            ⚔️ TACTICAL LEGENDS
+        </a>
+        <div class="nav-links">
+            <span class="nav-badge">STATUS: FEED ONLINE</span>
+            <a href="/" class="nav-link">← Command Portal</a>
+            <a href="/#tips" class="nav-link">Tactical Tips</a>
+            <a href="/#command" class="nav-link">Squad Roster</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="header">
+            <div class="hero-badge">CINEMATIC PROLOGUE // OISTARIAN ARCHIVES</div>
+            <h1 class="title">TACTICAL LEGENDS</h1>
+            <p class="subtitle">RISE OF OISTARIAN</p>
+            <p class="desc-lead">
+                Immerse yourself in the high-stakes tactical narrative. Listen to the official audio trailer, synthesized live with real-time sound design and synchronized multi-character voice lines.
+            </p>
+        </div>
+
+        <div class="main-interface">
+            <!-- Left: Podcast Player -->
+            <div class="podcast-player">
+                <div class="player-header">
+                    <div class="track-info">
+                        <h3>TRAILER // THE RELOAD OF EDEN</h3>
+                        <p>Track: 01-PROLOGUE • Synth Audio Engine: Active</p>
+                    </div>
+                    <span class="nav-badge" id="playbackBadge">STANDBY</span>
+                </div>
+
+                <div class="player-content">
+                    <button class="play-button" id="playButton" title="Toggle Playback (Spacebar)">▶</button>
+
+                    <div class="status-display" id="statusDisplay">
+                        READY TO INITIALIZE SOUND SYSTEM
+                    </div>
+
+                    <div class="progress-container" id="progressContainer">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+
+                    <div class="time-display">
+                        <span id="currentTime">00:00</span>
+                        <span id="totalTime">01:30</span>
+                    </div>
+
+                    <div class="controls-row">
+                        <div class="volume-control">
+                            <span style="color: #00ff88;">🔊</span>
+                            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="80" title="Master Volume">
+                        </div>
+
+                        <label class="tts-toggle" title="Enable browser speech synthesis for characters">
+                            <input type="checkbox" id="ttsToggle" checked>
+                            <span>Voice Narration (TTS)</span>
+                        </label>
+
+                        <div class="control-btns">
+                            <button class="control-btn" id="rewindBtn">⏪ -10s</button>
+                            <button class="control-btn" id="forwardBtn">+10s ⏩</button>
+                            <button class="control-btn" id="resetBtn">🔄 Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: AI Voice Generation & Soundboard Panel -->
+            <div class="ai-voice-panel">
+                <h3>🎙️ AI VOICE GENERATION</h3>
+
+                <div class="voice-generator-grid">
+                    <a href="https://elevenlabs.io/voice-library/deep-voices" target="_blank" rel="noopener noreferrer" class="voice-generator-card">
+                        <h4>🏆 ELEVENLABS DEEP <span class="badge">PRO</span></h4>
+                        <p>Hollywood-grade cinematic voices. Deep narrator tones tailored for trailer dialogue.</p>
+                    </a>
+
+                    <a href="https://play.ht/" target="_blank" rel="noopener noreferrer" class="voice-generator-card">
+                        <h4>🌍 PLAY.HT <span class="badge">42+ LANG</span></h4>
+                        <p>Ultra-realistic AI voice cloning and multi-character dialogue generation.</p>
+                    </a>
+
+                    <a href="https://speechify.com/male-voice-generator/" target="_blank" rel="noopener noreferrer" class="voice-generator-card">
+                        <h4>📚 SPEECHIFY <span class="badge">NARRATION</span></h4>
+                        <p>Specialized male narrator voices with natural conversational cadence.</p>
+                    </a>
+
+                    <a href="https://www.voicebooking.com/en/free-voice-over-generator" target="_blank" rel="noopener noreferrer" class="voice-generator-card">
+                        <h4>🎯 VOICEBOOKING <span class="badge">FREE PREVIEW</span></h4>
+                        <p>Audition sample voice styles before studio production and sound mixing.</p>
+                    </a>
+                </div>
+
+                <button class="action-btn-primary" id="openInstructionsBtn">
+                    📜 View AI Voice Prompt Script
+                </button>
+
+                <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 15px;">
+                    <div style="font-size: 0.85rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">
+                        Instant Tactical SFX Matrix
+                    </div>
+                    <div class="sfx-grid">
+                        <button class="sfx-btn" onclick="triggerSFX('neuropulse')">⚡ NeuroPulse</button>
+                        <button class="sfx-btn" onclick="triggerSFX('shield')">🛡️ Kinetic Shield</button>
+                        <button class="sfx-btn" onclick="triggerSFX('vault')">🔓 Vault Release</button>
+                        <button class="sfx-btn" onclick="triggerSFX('explosion')">💥 Heavy Detonation</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Script Section -->
+        <div class="script-section">
+            <h3>📜 PODCAST & TRAILER SCRIPT // TIMED LOG</h3>
+
+            <div class="script-line" id="line-0">
+                <div class="stage-direction">[Sound of distant data pulses and echoes of gunfire. Ambient cyber atmosphere building tension.]</div>
+            </div>
+
+            <div class="script-line" id="line-1">
+                <span class="character-name">Narrator</span> (low, gravelly voice):
+                <div class="dialogue">"In a world coded in silence... one whisper rewrites the algorithm."</div>
+            </div>
+
+            <div class="script-line" id="line-2">
+                <div class="stage-direction">[Flash cuts: a shattered memory crystal. A cloaked figure sprinting across Echo Swamp. Neon eyes flicker in the dark.]</div>
+            </div>
+
+            <div class="script-line" id="line-3">
+                <span class="character-name">Zoe's voice</span> (soft, glitching):
+                <div class="dialogue">"They said you were erased, but legends don't vanish. They reload."</div>
+            </div>
+
+            <div class="script-line" id="line-4">
+                <div class="stage-direction">[Cue synth-heavy combat sequence. OISTARIAN locks in the NeuroPulse Arm. Drones dive, explosions bloom.]</div>
+            </div>
+
+            <div class="script-line" id="line-5">
+                <span class="character-name">Narrator</span>:
+                <div class="dialogue">"OISTARIAN—former engineer. Reluctant operative. Relentless myth."</div>
+            </div>
+
+            <div class="script-line" id="line-6">
+                <div class="stage-direction">[Fast montage: encrypted data walls exploding, a vault marked "EDEN" unlocking, flash of Zoe's hologram saying "Protect the Shard."]</div>
+            </div>
+
+            <div class="script-line" id="line-7">
+                <span class="character-name">Narrator</span> (final beat):
+                <div class="dialogue">"This summer... silence is broken."</div>
+            </div>
+
+            <div class="script-line" id="line-8">
+                <div class="stage-direction">[Final scene: OISTARIAN stands under a storm-lit sky, whispering "This time, I choose the ending."]</div>
+            </div>
+
+            <div class="script-line" id="line-9">
+                <span class="character-name">OISTARIAN</span> (whispered):
+                <div class="dialogue">"This time, I choose the ending."</div>
+            </div>
+
+            <div class="tagline">
+                TACTICAL LEGENDS: RISE OF OISTARIAN<br>
+                <span style="font-size: 1.15rem; color: #00ff88; font-weight: 400;">"Decode the shadows. Unleash the legend."</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Voice Instructions In-Page Modal (No alert/window.open) -->
+    <div class="modal-overlay" id="instructionsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">🎙️ AI Voice Generation Script & Directives</h3>
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 12px;">
+                    Use the formatted character directives below to generate studio-grade AI audio tracks in ElevenLabs, Play.ht, or Speechify:
+                </p>
+                <pre id="scriptText">
+CHARACTER PROFILES & VOICE DIRECTIVES:
+
+1. NARRATOR (Deep, Gravelly, Cinematic):
+   "In a world coded in silence... one whisper rewrites the algorithm."
+   "OISTARIAN—former engineer. Reluctant operative. Relentless myth."
+   "This summer... silence is broken."
+   Tone: Measured pacing, low baritone, gritty cyberpunk aesthetic.
+
+2. ZOE (Female, Digital Distortion / Glitch Reverb):
+   "They said you were erased, but legends don't vanish. They reload."
+   Tone: Empathetic yet synthetic, slight robotic chorus effect.
+
+3. OISTARIAN (Whispered, Resolved, Defiant):
+   "This time, I choose the ending."
+   Tone: Near-mic proximity, heavy breath, resolute determination.
+
+RECOMMENDED POST-PROCESSING:
+- EQ: Low-cut at 80Hz, +2dB boost at 2.5kHz for voice clarity.
+- Dynamic Compressor: 3:1 ratio, 20ms attack, 100ms release.
+- Reverb: Medium cyber hall (decay 1.8s) for Narrator, 15% wet mix.
+                </pre>
+                <div class="modal-actions">
+                    <button class="control-btn" id="copyScriptBtn">📋 Copy Script to Clipboard</button>
+                    <button class="action-btn-primary" style="width: auto; padding: 8px 20px;" id="modalDoneBtn">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Web Audio Synthesizer & Speech Orchestration
+        class TacticalLegendsAudioEngine {
+            constructor() {
+                this.audioCtx = null;
+                this.isPlaying = false;
+                this.currentTime = 0;
+                this.totalTime = 90; // 1:30 runtime
+                this.volume = 0.8;
+                this.ttsEnabled = true;
+                this.intervals = [];
+                this.oscillators = [];
+                this.currentSpokenLine = -1;
+
+                this.initDOM();
+                this.bindEvents();
+            }
+
+            initDOM() {
+                this.playBtn = document.getElementById('playButton');
+                this.progressBar = document.getElementById('progressBar');
+                this.progressContainer = document.getElementById('progressContainer');
+                this.currentTimeEl = document.getElementById('currentTime');
+                this.totalTimeEl = document.getElementById('totalTime');
+                this.volumeSlider = document.getElementById('volumeSlider');
+                this.statusDisplay = document.getElementById('statusDisplay');
+                this.playbackBadge = document.getElementById('playbackBadge');
+                this.ttsToggle = document.getElementById('ttsToggle');
+                this.visualizer = document.getElementById('audioVisualizer');
+            }
+
+            bindEvents() {
+                this.playBtn.addEventListener('click', () => this.togglePlay());
+                this.volumeSlider.addEventListener('input', (e) => this.setVolume(e.target.value / 100));
+                this.progressContainer.addEventListener('click', (e) => this.handleSeek(e));
+                document.getElementById('rewindBtn').addEventListener('click', () => this.seek(Math.max(0, this.currentTime - 10)));
+                document.getElementById('forwardBtn').addEventListener('click', () => this.seek(Math.min(this.totalTime, this.currentTime + 10)));
+                document.getElementById('resetBtn').addEventListener('click', () => this.reset());
+                this.ttsToggle.addEventListener('change', (e) => { this.ttsEnabled = e.target.checked; });
+
+                // Keyboard controls
+                document.addEventListener('keydown', (e) => {
+                    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+                    if (e.code === 'Space') {
+                        e.preventDefault();
+                        this.togglePlay();
+                    } else if (e.code === 'ArrowLeft') {
+                        e.preventDefault();
+                        this.seek(Math.max(0, this.currentTime - 5));
+                    } else if (e.code === 'ArrowRight') {
+                        e.preventDefault();
+                        this.seek(Math.min(this.totalTime, this.currentTime + 5));
+                    }
+                });
+            }
+
+            initAudioContext() {
+                if (!this.audioCtx) {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    this.audioCtx = new AudioContext();
+                    this.masterGain = this.audioCtx.createGain();
+                    this.masterGain.gain.setValueAtTime(this.volume, this.audioCtx.currentTime);
+                    this.masterGain.connect(this.audioCtx.destination);
+                }
+                if (this.audioCtx.state === 'suspended') {
+                    this.audioCtx.resume();
+                }
+            }
+
+            setVolume(val) {
+                this.volume = Math.max(0, Math.min(1, val));
+                if (this.masterGain && this.audioCtx) {
+                    this.masterGain.gain.setValueAtTime(this.volume, this.audioCtx.currentTime);
+                }
+            }
+
+            createTone(freq, duration, type = 'sine', peak = 0.25) {
+                if (!this.audioCtx) return;
+                const osc = this.audioCtx.createOscillator();
+                const gain = this.audioCtx.createGain();
+                const filter = this.audioCtx.createBiquadFilter();
+
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, this.audioCtx.currentTime);
+
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(2500, this.audioCtx.currentTime);
+
+                gain.gain.setValueAtTime(0, this.audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(peak * this.volume, this.audioCtx.currentTime + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + duration);
+
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(this.masterGain);
+
+                osc.start();
+                osc.stop(this.audioCtx.currentTime + duration);
+                this.oscillators.push(osc);
+            }
+
+            createNoise(duration, type = 'white', peak = 0.2) {
+                if (!this.audioCtx) return;
+                const bufferSize = this.audioCtx.sampleRate * duration;
+                const buffer = this.audioCtx.createBuffer(1, bufferSize, this.audioCtx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    data[i] = (Math.random() * 2 - 1) * peak;
+                }
+                const noise = this.audioCtx.createBufferSource();
+                noise.buffer = buffer;
+
+                const gain = this.audioCtx.createGain();
+                gain.gain.setValueAtTime(peak * this.volume, this.audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + duration);
+
+                noise.connect(gain);
+                gain.connect(this.masterGain);
+                noise.start();
+            }
+
+            visualPulse() {
+                this.visualizer.classList.remove('active');
+                void this.visualizer.offsetWidth;
+                this.visualizer.classList.add('active');
+            }
+
+            speakDialogue(text, pitch = 1.0, rate = 0.95) {
+                if (!this.ttsEnabled || !('speechSynthesis' in window)) return;
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.pitch = pitch;
+                utterance.rate = rate;
+                utterance.volume = this.volume;
+                window.speechSynthesis.speak(utterance);
+            }
+
+            highlightLine(lineIdx) {
+                document.querySelectorAll('.script-line').forEach(el => el.classList.remove('active'));
+                const el = document.getElementById(`line-${lineIdx}`);
+                if (el) {
+                    el.classList.add('active');
+                    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }
+
+            // Timeline choreography
+            tickTimeline() {
+                const t = Math.floor(this.currentTime);
+
+                // Sound & line events mapping
+                if (t === 0 && this.currentSpokenLine !== 0) {
+                    this.highlightLine(0);
+                    this.statusDisplay.textContent = 'TRANSMISSION INITIALIZING...';
+                    this.createTone(140, 2.5, 'sine', 0.2);
+                    this.visualPulse();
+                } else if (t === 3 && this.currentSpokenLine !== 1) {
+                    this.currentSpokenLine = 1;
+                    this.highlightLine(1);
+                    this.statusDisplay.textContent = 'NARRATOR: "In a world coded in silence..."';
+                    this.createTone(85, 3.5, 'sawtooth', 0.18);
+                    this.speakDialogue("In a world coded in silence... one whisper rewrites the algorithm.", 0.7, 0.9);
+                } else if (t === 14 && this.currentSpokenLine !== 2) {
+                    this.currentSpokenLine = 2;
+                    this.highlightLine(2);
+                    this.statusDisplay.textContent = 'FLASH CUT: ECHO SWAMP';
+                    this.createNoise(0.4, 'white', 0.15);
+                    this.visualPulse();
+                } else if (t === 18 && this.currentSpokenLine !== 3) {
+                    this.currentSpokenLine = 3;
+                    this.highlightLine(3);
+                    this.statusDisplay.textContent = 'ZOE: "Legends don\'t vanish. They reload."';
+                    this.createTone(440, 0.2, 'square', 0.15);
+                    this.speakDialogue("They said you were erased, but legends don't vanish. They reload.", 1.25, 1.05);
+                } else if (t === 28 && this.currentSpokenLine !== 4) {
+                    this.currentSpokenLine = 4;
+                    this.highlightLine(4);
+                    this.statusDisplay.textContent = 'COMBAT ENGAGEMENT: NEUROPULSE ARM';
+                    this.createTone(60, 0.8, 'sawtooth', 0.35);
+                    this.createNoise(0.6, 'white', 0.25);
+                    this.visualPulse();
+                } else if (t === 36 && this.currentSpokenLine !== 5) {
+                    this.currentSpokenLine = 5;
+                    this.highlightLine(5);
+                    this.statusDisplay.textContent = 'NARRATOR: "Reluctant operative. Relentless myth."';
+                    this.createTone(90, 3, 'triangle', 0.2);
+                    this.speakDialogue("OISTARIAN. Former engineer. Reluctant operative. Relentless myth.", 0.65, 0.92);
+                } else if (t === 48 && this.currentSpokenLine !== 6) {
+                    this.currentSpokenLine = 6;
+                    this.highlightLine(6);
+                    this.statusDisplay.textContent = 'VAULT EDEN UNLOCKED';
+                    this.createTone(320, 1.5, 'sine', 0.2);
+                    this.createTone(480, 1.5, 'sine', 0.15);
+                    this.visualPulse();
+                } else if (t === 58 && this.currentSpokenLine !== 7) {
+                    this.currentSpokenLine = 7;
+                    this.highlightLine(7);
+                    this.statusDisplay.textContent = 'NARRATOR: "This summer... silence is broken."';
+                    this.createTone(75, 4, 'sawtooth', 0.25);
+                    this.speakDialogue("This summer... silence is broken.", 0.68, 0.88);
+                } else if (t === 68 && this.currentSpokenLine !== 8) {
+                    this.currentSpokenLine = 8;
+                    this.highlightLine(8);
+                    this.statusDisplay.textContent = 'STORM ATMOSPHERE & CLIMAX';
+                    this.createNoise(2.0, 'white', 0.12);
+                    this.visualPulse();
+                } else if (t === 74 && this.currentSpokenLine !== 9) {
+                    this.currentSpokenLine = 9;
+                    this.highlightLine(9);
+                    this.statusDisplay.textContent = 'OISTARIAN: "This time, I choose the ending."';
+                    this.createTone(55, 6, 'sawtooth', 0.3);
+                    this.speakDialogue("This time, I choose the ending.", 0.8, 0.85);
+                } else if (t >= 86) {
+                    this.statusDisplay.textContent = 'TRAILER CONCLUDED // VICTORY SECURED';
+                }
+            }
+
+            togglePlay() {
+                if (this.isPlaying) {
+                    this.pause();
+                } else {
+                    this.play();
+                }
+            }
+
+            play() {
+                this.initAudioContext();
+                this.isPlaying = true;
+                this.playBtn.textContent = '⏸';
+                this.playBtn.style.background = 'linear-gradient(145deg, #ff6b6b, #ef4444)';
+                this.playbackBadge.textContent = 'TRANSMITTING';
+                this.playbackBadge.style.color = '#ff6b6b';
+
+                this.interval = setInterval(() => {
+                    if (this.currentTime < this.totalTime) {
+                        this.currentTime += 0.25;
+                        this.updateProgress();
+                        this.tickTimeline();
+                    } else {
+                        this.reset();
+                    }
+                }, 250);
+            }
+
+            pause() {
+                this.isPlaying = false;
+                this.playBtn.textContent = '▶';
+                this.playBtn.style.background = 'linear-gradient(145deg, #00ff88, #00cc6a)';
+                this.playbackBadge.textContent = 'PAUSED';
+                this.playbackBadge.style.color = '#00ff88';
+                if (this.interval) clearInterval(this.interval);
+                if (window.speechSynthesis) window.speechSynthesis.cancel();
+            }
+
+            reset() {
+                this.pause();
+                this.currentTime = 0;
+                this.currentSpokenLine = -1;
+                this.updateProgress();
+                this.statusDisplay.textContent = 'SYSTEM RESET // READY FOR DEPLOYMENT';
+                this.playbackBadge.textContent = 'STANDBY';
+                document.querySelectorAll('.script-line').forEach(el => el.classList.remove('active'));
+            }
+
+            seek(val) {
+                this.currentTime = Math.max(0, Math.min(val, this.totalTime));
+                this.updateProgress();
+                this.currentSpokenLine = -1;
+                this.tickTimeline();
+            }
+
+            handleSeek(e) {
+                const rect = this.progressContainer.getBoundingClientRect();
+                const pos = (e.clientX - rect.left) / rect.width;
+                this.seek(pos * this.totalTime);
+            }
+
+            updateProgress() {
+                const pct = (this.currentTime / this.totalTime) * 100;
+                this.progressBar.style.width = `${pct}%`;
+                this.currentTimeEl.textContent = this.formatTime(this.currentTime);
+                this.totalTimeEl.textContent = this.formatTime(this.totalTime);
+            }
+
+            formatTime(sec) {
+                const m = Math.floor(sec / 60);
+                const s = Math.floor(sec % 60);
+                return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            }
+        }
+
+        // Initialize Audio Engine
+        let engine;
+        window.addEventListener('DOMContentLoaded', () => {
+            engine = new TacticalLegendsAudioEngine();
+
+            // Modal logic (no alert/window.open)
+            const modal = document.getElementById('instructionsModal');
+            const openBtn = document.getElementById('openInstructionsBtn');
+            const closeBtn = document.getElementById('closeModalBtn');
+            const doneBtn = document.getElementById('modalDoneBtn');
+            const copyBtn = document.getElementById('copyScriptBtn');
+
+            openBtn.addEventListener('click', () => modal.classList.add('active'));
+            closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+            doneBtn.addEventListener('click', () => modal.classList.remove('active'));
+
+            copyBtn.addEventListener('click', () => {
+                const scriptText = document.getElementById('scriptText').innerText;
+                navigator.clipboard.writeText(scriptText).then(() => {
+                    copyBtn.textContent = '✅ Copied to Clipboard!';
+                    setTimeout(() => { copyBtn.textContent = '📋 Copy Script to Clipboard'; }, 2000);
+                });
+            });
+
+            // Parallax mouse effect for neural grid
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth) * 40;
+                const y = (e.clientY / window.innerHeight) * 40;
+                document.getElementById('neuralGrid').style.backgroundPosition = `${x}px ${y}px`;
+            });
+        });
+
+        // Trigger Instant SFX Matrix
+        function triggerSFX(type) {
+            if (!engine) return;
+            engine.initAudioContext();
+            engine.visualPulse();
+
+            if (type === 'neuropulse') {
+                engine.createTone(75, 0.4, 'sawtooth', 0.4);
+                engine.createTone(320, 0.3, 'square', 0.25);
+            } else if (type === 'shield') {
+                engine.createTone(480, 0.5, 'sine', 0.3);
+                engine.createTone(240, 0.6, 'triangle', 0.3);
+            } else if (type === 'vault') {
+                for (let i = 0; i < 4; i++) {
+                    setTimeout(() => engine.createTone(200 + i * 80, 0.3, 'sine', 0.2), i * 120);
+                }
+            } else if (type === 'explosion') {
+                engine.createNoise(0.7, 'white', 0.35);
+                engine.createTone(45, 0.5, 'sawtooth', 0.4);
+            }
+        }
+    </script>
+</body>
+</html>
