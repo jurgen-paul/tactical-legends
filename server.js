@@ -12,7 +12,8 @@ const HOST = '0.0.0.0';
 
 app.use(express.json());
 
-// Serve static assets from root and docs directory
+// Serve static assets from public, root and docs directory
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/docs', express.static(path.join(__dirname, 'docs')));
 app.use('/store-assets', express.static(path.join(__dirname, 'store-assets')));
 app.use(express.static(__dirname));

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#00FFFF" />
+    </marker>
+    <style>
+      .label { font: bold 18px sans-serif; fill: #ffffff }
+      .box { fill: rgba(0,0,0,0.5); stroke: #00FFFF; stroke-width:2 }
+      .small { font: 14px sans-serif; fill: #ffffff }
+    </style>
+  </defs>
+
+  <!-- background placeholder image -->
+  <image href="https://via.placeholder.com/1200x800.png?text=Image+4+-+AI+Tactical+Brief" x="0" y="0" width="1200" height="800" />
+
+  <!-- dialog box highlight -->
+  <rect x="120" y="120" width="760" height="260" class="box" rx="6" ry="6" />
+  <text x="140" y="150" class="label">AI Tactical Brief — mission request instruction</text>
+  <line x1="520" y1="380" x2="380" y2="440" stroke="#00FFFF" stroke-width="4" marker-end="url(#arrow)" />
+  <rect x="340" y="420" width="260" height="60" fill="rgba(0,0,0,0.6)" stroke="#00FFFF" stroke-width="1" rx="4" ry="4" />
+  <text x="360" y="455" class="small">Mouse cursor (click to request briefing)</text>
+
+  <!-- legend -->
+  <rect x="20" y="700" width="1160" height="70" fill="rgba(0,0,0,0.6)" />
+  <text x="40" y="735" class="small">Annotations: cyan outlines highlight UI elements; labels explain purpose for QA/docs.</text>
+</svg>
