@@ -1,0 +1,28 @@
+name: autofix.ci
+on:
+  pull_request:
+  push:
+    branches: ["main"]
+
+permissions: {}
+
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: |
+          npm install
+          npx prettier --write . || true
+      - uses: autofix-ci/action@v1
+        continue-on-error: true
+        with:
+          commit-message: "Apply Prettier format"
+      - name: 'notify vercel'
+        uses: 'vercel/repository-dispatch/actions/status@v1'
+        continue-on-error: true
+        with:
+          name: "Vercel - tactical-legends: lint"

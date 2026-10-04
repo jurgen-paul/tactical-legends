@@ -156,8 +156,7 @@ const getSupersFx = createEffect(async () => {
   if (!res.ok) {
     throw new Error("something went wrong");
   }
-  const data = await res.json();
-  return data;
+  return await res.json();
 });
 
 // Create effects for saving new data

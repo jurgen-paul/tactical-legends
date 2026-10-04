@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#00FFFF" />
+    </marker>
+    <style>
+      .label { font: bold 28px sans-serif; fill: #ffffff }
+      .box { fill: rgba(0,0,0,0.5); stroke: #00FFFF; stroke-width:2 }
+      .small { font: 16px sans-serif; fill: #ffffff }
+    </style>
+  </defs>
+
+  <!-- background placeholder image -->
+  <image href="https://via.placeholder.com/1600x700.png?text=Image+7+-+Storm+Descent" x="0" y="0" width="1600" height="700" />
+
+  <!-- title highlight -->
+  <rect x="120" y="120" width="960" height="420" class="box" rx="6" ry="6" />
+  <text x="140" y="160" class="label">Chapter title — STORM DESCENT</text>
+
+  <!-- bottom controls highlight -->
+  <rect x="1180" y="540" width="380" height="120" class="box" rx="6" ry="6" />
+  <text x="1200" y="580" class="label">Playback / export controls (audio/export/replay)</text>
+
+  <!-- legend -->
+  <rect x="20" y="640" width="1560" height="40" fill="rgba(0,0,0,0.6)" />
+  <text x="40" y="664" class="small">Replace placeholder background with final screenshot for production documentation.</text>
+</svg>

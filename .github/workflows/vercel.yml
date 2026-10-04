@@ -1,0 +1,78 @@
+name: Vercel Deployments
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  lint:
+    name: Lint Codebase
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Linter
+        run: npm run lint
+
+  deploy-preview:
+    name: Deploy to Vercel (Preview)
+    needs: lint
+    if: github.event_name == 'pull_request'
+    environment:
+      name: "Preview – tactical-legends"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          if [ -n "$VERCEL_TOKEN" ]; then
+            vercel --confirm --token "$VERCEL_TOKEN"
+          else
+            echo "VERCEL_TOKEN secret not configured, relying on Vercel GitHub App integration."
+          fi
+
+  deploy-production:
+    name: Deploy to Vercel (Production)
+    needs: lint
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment:
+      name: "Production – tactical-legends"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Deploy to Vercel Production
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          if [ -n "$VERCEL_TOKEN" ]; then
+            vercel --prod --confirm --token "$VERCEL_TOKEN"
+          else
+            echo "VERCEL_TOKEN secret not configured, relying on Vercel GitHub App integration."
+          fi

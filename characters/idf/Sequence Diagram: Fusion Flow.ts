@@ -1,29 +1,4 @@
-PlanTulm
-@startuml
-title Tactical Legend: Relic Fusion Sequence
-
-actor RelicCrafter
-participant "Fusion Engine"
-participant "Crafting Tree Manager"
-participant "Synergy Calculator"
-participant "Factional Modifier Engine"
-participant "Mutation Selector"
-participant "Lore Composer"
-participant "Glyph Generator"
-participant "Achievement Tracker"
-participant "Relic Codex"
-
-RelicCrafter -> "Fusion Engine" : initiateFusion(relicA, relicB)
-"Fusion Engine" -> "Crafting Tree Manager" : fetchRelicMetadata()
-"Fusion Engine" -> "Synergy Calculator" : calculateSynergy()
-"Fusion Engine" -> "Factional Modifier Engine" : applyFactionBonus()
-"Fusion Engine" -> "Mutation Selector" : selectMutationPath()
-"Fusion Engine" -> "Lore Composer" : generateFusionLore()
-"Fusion Engine" -> "Glyph Generator" : generateGlyph()
-"Fusion Engine" -> "Achievement Tracker" : checkAchievements()
-"Fusion Engine" -> "Relic Codex" : updateCodexEntry()
-
-"Fusion Engine" --> RelicCrafter : returnFusionResult()
-
-@enduml
-
+// PlantUML Architecture Diagram
+export const DIAGRAM_NAME = 'Sequence Diagram: Fusion Flow.ts';
+export const PLANTUML_SOURCE = 'PlanTulm\n@startuml\ntitle Tactical Legend: Relic Fusion Sequence\n\nactor RelicCrafter\nparticipant "Fusion Engine"\nparticipant "Crafting Tree Manager"\nparticipant "Synergy Calculator"\nparticipant "Factional Modifier Engine"\nparticipant "Mutation Selector"\nparticipant "Lore Composer"\nparticipant "Glyph Generator"\nparticipant "Achievement Tracker"\nparticipant "Relic Codex"\n\nRelicCrafter -> "Fusion Engine" : initiateFusion(relicA, relicB)\n"Fusion Engine" -> "Crafting Tree Manager" : fetchRelicMetadata()\n"Fusion Engine" -> "Synergy Calculator" : calculateSynergy()\n"Fusion Engine" -> "Factional Modifier Engine" : applyFactionBonus()\n"Fusion Engine" -> "Mutation Selector" : selectMutationPath()\n"Fusion Engine" -> "Lore Composer" : generateFusionLore()\n"Fusion Engine" -> "Glyph Generator" : generateGlyph()\n"Fusion Engine" -> "Achievement Tracker" : checkAchievements()\n"Fusion Engine" -> "Relic Codex" : updateCodexEntry()\n\n"Fusion Engine" --> RelicCrafter : returnFusionResult()\n\n@enduml\n\n';
+export default PLANTUML_SOURCE;

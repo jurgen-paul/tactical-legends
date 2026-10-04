@@ -1,25 +1,4 @@
-PlanTulm
-@startuml
-title Tactical Legend: Expanded Component Architecture
-
-component "Fusion Engine" as Fusion
-component "Synergy Calculator" as Synergy
-component "Mutation Selector" as Mutation
-component "Glyph Generator" as Glyphs
-component "Achievement Tracker" as Achievements
-component "Crafting Tree Manager" as Crafting
-component "Relic Codex" as Codex
-component "Factional Modifier Engine" as FactionMod
-component "Lore Composer" as Lore
-
-Fusion --> Synergy : calculateSynergy()
-Fusion --> Mutation : selectMutationPath()
-Fusion --> Glyphs : generateGlyph()
-Fusion --> Achievements : checkAchievements()
-Fusion --> Crafting : fetchRelicMetadata()
-Fusion --> Codex : queryRelicEntry()
-Fusion --> FactionMod : applyFactionBonus()
-Fusion --> Lore : generateFusionLore()
-
-@enduml
-
+// PlantUML Architecture Diagram
+export const DIAGRAM_NAME = 'Updated Component Diagram.ts';
+export const PLANTUML_SOURCE = 'PlanTulm\n@startuml\ntitle Tactical Legend: Expanded Component Architecture\n\ncomponent "Fusion Engine" as Fusion\ncomponent "Synergy Calculator" as Synergy\ncomponent "Mutation Selector" as Mutation\ncomponent "Glyph Generator" as Glyphs\ncomponent "Achievement Tracker" as Achievements\ncomponent "Crafting Tree Manager" as Crafting\ncomponent "Relic Codex" as Codex\ncomponent "Factional Modifier Engine" as FactionMod\ncomponent "Lore Composer" as Lore\n\nFusion --> Synergy : calculateSynergy()\nFusion --> Mutation : selectMutationPath()\nFusion --> Glyphs : generateGlyph()\nFusion --> Achievements : checkAchievements()\nFusion --> Crafting : fetchRelicMetadata()\nFusion --> Codex : queryRelicEntry()\nFusion --> FactionMod : applyFactionBonus()\nFusion --> Lore : generateFusionLore()\n\n@enduml\n\n';
+export default PLANTUML_SOURCE;

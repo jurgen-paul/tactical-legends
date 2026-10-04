@@ -1,0 +1,8 @@
+{
+  "name": "Tactical Legends — Rise of OISTARIAN",
+  "description": "Turn-based tactical strategy game with deep squad customization, adaptive AI, and rich lore in the world of Oistarian.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

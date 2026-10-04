@@ -1,0 +1,377 @@
+#!/usr/bin/env python3
+"""
+Tactical Legends - Python HTML Portal Generator & Server
+Turns the entire web application frontend and HTML templates into a pure Python architecture.
+
+Capabilities:
+- Dynamic programmatic generation of the complete Tactical Legends web UI
+- Cybernetic dark tactical theme with animated HUD elements and SVG radars
+- Standalone multi-threaded Python HTTP server serving the generated web portal
+- CLI export utility to build or refresh static HTML files on demand
+"""
+
+import sys
+import os
+import json
+import argparse
+from pathlib import Path
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+from socketserver import ThreadingMixIn
+from typing import Dict, List, Any, Optional
+
+BASE_DIR = Path(__file__).resolve().parent
+
+
+def render_html_page(title: str = "Tactical Legends: Rise of OISTARIAN", extra_head: str = "") -> str:
+    """Builds and returns the complete, high-fidelity Tactical Legends HTML portal."""
+    return f"""<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Turn-based tactical RPG with deep squad synergy, procedural lore, and relic crafting.">
+    <title>{title}</title>
+    <!-- Tailwind CDN & Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {{
+            --cyber-neon: #00ffaa;
+            --cyber-gold: #facc15;
+            --cyber-blue: #38bdf8;
+            --bg-dark: #0a0d14;
+            --panel-bg: rgba(15, 23, 42, 0.85);
+        }}
+        body {{
+            background-color: var(--bg-dark);
+            font-family: 'Rajdhani', sans-serif;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }}
+        .font-orbitron {{ font-family: 'Orbitron', monospace; }}
+        .font-mono-tech {{ font-family: 'Share Tech Mono', monospace; }}
+        .cyber-border {{
+            border: 1px solid rgba(0, 255, 170, 0.3);
+            box-shadow: 0 0 15px rgba(0, 255, 170, 0.15);
+        }}
+        .cyber-border:hover {{
+            border-color: rgba(0, 255, 170, 0.8);
+            box-shadow: 0 0 25px rgba(0, 255, 170, 0.35);
+        }}
+        .glow-text {{
+            text-shadow: 0 0 12px rgba(0, 255, 170, 0.6);
+        }}
+        .scanline {{
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+        }}
+        .grid-pattern {{
+            background-image: radial-gradient(rgba(0, 255, 170, 0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }}
+    </style>
+    {extra_head}
+</head>
+<body class="relative min-h-screen bg-slate-950 text-slate-100 grid-pattern">
+    <div class="fixed inset-0 scanline z-50 pointer-events-none opacity-40"></div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-emerald-500/20 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="text-emerald-400 text-2xl font-bold font-orbitron tracking-wider">TACTICAL LEGENDS</span>
+                <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono-tech border border-emerald-500/40">PYTHON ENGINE</span>
+            </div>
+            <nav class="hidden md:flex items-center gap-6 font-orbitron text-sm">
+                <a href="#overview" class="hover:text-emerald-400 transition-colors">OVERVIEW</a>
+                <a href="#squad" class="hover:text-emerald-400 transition-colors">SQUAD</a>
+                <a href="#battlefield" class="hover:text-emerald-400 transition-colors">BATTLEFIELD</a>
+                <a href="#codex" class="hover:text-emerald-400 transition-colors">CODEX</a>
+                <a href="/trailer" class="hover:text-yellow-400 text-yellow-300 transition-colors flex items-center gap-1.5">
+                    <span>🎙️ AI TRAILER</span>
+                </a>
+            </nav>
+            <div class="flex items-center gap-3">
+                <button onclick="runPythonCombatSim()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold font-orbitron text-xs rounded transition-all shadow-lg shadow-emerald-500/25">
+                    ⚡ SIMULATE COMBAT
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="overview" class="py-20 px-6 max-w-7xl mx-auto text-center">
+        <div class="inline-block px-3 py-1 mb-4 rounded-full bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 font-mono-tech text-xs tracking-widest uppercase">
+            OPERATION SAND ECHO // SECTOR CH-03 ACTIVE
+        </div>
+        <h1 class="text-5xl md:text-7xl font-extrabold font-orbitron tracking-tight mb-6 glow-text text-white">
+            RISE OF <span class="text-emerald-400">OISTARIAN</span>
+        </h1>
+        <p class="max-w-3xl mx-auto text-lg md:text-xl text-slate-300 font-medium leading-relaxed mb-10">
+            A next-generation turn-based tactical combat simulator featuring dual-layer shield mitigation,
+            relic weapon fusion, trauma-based conflict escalation, and autonomous squad AI.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="#battlefield" class="px-8 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-orbitron font-bold text-sm tracking-wider rounded transition-all shadow-lg shadow-emerald-500/30">
+                TACTICAL RADAR
+            </a>
+            <a href="/trailer" class="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 text-emerald-400 font-orbitron font-bold text-sm tracking-wider rounded border border-emerald-500/30 transition-all">
+                VOICE STUDIO
+            </a>
+        </div>
+    </section>
+
+    <!-- Squad Showcase Section -->
+    <section id="squad" class="py-16 px-6 max-w-7xl mx-auto border-t border-slate-800/80">
+        <div class="flex justify-between items-end mb-10">
+            <div>
+                <span class="text-emerald-400 font-mono-tech text-xs tracking-widest">FIRETEAM COMPOSITION</span>
+                <h2 class="text-3xl font-bold font-orbitron text-white">ACTIVE OPERATIVES</h2>
+            </div>
+            <span class="text-xs font-mono-tech text-slate-400">4 / 4 READY FOR DEPLOYMENT</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Operative 1 -->
+            <div class="p-6 bg-slate-900/70 rounded-xl cyber-border transition-all">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-xs font-mono-tech text-emerald-400">[OP-01]</span>
+                    <span class="text-xs px-2 py-0.5 bg-emerald-500/20 text-emerald-300 rounded font-mono-tech">CYBER ENGINEER</span>
+                </div>
+                <h3 class="text-xl font-bold font-orbitron text-white mb-1">OISTARIAN</h3>
+                <p class="text-xs text-slate-400 mb-4">Relentless Myth • Overclock Mastery</p>
+                <div class="space-y-2 text-xs font-mono-tech">
+                    <div class="flex justify-between"><span>HP:</span><span class="text-emerald-400">140 / 140</span></div>
+                    <div class="flex justify-between"><span>SHIELDS:</span><span class="text-cyan-400">75 / 75</span></div>
+                    <div class="flex justify-between"><span>ACTION POINTS:</span><span class="text-yellow-400">4 AP</span></div>
+                </div>
+            </div>
+            <!-- Operative 2 -->
+            <div class="p-6 bg-slate-900/70 rounded-xl cyber-border transition-all">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-xs font-mono-tech text-emerald-400">[OP-02]</span>
+                    <span class="text-xs px-2 py-0.5 bg-cyan-500/20 text-cyan-300 rounded font-mono-tech">HOLO SCOUT</span>
+                </div>
+                <h3 class="text-xl font-bold font-orbitron text-white mb-1">ZOE</h3>
+                <p class="text-xs text-slate-400 mb-4">Holo Decoy • Digital Glitch</p>
+                <div class="space-y-2 text-xs font-mono-tech">
+                    <div class="flex justify-between"><span>HP:</span><span class="text-emerald-400">95 / 95</span></div>
+                    <div class="flex justify-between"><span>SHIELDS:</span><span class="text-cyan-400">40 / 40</span></div>
+                    <div class="flex justify-between"><span>ACTION POINTS:</span><span class="text-yellow-400">4 AP</span></div>
+                </div>
+            </div>
+            <!-- Operative 3 -->
+            <div class="p-6 bg-slate-900/70 rounded-xl cyber-border transition-all">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-xs font-mono-tech text-emerald-400">[OP-03]</span>
+                    <span class="text-xs px-2 py-0.5 bg-yellow-500/20 text-yellow-300 rounded font-mono-tech">VAULT VANGUARD</span>
+                </div>
+                <h3 class="text-xl font-bold font-orbitron text-white mb-1">COMMANDER JAX</h3>
+                <p class="text-xs text-slate-400 mb-4">Bulwark Stance • Heavy Aegis</p>
+                <div class="space-y-2 text-xs font-mono-tech">
+                    <div class="flex justify-between"><span>HP:</span><span class="text-emerald-400">160 / 160</span></div>
+                    <div class="flex justify-between"><span>SHIELDS:</span><span class="text-cyan-400">90 / 90</span></div>
+                    <div class="flex justify-between"><span>ACTION POINTS:</span><span class="text-yellow-400">4 AP</span></div>
+                </div>
+            </div>
+            <!-- Operative 4 -->
+            <div class="p-6 bg-slate-900/70 rounded-xl cyber-border transition-all">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-xs font-mono-tech text-emerald-400">[OP-04]</span>
+                    <span class="text-xs px-2 py-0.5 bg-red-500/20 text-red-300 rounded font-mono-tech">BIO-NANO MEDIC</span>
+                </div>
+                <h3 class="text-xl font-bold font-orbitron text-white mb-1">DOCTOR VAL</h3>
+                <p class="text-xs text-slate-400 mb-4">Field Nanites • Stim Booster</p>
+                <div class="space-y-2 text-xs font-mono-tech">
+                    <div class="flex justify-between"><span>HP:</span><span class="text-emerald-400">85 / 85</span></div>
+                    <div class="flex justify-between"><span>SHIELDS:</span><span class="text-cyan-400">50 / 50</span></div>
+                    <div class="flex justify-between"><span>ACTION POINTS:</span><span class="text-yellow-400">4 AP</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Battlefield Simulation Section -->
+    <section id="battlefield" class="py-16 px-6 max-w-7xl mx-auto border-t border-slate-800/80">
+        <div class="mb-10 text-center">
+            <span class="text-emerald-400 font-mono-tech text-xs tracking-widest">TACTICAL MATRIX</span>
+            <h2 class="text-3xl md:text-4xl font-bold font-orbitron text-white">PYTHON COMBAT SIMULATOR</h2>
+            <p class="text-sm text-slate-400 mt-2">Trigger real-time headless AI vs AI tactical skirmishes executing on the server.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            <!-- Combat Console -->
+            <div class="lg:col-span-2 p-6 bg-slate-900/90 rounded-2xl cyber-border">
+                <div class="flex justify-between items-center pb-4 mb-4 border-b border-slate-800">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span class="font-mono-tech text-xs text-emerald-400">SECTOR CH-03 TELEMETRY</span>
+                    </div>
+                    <button onclick="runPythonCombatSim()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold font-mono-tech text-xs rounded transition-all">
+                        RUN NEW SIMULATION
+                    </button>
+                </div>
+                <div id="combatLogBox" class="h-80 overflow-y-auto font-mono-tech text-xs bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-1.5 text-slate-300">
+                    <div class="text-emerald-400">[SYSTEM] Python Combat Engine ready. Click 'Run New Simulation' to execute a turn-based skirmish.</div>
+                    <div class="text-slate-500">[INFO] Operatives: OISTARIAN, Zoe, Jax. Hostiles: Dominion Enforcer, Holo Hunter, Mecha Sentry.</div>
+                </div>
+            </div>
+            <!-- Telemetry Summary -->
+            <div class="p-6 bg-slate-900/90 rounded-2xl cyber-border space-y-4">
+                <h3 class="text-lg font-bold font-orbitron text-white">SIMULATION METRICS</h3>
+                <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 space-y-3 font-mono-tech text-xs">
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">WINNER:</span>
+                        <span id="simWinner" class="text-emerald-400 font-bold">READY</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">TURNS TAKEN:</span>
+                        <span id="simTurns" class="text-yellow-400">-</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">SURVIVORS:</span>
+                        <span id="simSurvivors" class="text-cyan-400">-</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">STATUS:</span>
+                        <span id="simStatus" class="text-slate-300">STANDBY</span>
+                    </div>
+                </div>
+                <div class="pt-2">
+                    <div class="text-xs font-mono-tech text-slate-400 mb-2">REST API ENDPOINTS:</div>
+                    <div class="space-y-1 text-xs font-mono-tech text-slate-400">
+                        <div>POST <span class="text-emerald-400">/api/battle/simulate</span></div>
+                        <div>GET <span class="text-cyan-400">/api/squad</span></div>
+                        <div>GET <span class="text-yellow-400">/api/coe</span></div>
+                        <div>GET <span class="text-purple-400">/api/eden</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-slate-800/80 bg-slate-950 text-center text-xs text-slate-500 font-mono-tech">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>TACTICAL LEGENDS: RISE OF OISTARIAN • FULL PYTHON & TYPESCRIPT ARCHITECTURE</div>
+            <div>DEVELOPED BY OISTARS ENTERTAINMENT • ALL SYSTEMS VERIFIED</div>
+        </div>
+    </footer>
+
+    <!-- Interactive Client Script -->
+    <script>
+        async function runPythonCombatSim() {{
+            const logBox = document.getElementById('combatLogBox');
+            logBox.innerHTML = '<div class="text-yellow-400">>>> Initiating headless Python simulation via /api/battle/simulate...</div>';
+            
+            try {{
+                const res = await fetch('/api/battle/simulate', {{ method: 'POST' }});
+                if (!res.ok) throw new Error('Simulation failed');
+                const data = await res.json();
+                
+                document.getElementById('simWinner').textContent = data.winner ? data.winner.toUpperCase() : 'DRAW';
+                document.getElementById('simTurns').textContent = data.turns_taken || '-';
+                document.getElementById('simSurvivors').textContent = (data.survivors ? data.survivors.length : '0') + ' units';
+                document.getElementById('simStatus').textContent = 'RESOLVED';
+                
+                logBox.innerHTML = '';
+                (data.final_log || []).forEach(entry => {{
+                    const line = document.createElement('div');
+                    line.textContent = entry;
+                    if (entry.includes('💥')) line.className = 'text-yellow-300';
+                    else if (entry.includes('🏆')) line.className = 'text-emerald-400 font-bold';
+                    else if (entry.includes('⚠️')) line.className = 'text-red-400';
+                    else line.className = 'text-slate-300';
+                    logBox.appendChild(line);
+                }});
+                logBox.scrollTop = logBox.scrollHeight;
+            }} catch (e) {{
+                logBox.innerHTML += `<div class="text-red-400">[ERROR] Failed to run simulation: ${{e.message}}</div>`;
+            }}
+        }}
+    </script>
+</body>
+</html>
+"""
+
+
+class PythonWebHandler(SimpleHTTPRequestHandler):
+    """Custom HTTP handler serving the Python-rendered HTML portal and REST endpoints."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, directory=str(BASE_DIR), **kwargs)
+
+    def do_GET(self):
+        if self.path == "/" or self.path == "/index.html":
+            html_content = render_html_page().encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(html_content)))
+            self.end_headers()
+            self.wfile.write(html_content)
+            return
+
+        if self.path == "/api/health":
+            self.send_json_response({"status": "online", "engine": "Python HTML Portal Engine"})
+            return
+
+        super().do_GET()
+
+    def do_POST(self):
+        if self.path == "/api/battle/simulate":
+            from tactical_legends import TacticalGame
+            game = TacticalGame()
+            res = game.simulate_automated_battle()
+            self.send_json_response(res)
+            return
+        self.send_error(404, "Endpoint not found")
+
+    def send_json_response(self, data: Any, status: int = 200):
+        body = json.dumps(data, indent=2).encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+        self.wfile.write(body)
+
+
+class ThreadedServer(ThreadingMixIn, HTTPServer):
+    daemon_threads = True
+
+
+def export_html(output_file: Path):
+    """Exports the generated HTML page to a file on disk."""
+    html_data = render_html_page()
+    output_file.write_text(html_data, encoding="utf-8")
+    print(f"✅ Exported Python HTML portal to {output_file} ({len(html_data)} bytes)")
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Tactical Legends Python HTML Portal Generator")
+    parser.add_argument("--server", action="store_true", help="Launch Python Web Portal server on port 3000")
+    parser.add_argument("--port", type=int, default=3000, help="Port to bind (default: 3000)")
+    parser.add_argument("--export", type=str, help="Export rendered HTML to a specific file (e.g., index.html)")
+    args = parser.parse_args()
+
+    if args.export:
+        export_html(Path(args.export))
+        return
+
+    # Default action: run server or export
+    if args.server:
+        server = ThreadedServer(("0.0.0.0", args.port), PythonWebHandler)
+        print(f"🌐 Python HTML Portal running on http://0.0.0.0:{args.port}/")
+        try:
+            server.serve_forever()
+        except KeyboardInterrupt:
+            server.server_close()
+    else:
+        # If no flags passed, export and print summary
+        out = BASE_DIR / "index.html"
+        export_html(out)
+
+
+if __name__ == "__main__":
+    main()

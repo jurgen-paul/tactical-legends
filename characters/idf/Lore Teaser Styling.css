@@ -1,0 +1,44 @@
+.lore {
+  margin: 80px 0;
+  text-align: center;
+  color: #00ff88;
+  padding: 40px 20px;
+  background: rgba(10, 10, 10, 0.7);
+  border: 2px solid #00ff88;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0, 255, 136, 0.3);
+}
+
+.lore h2 {
+  font-size: 2.5rem;
+  font-family: 'Orbitron', monospace;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+}
+
+.lore p {
+  font-size: 1.2rem;
+  font-family: 'Rajdhani', sans-serif;
+  margin-bottom: 30px;
+  line-height: 1.6;
+  color: #00ffaa;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-family: 'Orbitron', monospace;
+  background: #00ff88;
+  color: #0a0a0a;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.cta-button:hover {
+  background: #00cc6a;
+  transform: scale(1.05);
+}
