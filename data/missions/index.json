@@ -1,0 +1,43 @@
+{
+  "mission_001": {
+    "id": "mission_001",
+    "name": "Operation Sand Echo",
+    "description": "Secure the Echo Core and survive the desert breach.",
+    "environment": "desert",
+    "difficulty": "NORMAL",
+    "faction": "United Resistance Coalition",
+    "squad_slots": 4,
+    "turn_limit": 12,
+    "enemy_count": 6,
+    "enemy_types": ["enforcer", "hunter", "sentry"],
+    "rewards": { "credits": 800, "xp": 300 },
+    "unlocks": ["echo_core", "sandstorm_map"],
+    "branches": { "stealth": "mission_002", "aggressive": "mission_003" },
+    "morale_impact": 5,
+    "objectives": [
+      { "id": "obj_01", "name": "Secure relic vault", "type": "REACH_LOCATION", "description": "Reach the vault node and secure the relic", "target": 1, "primary": true },
+      { "id": "obj_02", "name": "Eliminate hostiles", "type": "ELIMINATE_ENEMIES", "description": "Defeat enemy patrols", "target": 4, "primary": true },
+      { "id": "obj_03", "name": "Extract squad", "type": "REACH_LOCATION", "description": "Return to extraction point", "target": 1, "primary": true }
+    ]
+  },
+  "mission_002": {
+    "id": "mission_002",
+    "name": "Operation Ghost Reach",
+    "description": "Move through the ruins undetected.",
+    "environment": "ruins",
+    "difficulty": "HARD",
+    "faction": "Echo Ascendants",
+    "squad_slots": 4,
+    "turn_limit": 10,
+    "enemy_count": 5,
+    "enemy_types": ["cavalier", "scanner"],
+    "rewards": { "credits": 1200, "xp": 450 },
+    "unlocks": ["ghost_cloak"],
+    "branches": {},
+    "morale_impact": 8,
+    "objectives": [
+      { "id": "obj_04", "name": "Infiltrate ruins", "type": "REACH_LOCATION", "description": "Reach the hidden panel", "target": 1, "primary": true },
+      { "id": "obj_05", "name": "Remain undetected", "type": "STEALTH_ONLY", "description": "Do not trigger alarms", "target": 1, "primary": true }
+    ]
+  }
+}
