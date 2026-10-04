@@ -26,6 +26,8 @@ from socketserver import ThreadingMixIn
 from tactical_legends import TacticalGame, Position, Combatant, TileType
 from SquadMember import get_default_squad, SquadMember
 from soundNvoiceManager import SoundNVoiceManager
+from coe import CathedralOfEchoes
+from vault_of_eden import VaultOfEdenEncounter
 
 BASE_DIR = Path(__file__).resolve().parent
 PUBLIC_DIR = BASE_DIR / "public"
@@ -75,6 +77,18 @@ class TacticalLegendsHTTPHandler(SimpleHTTPRequestHandler):
                     self.send_json_response({"error": str(e)}, status=500)
                     return
             self.send_json_response({"operation": "Sand Echo", "status": "Ready"})
+            return
+
+        if self.path == "/api/coe":
+            engine = CathedralOfEchoes()
+            engine.record_action("spared_enemy")
+            engine.complete_mission_echoes_of_judgment()
+            self.send_json_response(engine.to_dict())
+            return
+
+        if self.path == "/api/eden":
+            encounter = VaultOfEdenEncounter(morality_score=75, prior_civilian_rescue=True)
+            self.send_json_response(encounter.run_full_simulation())
             return
 
         if self.path == "/api/codex":
@@ -352,9 +366,21 @@ def main():
     parser.add_argument("--squad", action="store_true", help="Display active squad roster & stats")
     parser.add_argument("--codex", action="store_true", help="Display Codex factions & relics catalog")
     parser.add_argument("--voice", action="store_true", help="Display voice scripts and trailer audio manifest")
+    parser.add_argument("--coe", action="store_true", help="Run Cathedral of Echoes (COE) moral consequence demo")
+    parser.add_argument("--eden", action="store_true", help="Run Vault of Eden symphonic tactical encounter demo")
     parser.add_argument("--test", action="store_true", help="Execute Python unit & integration tests")
 
     args = parser.parse_args()
+
+    if args.coe:
+        from coe import run_demo
+        run_demo()
+        return
+
+    if args.eden:
+        from vault_of_eden import main as run_eden
+        run_eden()
+        return
 
     if args.json_sim:
         game = TacticalGame()

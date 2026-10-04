@@ -1,36 +1,4 @@
-@startuml
-title Tactical Legend: Relic Fusion Component Diagram
-
-package "Fusion System" {
-  [RelicFusionEngine] --> [SynergyCalculator]
-  [RelicFusionEngine] --> [FactionalModifier]
-  [RelicFusionEngine] --> [MutationSelector]
-  [RelicFusionEngine] --> [GlyphGenerator]
-  [RelicFusionEngine] --> [LoreComposer]
-}
-
-package "Data Management" {
-  [RelicRepository]
-  [FactionDatabase]
-  [MutationLibrary]
-  [GlyphTemplates]
-  [LoreArchive]
-}
-
-package "UI & Player Interaction" {
-  [FusionUI]
-  [AchievementTracker]
-  [RelicCodex]
-}
-
-[FusionUI] --> [RelicFusionEngine]
-[RelicFusionEngine] --> [RelicRepository]
-[RelicFusionEngine] --> [FactionDatabase]
-[RelicFusionEngine] --> [MutationLibrary]
-[RelicFusionEngine] --> [GlyphTemplates]
-[RelicFusionEngine] --> [LoreArchive]
-[RelicFusionEngine] --> [AchievementTracker]
-[RelicFusionEngine] --> [RelicCodex]
-
-@enduml
-
+// PlantUML Architecture Diagram
+export const DIAGRAM_NAME = 'Tactical Legend – Relic Fusion System.ts';
+export const PLANTUML_SOURCE = '@startuml\ntitle Tactical Legend: Relic Fusion Component Diagram\n\npackage "Fusion System" {\n  [RelicFusionEngine] --> [SynergyCalculator]\n  [RelicFusionEngine] --> [FactionalModifier]\n  [RelicFusionEngine] --> [MutationSelector]\n  [RelicFusionEngine] --> [GlyphGenerator]\n  [RelicFusionEngine] --> [LoreComposer]\n}\n\npackage "Data Management" {\n  [RelicRepository]\n  [FactionDatabase]\n  [MutationLibrary]\n  [GlyphTemplates]\n  [LoreArchive]\n}\n\npackage "UI & Player Interaction" {\n  [FusionUI]\n  [AchievementTracker]\n  [RelicCodex]\n}\n\n[FusionUI] --> [RelicFusionEngine]\n[RelicFusionEngine] --> [RelicRepository]\n[RelicFusionEngine] --> [FactionDatabase]\n[RelicFusionEngine] --> [MutationLibrary]\n[RelicFusionEngine] --> [GlyphTemplates]\n[RelicFusionEngine] --> [LoreArchive]\n[RelicFusionEngine] --> [AchievementTracker]\n[RelicFusionEngine] --> [RelicCodex]\n\n@enduml\n\n';
+export default PLANTUML_SOURCE;

@@ -1,82 +1,45 @@
-public class Main {
-    // ANSI escape codes
-    public static final String RESET = "\u001B[0m";
-    public static final String CYAN = "\u001B[36m";
-    public static final String YELLOW = "\u001B[33m";
-    public static final String GREEN = "\u001B[32;1m"; // bright green
-    public static final String RED = "\u001B[31;1m";   // bright red
-    public static final String BEEP = "\u0007";        // ASCII bell (beep)
+#!/usr/bin/env python3
+"""
+Tactical Legends - Characters/IDF Module Initializer & Diagnostics
+"""
 
-    public static void main(String[] args) {
-        // Intro banner
-        System.out.println(CYAN + "===============================================" + RESET);
-        System.out.println(CYAN + "        ⚔️  Tactical Legends ⚔️" + RESET);
-        System.out.println(CYAN + "         Rise of the Oistarian" + RESET);
-        System.out.println(CYAN + "===============================================" + RESET);
-        System.out.println("Prepare to command elite squads, forge relics,");
-        System.out.println("and shape the fate of Oistaria.\n");
+import time
+import sys
 
-        // Simulation initialization
-        System.out.println(">>> Initializing battlefield simulation...");
-        for (int i = 1; i <= 5; i++) {
-            System.out.print(YELLOW + "Loading unit " + i + " " + RESET);
-            animateDots(3, 250); // Show animated dots
-            try {
-                Thread.sleep(400); // Simulate loading delay
-                System.out.println(GREEN + "✅ Ready" + RESET);
-            } catch (InterruptedException e) {
-                flashRedWarning("Initialization interrupted!");
-                showCriticalOverrideBanner();
-            }
-        }
+RESET = "\033[0m"
+CYAN = "\033[36m"
+YELLOW = "\033[33m"
+GREEN = "\033[32;1m"
+RED = "\033[31;1m"
 
-        // Final status
-        System.out.println(CYAN + "\n===============================================" + RESET);
-        System.out.println(GREEN + "   All units deployed. Tactical systems online." + RESET);
-        System.out.println(CYAN + "===============================================" + RESET);
-        System.out.println(GREEN + "⚡ Let the legend begin... ⚡" + RESET);
-    }
 
-    /**
-     * Utility method to animate loading dots
-     */
-    private static void animateDots(int count, int delay) {
-        for (int i = 0; i < count; i++) {
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException e) {
-                // Ignore interruption for animation
-            }
-            System.out.print(".");
-        }
-    }
+def animate_dots(count=3, delay=0.1):
+    for _ in range(count):
+        sys.stdout.write(".")
+        sys.stdout.flush()
+        time.sleep(delay)
 
-    /**
-     * Flash a red warning message with an audible beep
-     */
-    private static void flashRedWarning(String message) {
-        for (int i = 0; i < 3; i++) {
-            System.out.println(RED + message + BEEP + RESET); // red + beep
-            try {
-                Thread.sleep(300);
-            } catch (InterruptedException ignored) {}
-            System.out.println(RESET); // Clear/reset
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException ignored) {}
-        }
-    }
 
-    /**
-     * Show dramatic ASCII banner for critical override
-     */
-    private static void showCriticalOverrideBanner() {
-        System.out.println(RED + BEEP);
-        System.out.println(RED + "################################################" + RESET);
-        System.out.println(RED + "###   !!! CRITICAL SYSTEMS OVERRIDE !!!      ###" + RESET);
-        System.out.println(RED + "###   Tactical Command Lockdown Engaged      ###" + RESET);
-        System.out.println(RED + "################################################" + RESET);
-        System.out.println(RED + BEEP);
-    }
-}
+def main():
+    print(CYAN + "===============================================" + RESET)
+    print(CYAN + "        ⚔️  Tactical Legends ⚔️" + RESET)
+    print(CYAN + "      IDF Tactical Operatives Engine" + RESET)
+    print(CYAN + "===============================================" + RESET)
+    print("Prepare to command elite squads, forge relics,")
+    print("and shape the fate of Oistaria.\n")
 
+    print(">>> Initializing IDF operative roster...")
+    for i in range(1, 6):
+        sys.stdout.write(YELLOW + f"Loading unit {i} " + RESET)
+        animate_dots(3, 0.05)
+        time.sleep(0.05)
+        print(GREEN + " ✅ Ready" + RESET)
+
+    print(CYAN + "\n===============================================" + RESET)
+    print(GREEN + "   All units deployed. Tactical systems online." + RESET)
+    print(CYAN + "===============================================" + RESET)
+    print(GREEN + "⚡ Let the legend begin... ⚡" + RESET)
+
+
+if __name__ == "__main__":
+    main()

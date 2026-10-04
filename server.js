@@ -59,6 +59,30 @@ app.get('/api/python/health', (req, res) => {
   });
 });
 
+// Cathedral of Echoes (COE) Python evaluation
+app.get('/api/coe', (req, res) => {
+  exec('python3 coe.py --json', { cwd: __dirname }, (error, stdout) => {
+    if (!error) {
+      try {
+        return res.json(JSON.parse(stdout));
+      } catch {}
+    }
+    res.status(500).json({ error: 'COE execution failed' });
+  });
+});
+
+// Vault of Eden Python encounter simulation
+app.get('/api/eden', (req, res) => {
+  exec('python3 vault_of_eden.py --json', { cwd: __dirname }, (error, stdout) => {
+    if (!error) {
+      try {
+        return res.json(JSON.parse(stdout));
+      } catch {}
+    }
+    res.status(500).json({ error: 'Vault of Eden execution failed' });
+  });
+});
+
 // Optional lightweight JSON endpoints based on repo datasets
 app.get('/api/codex', (req, res) => {
   const codexPath = path.join(__dirname, 'resource', 'CODEX.json');

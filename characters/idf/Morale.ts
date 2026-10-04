@@ -1,3 +1,15 @@
+/**
+ * Tactical Legends - Squad Morale Engine
+ */
+
+export type MoraleLevel = "High" | "Neutral" | "Low" | "Broken";
+
+export interface SquadMemberMorale {
+  name: string;
+  morale: number;
+  [key: string]: any;
+}
+
 export function getMoraleLevel(morale: number): MoraleLevel {
   if (morale >= 80) return "High";
   if (morale >= 40) return "Neutral";
@@ -5,11 +17,11 @@ export function getMoraleLevel(morale: number): MoraleLevel {
   return "Broken";
 }
 
-export function adjustMorale(member: SquadMember, change: number): void {
+export function adjustMorale(member: SquadMemberMorale, change: number): void {
   member.morale = Math.max(0, Math.min(100, member.morale + change));
 }
 
-export function applyEventImpact(event: string, squad: SquadMember[]): void {
+export function applyEventImpact(event: string, squad: SquadMemberMorale[]): void {
   switch (event) {
     case "mission_success":
       squad.forEach(m => adjustMorale(m, 15));
@@ -28,4 +40,3 @@ export function applyEventImpact(event: string, squad: SquadMember[]): void {
       break;
   }
 }
-
