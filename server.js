@@ -49,6 +49,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// Cinematic Introduction & AI Voice Trailer page
+app.get('/trailer', (req, res) => {
+  res.sendFile(path.join(__dirname, 'trailer.html'));
+});
+
 // Wildcard fallback for HTML routing
 app.get('*', (req, res) => {
   if (req.accepts('html')) {

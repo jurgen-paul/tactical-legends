@@ -3,5 +3,8 @@
   "framework": null,
   "buildCommand": "npm run build",
   "outputDirectory": ".",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/trailer", "destination": "/trailer.html" }
+  ]
 }
