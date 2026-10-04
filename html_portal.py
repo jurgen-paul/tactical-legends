@@ -1,53 +1,79 @@
-<!DOCTYPE html>
+#!/usr/bin/env python3
+"""
+Tactical Legends - Python HTML Portal Generator & Server
+Turns the entire web application frontend and HTML templates into a pure Python architecture.
+
+Capabilities:
+- Dynamic programmatic generation of the complete Tactical Legends web UI
+- Cybernetic dark tactical theme with animated HUD elements and SVG radars
+- Standalone multi-threaded Python HTTP server serving the generated web portal
+- CLI export utility to build or refresh static HTML files on demand
+"""
+
+import sys
+import os
+import json
+import argparse
+from pathlib import Path
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+from socketserver import ThreadingMixIn
+from typing import Dict, List, Any, Optional
+
+BASE_DIR = Path(__file__).resolve().parent
+
+
+def render_html_page(title: str = "Tactical Legends: Rise of OISTARIAN", extra_head: str = "") -> str:
+    """Builds and returns the complete, high-fidelity Tactical Legends HTML portal."""
+    return f"""<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Turn-based tactical RPG with deep squad synergy, procedural lore, and relic crafting.">
-    <title>Tactical Legends: Rise of OISTARIAN</title>
+    <title>{title}</title>
     <!-- Tailwind CDN & Google Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
-        :root {
+        :root {{
             --cyber-neon: #00ffaa;
             --cyber-gold: #facc15;
             --cyber-blue: #38bdf8;
             --bg-dark: #0a0d14;
             --panel-bg: rgba(15, 23, 42, 0.85);
-        }
-        body {
+        }}
+        body {{
             background-color: var(--bg-dark);
             font-family: 'Rajdhani', sans-serif;
             color: #e2e8f0;
             overflow-x: hidden;
-        }
-        .font-orbitron { font-family: 'Orbitron', monospace; }
-        .font-mono-tech { font-family: 'Share Tech Mono', monospace; }
-        .cyber-border {
+        }}
+        .font-orbitron {{ font-family: 'Orbitron', monospace; }}
+        .font-mono-tech {{ font-family: 'Share Tech Mono', monospace; }}
+        .cyber-border {{
             border: 1px solid rgba(0, 255, 170, 0.3);
             box-shadow: 0 0 15px rgba(0, 255, 170, 0.15);
-        }
-        .cyber-border:hover {
+        }}
+        .cyber-border:hover {{
             border-color: rgba(0, 255, 170, 0.8);
             box-shadow: 0 0 25px rgba(0, 255, 170, 0.35);
-        }
-        .glow-text {
+        }}
+        .glow-text {{
             text-shadow: 0 0 12px rgba(0, 255, 170, 0.6);
-        }
-        .scanline {
+        }}
+        .scanline {{
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
             background-size: 100% 3px, 3px 100%;
             pointer-events: none;
-        }
-        .grid-pattern {
+        }}
+        .grid-pattern {{
             background-image: radial-gradient(rgba(0, 255, 170, 0.15) 1px, transparent 1px);
             background-size: 24px 24px;
-        }
+        }}
     </style>
-    
+    {extra_head}
 </head>
 <body class="relative min-h-screen bg-slate-950 text-slate-100 grid-pattern">
     <div class="fixed inset-0 scanline z-50 pointer-events-none opacity-40"></div>
@@ -235,12 +261,12 @@
 
     <!-- Interactive Client Script -->
     <script>
-        async function runPythonCombatSim() {
+        async function runPythonCombatSim() {{
             const logBox = document.getElementById('combatLogBox');
             logBox.innerHTML = '<div class="text-yellow-400">>>> Initiating headless Python simulation via /api/battle/simulate...</div>';
             
-            try {
-                const res = await fetch('/api/battle/simulate', { method: 'POST' });
+            try {{
+                const res = await fetch('/api/battle/simulate', {{ method: 'POST' }});
                 if (!res.ok) throw new Error('Simulation failed');
                 const data = await res.json();
                 
@@ -250,7 +276,7 @@
                 document.getElementById('simStatus').textContent = 'RESOLVED';
                 
                 logBox.innerHTML = '';
-                (data.final_log || []).forEach(entry => {
+                (data.final_log || []).forEach(entry => {{
                     const line = document.createElement('div');
                     line.textContent = entry;
                     if (entry.includes('💥')) line.className = 'text-yellow-300';
@@ -258,12 +284,94 @@
                     else if (entry.includes('⚠️')) line.className = 'text-red-400';
                     else line.className = 'text-slate-300';
                     logBox.appendChild(line);
-                });
+                }});
                 logBox.scrollTop = logBox.scrollHeight;
-            } catch (e) {
-                logBox.innerHTML += `<div class="text-red-400">[ERROR] Failed to run simulation: ${e.message}</div>`;
-            }
-        }
+            }} catch (e) {{
+                logBox.innerHTML += `<div class="text-red-400">[ERROR] Failed to run simulation: ${{e.message}}</div>`;
+            }}
+        }}
     </script>
 </body>
 </html>
+"""
+
+
+class PythonWebHandler(SimpleHTTPRequestHandler):
+    """Custom HTTP handler serving the Python-rendered HTML portal and REST endpoints."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, directory=str(BASE_DIR), **kwargs)
+
+    def do_GET(self):
+        if self.path == "/" or self.path == "/index.html":
+            html_content = render_html_page().encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(html_content)))
+            self.end_headers()
+            self.wfile.write(html_content)
+            return
+
+        if self.path == "/api/health":
+            self.send_json_response({"status": "online", "engine": "Python HTML Portal Engine"})
+            return
+
+        super().do_GET()
+
+    def do_POST(self):
+        if self.path == "/api/battle/simulate":
+            from tactical_legends import TacticalGame
+            game = TacticalGame()
+            res = game.simulate_automated_battle()
+            self.send_json_response(res)
+            return
+        self.send_error(404, "Endpoint not found")
+
+    def send_json_response(self, data: Any, status: int = 200):
+        body = json.dumps(data, indent=2).encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+        self.wfile.write(body)
+
+
+class ThreadedServer(ThreadingMixIn, HTTPServer):
+    daemon_threads = True
+
+
+def export_html(output_file: Path):
+    """Exports the generated HTML page to a file on disk."""
+    html_data = render_html_page()
+    output_file.write_text(html_data, encoding="utf-8")
+    print(f"✅ Exported Python HTML portal to {output_file} ({len(html_data)} bytes)")
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Tactical Legends Python HTML Portal Generator")
+    parser.add_argument("--server", action="store_true", help="Launch Python Web Portal server on port 3000")
+    parser.add_argument("--port", type=int, default=3000, help="Port to bind (default: 3000)")
+    parser.add_argument("--export", type=str, help="Export rendered HTML to a specific file (e.g., index.html)")
+    args = parser.parse_args()
+
+    if args.export:
+        export_html(Path(args.export))
+        return
+
+    # Default action: run server or export
+    if args.server:
+        server = ThreadedServer(("0.0.0.0", args.port), PythonWebHandler)
+        print(f"🌐 Python HTML Portal running on http://0.0.0.0:{args.port}/")
+        try:
+            server.serve_forever()
+        except KeyboardInterrupt:
+            server.server_close()
+    else:
+        # If no flags passed, export and print summary
+        out = BASE_DIR / "index.html"
+        export_html(out)
+
+
+if __name__ == "__main__":
+    main()

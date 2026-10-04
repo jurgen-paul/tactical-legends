@@ -1,1284 +1,267 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Turn-based tactical strategy game with deep squad customization, adaptive AI, and rich lore in the world of Oistarian.">
-    <meta property="og:title" content="Tactical Legends — Rise of OISTARIAN">
-    <meta property="og:description" content="Turn-based tactical strategy game with deep squad customization, adaptive AI, and rich lore in the world of Oistarian.">
-    <meta name="keywords" content="tactical game, strategy, turn-based, squad customization, open-source, Oistarian">
-    <meta name="author" content="jurgen-paul">
-    <title>Tactical Legends — Rise of OISTARIAN</title>
+    <meta name="description" content="Turn-based tactical RPG with deep squad synergy, procedural lore, and relic crafting.">
+    <title>Tactical Legends: Rise of OISTARIAN</title>
+    <!-- Tailwind CDN & Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --cyber-neon: #00ffaa;
+            --cyber-gold: #facc15;
+            --cyber-blue: #38bdf8;
+            --bg-dark: #0a0d14;
+            --panel-bg: rgba(15, 23, 42, 0.85);
         }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #d1d5db;
-            background: linear-gradient(135deg, #0b0f19 0%, #111827 50%, #1a1a2e 100%);
-            min-height: 100vh;
-        }
-
-        /* Header & Navigation */
-        header {
-            background: rgba(11, 15, 25, 0.9);
-            backdrop-filter: blur(12px);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: #00d4ff;
-            text-decoration: none;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 1.8rem;
-        }
-
-        nav a {
-            color: #9ca3af;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-
-        nav a:hover {
-            color: #00d4ff;
-        }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            padding: 5rem 2rem 4rem;
-            text-align: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: rgba(0, 212, 255, 0.1);
-            color: #00d4ff;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            padding: 0.3rem 1rem;
-            border-radius: 999px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            margin-bottom: 1.25rem;
-            text-transform: uppercase;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #ffffff 30%, #00d4ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.5px;
-        }
-
-        .hero h2 {
-            font-size: 1.6rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            color: #38bdf8;
-            letter-spacing: 2px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: #94a3b8;
-            max-width: 680px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .btn {
-            padding: 0.85rem 2rem;
-            font-size: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 600;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #00d4ff, #0284c7);
-            color: #031321;
-            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 212, 255, 0.45);
-        }
-
-        .btn-secondary {
-            background: rgba(15, 23, 42, 0.7);
-            color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.4);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(56, 189, 248, 0.15);
-            border-color: #38bdf8;
-        }
-
-        /* Awesome Introduction / Cinematic Prologue */
-        .intro-section {
-            max-width: 1200px;
-            margin: 2rem auto 3.5rem;
-            padding: 0 2rem;
-        }
-
-        .intro-box {
-            background: radial-gradient(ellipse at top, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.95) 70%);
-            border: 2px solid rgba(0, 255, 136, 0.4);
-            border-radius: 16px;
-            padding: 2.75rem 2.5rem;
-            box-shadow: 0 0 35px rgba(0, 255, 136, 0.15);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .intro-tag {
-            display: inline-block;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #00ff88;
-            background: rgba(0, 255, 136, 0.12);
-            border: 1px solid rgba(0, 255, 136, 0.35);
-            padding: 0.3rem 0.8rem;
-            border-radius: 9999px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 1.25rem;
-        }
-
-        .intro-title {
-            font-size: clamp(1.8rem, 4vw, 2.75rem);
-            color: #ffffff;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .intro-description {
-            max-width: 820px;
-            margin: 0 auto 2.5rem;
-            color: #cbd5e1;
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-
-        .intro-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
-            text-align: left;
-        }
-
-        .intro-feature-card {
-            background: rgba(3, 7, 18, 0.6);
-            border: 1px solid rgba(0, 255, 136, 0.2);
-            border-radius: 10px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .intro-feature-card:hover {
-            border-color: #00ff88;
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.2);
-        }
-
-        .intro-card-icon {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .intro-feature-card h4 {
-            color: #00ff88;
-            font-size: 1.15rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .intro-feature-card p {
-            color: #94a3b8;
-            font-size: 0.92rem;
-            line-height: 1.5;
-        }
-
-        .intro-cta-wrapper {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        /* Tactical Command Terminal */
-        .terminal-section {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 2rem;
-        }
-
-        .terminal-box {
-            background: #0f172a;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-        }
-
-        .terminal-header {
-            background: #090d16;
-            padding: 0.75rem 1.25rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-        }
-
-        .terminal-tabs {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .tab-btn {
-            background: transparent;
-            border: none;
-            color: #94a3b8;
-            font-size: 0.85rem;
-            font-weight: 600;
-            padding: 0.4rem 0.9rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .tab-btn.active {
-            background: rgba(0, 212, 255, 0.15);
-            color: #00d4ff;
-            border: 1px solid rgba(0, 212, 255, 0.4);
-        }
-
-        .terminal-status {
-            font-size: 0.75rem;
-            color: #10b981;
-            font-family: monospace;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: #10b981;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #10b981;
-        }
-
-        .terminal-body {
-            padding: 1.75rem;
-            min-height: 280px;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Operative Grid */
-        .operative-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.25rem;
-        }
-
-        @keyframes operativePulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.45);
-                border-color: rgba(0, 212, 255, 0.5);
-                transform: translateY(-2px);
-            }
-            50% {
-                box-shadow: 0 0 16px 3px rgba(0, 212, 255, 0.35);
-                border-color: rgba(0, 212, 255, 0.85);
-                transform: translateY(-4px);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(0, 212, 255, 0);
-                border-color: rgba(0, 212, 255, 0.5);
-                transform: translateY(-2px);
-            }
-        }
-
-        .operative-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
-            padding: 1.25rem;
-            position: relative;
-            transition: all 0.25s ease;
-            cursor: pointer;
-        }
-
-        .operative-card:hover {
-            background: rgba(0, 212, 255, 0.06);
-            animation: operativePulse 2s infinite ease-in-out;
-        }
-
-        .op-role {
-            font-size: 0.75rem;
-            color: #00d4ff;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .op-name {
-            font-size: 1.15rem;
-            color: #ffffff;
-            font-weight: bold;
-            margin: 0.25rem 0 0.5rem;
-        }
-
-        .op-stats {
-            display: flex;
-            gap: 0.75rem;
-            margin-top: 0.75rem;
-            padding-top: 0.75rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            font-family: monospace;
-            font-size: 0.85rem;
-        }
-
-        .op-stat {
-            background: rgba(0, 212, 255, 0.08);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            color: #7dd3fc;
-        }
-
-        /* Visual Gallery Section */
-        .gallery-section {
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 2.2rem;
-            text-align: center;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-            font-weight: 800;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: #94a3b8;
-            margin-bottom: 2.5rem;
-            font-size: 1.05rem;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .gallery-card {
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 10px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .gallery-img-wrap {
-            height: 220px;
-            overflow: hidden;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .gallery-img-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .gallery-card:hover .gallery-img-wrap img {
-            transform: scale(1.05);
-        }
-
-        .gallery-info {
-            padding: 1.25rem;
-        }
-
-        .gallery-info h3 {
-            color: #00d4ff;
-            font-size: 1.1rem;
-            margin-bottom: 0.4rem;
-        }
-
-        .gallery-info p {
-            color: #94a3b8;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.75rem;
-        }
-
-        .feature-card {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            padding: 2rem;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-4px);
-            border-color: #00d4ff;
-            background: rgba(0, 212, 255, 0.05);
-            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.15);
-        }
-
-        .feature-icon {
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.6rem;
-            color: #38bdf8;
-        }
-
-        .feature-card p {
-            color: #94a3b8;
-            font-size: 0.95rem;
-        }
-
-        /* Tactical Tips Section */
-        .tips-section {
-            padding: 4.5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .tips-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .tip-card {
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 10px;
-            padding: 1.75rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .tip-card:hover {
-            transform: translateY(-4px);
-            border-color: #00d4ff;
-            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.15);
-            background: rgba(0, 212, 255, 0.05);
-        }
-
-        .tip-badge {
-            display: inline-block;
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: #00d4ff;
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.75rem;
-        }
-
-        .tip-card h3 {
-            font-size: 1.2rem;
-            color: #ffffff;
-            margin-bottom: 0.6rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .tip-card p {
-            color: #94a3b8;
-            font-size: 0.92rem;
-            line-height: 1.6;
-            margin-bottom: 0.75rem;
-        }
-
-        .tip-detail {
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding-top: 0.75rem;
-            font-family: monospace;
-            font-size: 0.82rem;
-            color: #38bdf8;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        /* Tech Stack Section */
-        .tech-stack {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 4rem 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1.25rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .tech-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(0, 212, 255, 0.15);
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .tech-item:hover {
-            border-color: #00d4ff;
-            background: rgba(0, 212, 255, 0.08);
-        }
-
-        .tech-item .lang {
-            color: #38bdf8;
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 0.4rem;
-        }
-
-        .tech-item .percent {
-            color: #64748b;
-            font-size: 0.85rem;
-        }
-
-        /* Getting Started */
-        .getting-started {
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .step {
-            background: rgba(0, 212, 255, 0.04);
-            border-left: 3px solid #00d4ff;
-            padding: 1.5rem;
-            border-radius: 6px;
-        }
-
-        .step-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: #00d4ff;
-            color: #031321;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            font-weight: bold;
-            margin-bottom: 0.8rem;
-            font-size: 0.9rem;
-        }
-
-        .step h3 {
+            background-color: var(--bg-dark);
+            font-family: 'Rajdhani', sans-serif;
             color: #e2e8f0;
-            font-size: 1.1rem;
-            margin-bottom: 0.4rem;
+            overflow-x: hidden;
         }
-
-        .step p {
-            color: #94a3b8;
-            font-size: 0.9rem;
+        .font-orbitron { font-family: 'Orbitron', monospace; }
+        .font-mono-tech { font-family: 'Share Tech Mono', monospace; }
+        .cyber-border {
+            border: 1px solid rgba(0, 255, 170, 0.3);
+            box-shadow: 0 0 15px rgba(0, 255, 170, 0.15);
         }
-
-        .code-block {
-            background: #0b0f19;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            padding: 1.5rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 2rem 0;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+        .cyber-border:hover {
+            border-color: rgba(0, 255, 170, 0.8);
+            box-shadow: 0 0 25px rgba(0, 255, 170, 0.35);
         }
-
-        .code-block code {
-            color: #38bdf8;
-            font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-            font-size: 0.9rem;
-            line-height: 1.6;
+        .glow-text {
+            text-shadow: 0 0 12px rgba(0, 255, 170, 0.6);
         }
-
-        /* Links Section */
-        .links {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 4rem 2rem;
+        .scanline {
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
         }
-
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .link-card {
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            padding: 1.75rem;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-
-        .link-card:hover {
-            border-color: #00d4ff;
-            transform: translateY(-3px);
-            background: rgba(0, 212, 255, 0.05);
-        }
-
-        .link-card h3 {
-            color: #38bdf8;
-            margin-bottom: 0.75rem;
-            font-size: 1.15rem;
-        }
-
-        .link-card p {
-            color: #94a3b8;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .link-card a {
-            color: #00d4ff;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-        }
-
-        .link-card a:hover {
-            text-decoration: underline;
-        }
-
-        /* Footer */
-        footer {
-            background: #080c14;
-            color: #64748b;
-            text-align: center;
-            padding: 2.5rem 2rem;
-            border-top: 1px solid rgba(0, 212, 255, 0.15);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: #38bdf8;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .footer-links a:hover {
-            color: #00d4ff;
-            text-decoration: underline;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.3rem;
-            }
-
-            nav ul {
-                gap: 0.8rem;
-                font-size: 0.85rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
+        .grid-pattern {
+            background-image: radial-gradient(rgba(0, 255, 170, 0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
         }
     </style>
+    
 </head>
-<body>
-    <!-- Header / Navigation -->
-    <header>
-        <nav>
-            <a href="#" class="logo">⚔️ Tactical Legends</a>
-            <ul>
-                <li><a href="#intro">Prologue</a></li>
-                <li><a href="/trailer">AI Trailer</a></li>
-                <li><a href="#command">Command</a></li>
-                <li><a href="#gallery">Visuals</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#tips">Tactical Tips</a></li>
-                <li><a href="#tech">Tech Stack</a></li>
-                <li><a href="#getting-started">Install</a></li>
-                <li><a href="#links">Docs</a></li>
-            </ul>
-        </nav>
+<body class="relative min-h-screen bg-slate-950 text-slate-100 grid-pattern">
+    <div class="fixed inset-0 scanline z-50 pointer-events-none opacity-40"></div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-emerald-500/20 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="text-emerald-400 text-2xl font-bold font-orbitron tracking-wider">TACTICAL LEGENDS</span>
+                <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono-tech border border-emerald-500/40">PYTHON ENGINE</span>
+            </div>
+            <nav class="hidden md:flex items-center gap-6 font-orbitron text-sm">
+                <a href="#overview" class="hover:text-emerald-400 transition-colors">OVERVIEW</a>
+                <a href="#squad" class="hover:text-emerald-400 transition-colors">SQUAD</a>
+                <a href="#battlefield" class="hover:text-emerald-400 transition-colors">BATTLEFIELD</a>
+                <a href="#codex" class="hover:text-emerald-400 transition-colors">CODEX</a>
+                <a href="/trailer" class="hover:text-yellow-400 text-yellow-300 transition-colors flex items-center gap-1.5">
+                    <span>🎙️ AI TRAILER</span>
+                </a>
+            </nav>
+            <div class="flex items-center gap-3">
+                <button onclick="runPythonCombatSim()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold font-orbitron text-xs rounded transition-all shadow-lg shadow-emerald-500/25">
+                    ⚡ SIMULATE COMBAT
+                </button>
+            </div>
+        </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-badge">RISE OF OISTARIAN // V1.0.0</div>
-        <h1>Tactical Legends</h1>
-        <h2>RISE OF OISTARIAN</h2>
-        <p>Master the art of tactical warfare. Command elite squads, customize loadouts, and outwit adaptive AI in deep turn-based strategy combat set across ancient dunes and futuristic strongholds.</p>
-        <div class="cta-buttons">
-            <a href="/trailer" class="btn" style="background: linear-gradient(135deg, #00ff88, #00cc6a); color: #030712; font-weight: 700; box-shadow: 0 4px 20px rgba(0, 255, 136, 0.4);">🎙️ AI Voice Trailer</a>
-            <a href="#command" class="btn btn-primary">Open Command Terminal</a>
-            <a href="https://github.com/jurgen-paul/tactical-legends" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">GitHub Repository</a>
-            <a href="/docs/INDEX.md" class="btn btn-secondary">System Docs</a>
+    <section id="overview" class="py-20 px-6 max-w-7xl mx-auto text-center">
+        <div class="inline-block px-3 py-1 mb-4 rounded-full bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 font-mono-tech text-xs tracking-widest uppercase">
+            OPERATION SAND ECHO // SECTOR CH-03 ACTIVE
+        </div>
+        <h1 class="text-5xl md:text-7xl font-extrabold font-orbitron tracking-tight mb-6 glow-text text-white">
+            RISE OF <span class="text-emerald-400">OISTARIAN</span>
+        </h1>
+        <p class="max-w-3xl mx-auto text-lg md:text-xl text-slate-300 font-medium leading-relaxed mb-10">
+            A next-generation turn-based tactical combat simulator featuring dual-layer shield mitigation,
+            relic weapon fusion, trauma-based conflict escalation, and autonomous squad AI.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="#battlefield" class="px-8 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-orbitron font-bold text-sm tracking-wider rounded transition-all shadow-lg shadow-emerald-500/30">
+                TACTICAL RADAR
+            </a>
+            <a href="/trailer" class="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 text-emerald-400 font-orbitron font-bold text-sm tracking-wider rounded border border-emerald-500/30 transition-all">
+                VOICE STUDIO
+            </a>
         </div>
     </section>
 
-    <!-- Awesome Introduction & Cinematic Prologue Section -->
-    <section class="intro-section" id="intro">
-        <div class="intro-box">
-            <div class="intro-tag">CINEMATIC PROLOGUE // OISTARIAN ORIGINS</div>
-            <h2 class="intro-title">"Legends Don't Vanish. They Reload."</h2>
-            <p class="intro-description">
-                In a world coded in silence, one whisper rewrites the algorithm. Follow OISTARIAN—former cybernetics engineer turned relentless operative—as he navigates shattered data walls, locks into the high-voltage NeuroPulse Arm, and unseals the forbidden Vault of Eden.
-            </p>
-            
-            <div class="intro-features">
-                <div class="intro-feature-card">
-                    <div class="intro-card-icon">⚡</div>
-                    <h4>The NeuroPulse Operative</h4>
-                    <p>Wield kinetic augments and magnetic dampeners designed to pierce Dominion armored lines.</p>
+    <!-- Squad Showcase Section -->
+    <section id="squad" class="py-16 px-6 max-w-7xl mx-auto border-t border-slate-800/80">
+        <div class="flex justify-between items-end mb-10">
+            <div>
+                <span class="text-emerald-400 font-mono-tech text-xs tracking-widest">FIRETEAM COMPOSITION</span>
+                <h2 class="text-3xl font-bold font-orbitron text-white">ACTIVE OPERATIVES</h2>
+            </div>
+            <span class="text-xs font-mono-tech text-slate-400">4 / 4 READY FOR DEPLOYMENT</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Operative 1 -->
+            <div class="p-6 bg-slate-900/70 rounded-xl cyber-border transition-all">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-xs font-mono-tech text-emerald-400">[OP-01]</span>
+                    <span class="text-xs px-2 py-0.5 bg-emerald-500/20 text-emerald-300 rounded font-mono-tech">CYBER ENGINEER</span>
                 </div>
-                <div class="intro-feature-card">
-                    <div class="intro-card-icon">🗝️</div>
-                    <h4>The Vault of Eden</h4>
-                    <p>Unseal millennia-old subterranean chambers housing lost relic fusions and ancient war protocols.</p>
-                </div>
-                <div class="intro-feature-card">
-                    <div class="intro-card-icon">🎙️</div>
-                    <h4>Neural Voice Synthesis</h4>
-                    <p>Experience the official audio trailer with live Web Audio synthesis, synchronized voice acting, and tactical sound design.</p>
+                <h3 class="text-xl font-bold font-orbitron text-white mb-1">OISTARIAN</h3>
+                <p class="text-xs text-slate-400 mb-4">Relentless Myth • Overclock Mastery</p>
+                <div class="space-y-2 text-xs font-mono-tech">
+                    <div class="flex justify-between"><span>HP:</span><span class="text-emerald-400">140 / 140</span></div>
+                    <div class="flex justify-between"><span>SHIELDS:</span><span class="text-cyan-400">75 / 75</span></div>
+                    <div class="flex justify-between"><span>ACTION POINTS:</span><span class="text-yellow-400">4 AP</span></div>
                 </div>
             </div>
-
-            <div class="intro-cta-wrapper">
-                <a href="/trailer" class="btn" style="background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%); color: #030712; font-weight: 700; border: none; box-shadow: 0 0 25px rgba(0,255,136,0.4);">
-                    ▶ Listen to AI Voice Trailer
-                </a>
-                <a href="#command" class="btn btn-primary">
-                    🛡️ Enter Command Terminal
-                </a>
-                <a href="#tips" class="btn btn-secondary">
-                    💡 Field Doctrine & Tips
-                </a>
+            <!-- Operative 2 -->
+            <div class="p-6 bg-slate-900/70 rounded-xl cyber-border transition-all">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-xs font-mono-tech text-emerald-400">[OP-02]</span>
+                    <span class="text-xs px-2 py-0.5 bg-cyan-500/20 text-cyan-300 rounded font-mono-tech">HOLO SCOUT</span>
+                </div>
+                <h3 class="text-xl font-bold font-orbitron text-white mb-1">ZOE</h3>
+                <p class="text-xs text-slate-400 mb-4">Holo Decoy • Digital Glitch</p>
+                <div class="space-y-2 text-xs font-mono-tech">
+                    <div class="flex justify-between"><span>HP:</span><span class="text-emerald-400">95 / 95</span></div>
+                    <div class="flex justify-between"><span>SHIELDS:</span><span class="text-cyan-400">40 / 40</span></div>
+                    <div class="flex justify-between"><span>ACTION POINTS:</span><span class="text-yellow-400">4 AP</span></div>
+                </div>
+            </div>
+            <!-- Operative 3 -->
+            <div class="p-6 bg-slate-900/70 rounded-xl cyber-border transition-all">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-xs font-mono-tech text-emerald-400">[OP-03]</span>
+                    <span class="text-xs px-2 py-0.5 bg-yellow-500/20 text-yellow-300 rounded font-mono-tech">VAULT VANGUARD</span>
+                </div>
+                <h3 class="text-xl font-bold font-orbitron text-white mb-1">COMMANDER JAX</h3>
+                <p class="text-xs text-slate-400 mb-4">Bulwark Stance • Heavy Aegis</p>
+                <div class="space-y-2 text-xs font-mono-tech">
+                    <div class="flex justify-between"><span>HP:</span><span class="text-emerald-400">160 / 160</span></div>
+                    <div class="flex justify-between"><span>SHIELDS:</span><span class="text-cyan-400">90 / 90</span></div>
+                    <div class="flex justify-between"><span>ACTION POINTS:</span><span class="text-yellow-400">4 AP</span></div>
+                </div>
+            </div>
+            <!-- Operative 4 -->
+            <div class="p-6 bg-slate-900/70 rounded-xl cyber-border transition-all">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-xs font-mono-tech text-emerald-400">[OP-04]</span>
+                    <span class="text-xs px-2 py-0.5 bg-red-500/20 text-red-300 rounded font-mono-tech">BIO-NANO MEDIC</span>
+                </div>
+                <h3 class="text-xl font-bold font-orbitron text-white mb-1">DOCTOR VAL</h3>
+                <p class="text-xs text-slate-400 mb-4">Field Nanites • Stim Booster</p>
+                <div class="space-y-2 text-xs font-mono-tech">
+                    <div class="flex justify-between"><span>HP:</span><span class="text-emerald-400">85 / 85</span></div>
+                    <div class="flex justify-between"><span>SHIELDS:</span><span class="text-cyan-400">50 / 50</span></div>
+                    <div class="flex justify-between"><span>ACTION POINTS:</span><span class="text-yellow-400">4 AP</span></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Tactical Command Terminal Section -->
-    <section class="terminal-section" id="command">
-        <div class="terminal-box">
-            <div class="terminal-header">
-                <div class="terminal-tabs">
-                    <button class="tab-btn active" onclick="switchTab('briefing', this)">📡 Active Briefing</button>
-                    <button class="tab-btn" onclick="switchTab('squad', this)">🛡️ Squad Roster</button>
-                    <button class="tab-btn" onclick="switchTab('codex', this)">📜 Codex & Relics</button>
+    <!-- Battlefield Simulation Section -->
+    <section id="battlefield" class="py-16 px-6 max-w-7xl mx-auto border-t border-slate-800/80">
+        <div class="mb-10 text-center">
+            <span class="text-emerald-400 font-mono-tech text-xs tracking-widest">TACTICAL MATRIX</span>
+            <h2 class="text-3xl md:text-4xl font-bold font-orbitron text-white">PYTHON COMBAT SIMULATOR</h2>
+            <p class="text-sm text-slate-400 mt-2">Trigger real-time headless AI vs AI tactical skirmishes executing on the server.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            <!-- Combat Console -->
+            <div class="lg:col-span-2 p-6 bg-slate-900/90 rounded-2xl cyber-border">
+                <div class="flex justify-between items-center pb-4 mb-4 border-b border-slate-800">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span class="font-mono-tech text-xs text-emerald-400">SECTOR CH-03 TELEMETRY</span>
+                    </div>
+                    <button onclick="runPythonCombatSim()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold font-mono-tech text-xs rounded transition-all">
+                        RUN NEW SIMULATION
+                    </button>
                 </div>
-                <div class="terminal-status">
-                    <span class="status-dot"></span> SECURE FEED ONLINE
+                <div id="combatLogBox" class="h-80 overflow-y-auto font-mono-tech text-xs bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-1.5 text-slate-300">
+                    <div class="text-emerald-400">[SYSTEM] Python Combat Engine ready. Click 'Run New Simulation' to execute a turn-based skirmish.</div>
+                    <div class="text-slate-500">[INFO] Operatives: OISTARIAN, Zoe, Jax. Hostiles: Dominion Enforcer, Holo Hunter, Mecha Sentry.</div>
                 </div>
             </div>
-
-            <div class="terminal-body">
-                <!-- Tab 1: Active Briefing -->
-                <div id="tab-briefing" class="tab-content active">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
-                        <div>
-                            <h3 style="color: #38bdf8; font-size: 1.25rem; margin-bottom: 0.2rem;">OPERATION SAND ECHO // SECTOR CH-03</h3>
-                            <p style="color: #94a3b8; font-size: 0.85rem; font-family: monospace;">Environment: Ancient Vault Ruins • Target: Echo Core Relic</p>
-                        </div>
-                        <span style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem; font-weight: 700;">STATUS: READY FOR DEPLOYMENT</span>
+            <!-- Telemetry Summary -->
+            <div class="p-6 bg-slate-900/90 rounded-2xl cyber-border space-y-4">
+                <h3 class="text-lg font-bold font-orbitron text-white">SIMULATION METRICS</h3>
+                <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 space-y-3 font-mono-tech text-xs">
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">WINNER:</span>
+                        <span id="simWinner" class="text-emerald-400 font-bold">READY</span>
                     </div>
-                    <p style="color: #cbd5e1; margin-bottom: 1.25rem; font-size: 0.95rem;">
-                        "Legends are written in the sand — and buried in it." Intelligence reports Dominion patrol groups advancing toward the Vault of Eden. Secure the neural relics before enemy reinforcements lock down the extraction perimeter.
-                    </p>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
-                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 1rem; border-radius: 6px;">
-                            <div style="color: #00d4ff; font-weight: 700; font-size: 0.85rem; margin-bottom: 0.4rem;">PRIMARY OBJECTIVE</div>
-                            <div style="color: #e2e8f0; font-size: 0.9rem;">Breach the Vault inner chamber & recover the Echo Core.</div>
-                        </div>
-                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 1rem; border-radius: 6px;">
-                            <div style="color: #38bdf8; font-weight: 700; font-size: 0.85rem; margin-bottom: 0.4rem;">TACTICAL MODIFIER</div>
-                            <div style="color: #e2e8f0; font-size: 0.9rem;">Sandstorm descent: -15% weapon accuracy at long range (>5 tiles).</div>
-                        </div>
-                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 1rem; border-radius: 6px;">
-                            <div style="color: #10b981; font-weight: 700; font-size: 0.85rem; margin-bottom: 0.4rem;">THREAT LEVEL</div>
-                            <div style="color: #e2e8f0; font-size: 0.9rem;">Adaptive Behavior Tree AI: Flanking and suppression active.</div>
-                        </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">TURNS TAKEN:</span>
+                        <span id="simTurns" class="text-yellow-400">-</span>
                     </div>
-                </div>
-
-                <!-- Tab 2: Squad Roster -->
-                <div id="tab-squad" class="tab-content">
-                    <div class="operative-grid">
-                        <div class="operative-card">
-                            <span class="op-role">Frontline Specialist</span>
-                            <h4 class="op-name">Trooper-9BF9</h4>
-                            <p style="color: #94a3b8; font-size: 0.85rem;">Standard Vanguard unit equipped with TL-Standard Rifle and hardened ballistic plating.</p>
-                            <div class="op-stats">
-                                <span class="op-stat">HP 10</span>
-                                <span class="op-stat">AP 2</span>
-                                <span class="op-stat">MOV 4</span>
-                                <span class="op-stat">RNG 4</span>
-                            </div>
-                        </div>
-                        <div class="operative-card">
-                            <span class="op-role">Recon & Saboteur</span>
-                            <h4 class="op-name">Operative Vex</h4>
-                            <p style="color: #94a3b8; font-size: 0.85rem;">Stealth infiltration specialist. Deploys smoke screen traps and disruption EMPs.</p>
-                            <div class="op-stats">
-                                <span class="op-stat">HP 8</span>
-                                <span class="op-stat">AP 3</span>
-                                <span class="op-stat">MOV 6</span>
-                                <span class="op-stat">RNG 5</span>
-                            </div>
-                        </div>
-                        <div class="operative-card">
-                            <span class="op-role">Intelligence Operative</span>
-                            <h4 class="op-name">Lt. Sofia Varga</h4>
-                            <p style="color: #94a3b8; font-size: 0.85rem;">Cryptanalyst and field strategist. Grants +15% squad reaction rate via tactical uplink.</p>
-                            <div class="op-stats">
-                                <span class="op-stat">HP 9</span>
-                                <span class="op-stat">AP 2</span>
-                                <span class="op-stat">MOV 5</span>
-                                <span class="op-stat">RNG 6</span>
-                            </div>
-                        </div>
-                        <div class="operative-card">
-                            <span class="op-role">Heavy Breacher</span>
-                            <h4 class="op-name">Lt. Maya Cohen</h4>
-                            <p style="color: #94a3b8; font-size: 0.85rem;">Assault and aquatic demolition leader. Deploys kinetic shield wall and suppressive fire.</p>
-                            <div class="op-stats">
-                                <span class="op-stat">HP 14</span>
-                                <span class="op-stat">AP 2</span>
-                                <span class="op-stat">MOV 3</span>
-                                <span class="op-stat">RNG 4</span>
-                            </div>
-                        </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">SURVIVORS:</span>
+                        <span id="simSurvivors" class="text-cyan-400">-</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">STATUS:</span>
+                        <span id="simStatus" class="text-slate-300">STANDBY</span>
                     </div>
                 </div>
-
-                <!-- Tab 3: Codex & Relics -->
-                <div id="tab-codex" class="tab-content">
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
-                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(0,212,255,0.2); padding: 1.25rem; border-radius: 8px;">
-                            <span style="color: #f59e0b; font-size: 0.75rem; text-transform: uppercase; font-weight: 700;">Artifact Tier: Epic</span>
-                            <h4 style="color: #ffffff; font-size: 1.15rem; margin: 0.3rem 0;">Echo Core</h4>
-                            <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 0.75rem;">Neural reflex mutation relic salvaged from ancient Oistarian subterranean reactors.</p>
-                            <div style="color: #38bdf8; font-family: monospace; font-size: 0.85rem;">Effect: +15% neural reflex speed & reaction AP</div>
-                        </div>
-                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(0,212,255,0.2); padding: 1.25rem; border-radius: 8px;">
-                            <span style="color: #f59e0b; font-size: 0.75rem; text-transform: uppercase; font-weight: 700;">Artifact Tier: Rare</span>
-                            <h4 style="color: #ffffff; font-size: 1.15rem; margin: 0.3rem 0;">Iron Sigil</h4>
-                            <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 0.75rem;">Forged in the Vault of Eden. Emits a localized magnetic barrier that deflects shrapnel.</p>
-                            <div style="color: #38bdf8; font-family: monospace; font-size: 0.85rem;">Effect: +3 Armor Rating, +10 Morale recovery</div>
-                        </div>
-                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(0,212,255,0.2); padding: 1.25rem; border-radius: 8px;">
-                            <span style="color: #10b981; font-size: 0.75rem; text-transform: uppercase; font-weight: 700;">Faction Dossier</span>
-                            <h4 style="color: #ffffff; font-size: 1.15rem; margin: 0.3rem 0;">The Dominion</h4>
-                            <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 0.75rem;">Militant faction aiming for total monopoly over relic excavation and cybernetic integration.</p>
-                            <div style="color: #10b981; font-family: monospace; font-size: 0.85rem;">Zones: Vault Perimeter, Lowtown Citadel</div>
-                        </div>
+                <div class="pt-2">
+                    <div class="text-xs font-mono-tech text-slate-400 mb-2">REST API ENDPOINTS:</div>
+                    <div class="space-y-1 text-xs font-mono-tech text-slate-400">
+                        <div>POST <span class="text-emerald-400">/api/battle/simulate</span></div>
+                        <div>GET <span class="text-cyan-400">/api/squad</span></div>
+                        <div>GET <span class="text-yellow-400">/api/coe</span></div>
+                        <div>GET <span class="text-purple-400">/api/eden</span></div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Visual Gallery Section -->
-    <section class="gallery-section" id="gallery">
-        <h2 class="section-title">Visual Dossier & Assets</h2>
-        <p class="section-subtitle">Tactical operatives, concept art, and gameplay schematics from the world of Oistarian.</p>
-        <div class="gallery-grid">
-            <div class="gallery-card">
-                <div class="gallery-img-wrap">
-                    <img src="/TL_001.jpeg" alt="Tactical Legends — Hero Operative in Combat" onerror="this.src='/store-assets/annotated/annotated-ss5.svg'">
-                </div>
-                <div class="gallery-info">
-                    <h3>Tactical Operative TL-001</h3>
-                    <p>Heavy tactical operative deployed in high-threat desert conflict zones.</p>
-                </div>
-            </div>
-            <div class="gallery-card">
-                <div class="gallery-img-wrap">
-                    <img src="/TL_003.jpeg" alt="Tactical Legends — Recon Operative" onerror="this.src='/store-assets/annotated/annotated-ss6.svg'">
-                </div>
-                <div class="gallery-info">
-                    <h3>Recon Unit TL-003</h3>
-                    <p>Advanced scout equipped with long-range surveillance and stealth gear.</p>
-                </div>
-            </div>
-            <div class="gallery-card">
-                <div class="gallery-img-wrap">
-                    <img src="/TL_008.jpeg" alt="Tactical Legends — Urban Operative" onerror="this.src='/store-assets/annotated/annotated-ss7.svg'">
-                </div>
-                <div class="gallery-info">
-                    <h3>Infiltration Specialist TL-008</h3>
-                    <p>Cyber-warfare and urban breaching operative in high-tech city sectors.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Game Features Section -->
-    <section class="features" id="features">
-        <h2 class="section-title">Engine Features</h2>
-        <p class="section-subtitle">Engineered for deep strategic planning and relentless tactical challenges.</p>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🎮</div>
-                <h3>Turn-Based Combat</h3>
-                <p>Grid-based tactical warfare where every action point (AP) matters. Position your operatives behind cover and exploit sightlines.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🤖</div>
-                <h3>Adaptive AI System</h3>
-                <p>Intelligent opponents utilizing behavior trees and A* pathfinding. Enemies react dynamically with flanking, overwatch, and tactical retreats.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">⚙️</div>
-                <h3>Deep Squad Customization</h3>
-                <p>Customize loadouts with modular carbines, sniper platforms, recon drones, and energy shields to craft synergistic fireteams.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>Relic Fusion Matrix</h3>
-                <p>Combine excavated ancient relics like Echo Core and Eden Alloy to forge high-tier surge beacons with game-changing squad bonuses.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📖</div>
-                <h3>Branching Campaign</h3>
-                <p>Navigate a multifaceted narrative through Oistarian with mission-branching decisions based on morality, faction trust, and operational success.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🧩</div>
-                <h3>Modular Cross-Platform Architecture</h3>
-                <p>Clean, extensible architecture built with modern CMake and SDL2 for optimal performance across Linux, macOS, and Windows.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tactical Tips Section -->
-    <section class="tips-section" id="tips">
-        <h2 class="section-title">Tactical Tips for Commanders</h2>
-        <p class="section-subtitle">Strategic field doctrines and combat advice derived from veterans of the Oistarian frontlines.</p>
-        <div class="tips-grid">
-            <div class="tip-card">
-                <span class="tip-badge">Map Control</span>
-                <h3>⛰️ Secure High Ground & Cover</h3>
-                <p>Units positioned on elevated ridge tiles gain +2 sightline range and defensive evasion. Always end turns behind full cover (walls/barriers) rather than half cover (debris) to halve incoming projectile damage.</p>
-                <div class="tip-detail">
-                    <span>💡 PRO TIP:</span> Never leave scouts out in open sand where enemy marksmen have uninterrupted sightlines.
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <span class="tip-badge">Flanking Doctrine</span>
-                <h3>🎯 Crossfire & Flank Angles</h3>
-                <p>Attacking an enemy operative from a 90° angle or rear flank bypasses their cover defense and triggers a <strong>+25% Critical Flank Multiplier</strong>. Pin enemies with suppressive rifle fire while a mobile scout closes the angle.</p>
-                <div class="tip-detail">
-                    <span>💡 PRO TIP:</span> Pair Trooper-9BF9's suppressive fire with Operative Vex's high-mobility flank maneuver.
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <span class="tip-badge">Resource Economy</span>
-                <h3>⚡ Action Point (AP) Budgeting</h3>
-                <p>Every turn is defined by Action Points. Sprinting into maximum distance tiles exhausts all remaining AP. Plan your moves backwards: calculate attack AP first, reserve emergency retreat AP, and check cooldowns before committing.</p>
-                <div class="tip-detail">
-                    <span>💡 PRO TIP:</span> Keep 1 AP in reserve for defensive Overwatch if enemy reinforcements are inbound.
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <span class="tip-badge">AI Prediction</span>
-                <h3>🤖 Outwit Behavior Trees</h3>
-                <p>Adaptive AI seeks the nearest wounded operative and falls back when surrounded. Bait aggressive enemy assault troopers into predetermined crossfire zones or smoke grenade choke points where their accuracy drops drastically.</p>
-                <div class="tip-detail">
-                    <span>💡 PRO TIP:</span> Exploit AI cooldowns right after enemies expend their high-damage heavy weapons.
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <span class="tip-badge">Squad Synergy</span>
-                <h3>🛡️ Interlocking Formations</h3>
-                <p>Never isolate units. Position Vanguard and Heavy Breachers on the frontline with Shields active, tucking fragile Tech and Marksmen two tiles behind. Support units can stabilize morale before panic cascades.</p>
-                <div class="tip-detail">
-                    <span>💡 PRO TIP:</span> Lt. Maya Cohen's kinetic barrier protects entire squads passing through narrow chokepoints.
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <span class="tip-badge">Relic Matrix</span>
-                <h3>🔮 Harness Relic Mutations</h3>
-                <p>Equip relics like the <strong>Echo Core</strong> (+15% reaction speed) and <strong>Iron Sigil</strong> (+3 Armor) on frontline operatives to build resilience. Stack relics that augment your squad's primary tactical doctrine.</p>
-                <div class="tip-detail">
-                    <span>💡 PRO TIP:</span> Forge relics into Surge Beacons at the Vault for expedition-wide squad buffs.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tech Stack Section -->
-    <section class="tech-stack" id="tech">
-        <h2 class="section-title">Technology Stack</h2>
-        <p class="section-subtitle">Multi-tier architecture bridging performant game loops with modern web tooling.</p>
-        <div class="tech-grid">
-            <div class="tech-item">
-                <div class="lang">TypeScript</div>
-                <div class="percent">68.4%</div>
-            </div>
-            <div class="tech-item">
-                <div class="lang">Python</div>
-                <div class="percent">16.6%</div>
-            </div>
-            <div class="tech-item">
-                <div class="lang">C# / .NET</div>
-                <div class="percent">7.0%</div>
-            </div>
-            <div class="tech-item">
-                <div class="lang">JavaScript / Node</div>
-                <div class="percent">4.0%</div>
-            </div>
-            <div class="tech-item">
-                <div class="lang">GDScript</div>
-                <div class="percent">4.0%</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Getting Started Section -->
-    <section class="getting-started" id="getting-started">
-        <h2 class="section-title">Quick Start Guide</h2>
-        <p class="section-subtitle">Follow these steps to compile, configure, and launch the Tactical Legends project.</p>
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <h3>Clone Repository</h3>
-                <p>Download the source code and documentation assets from GitHub.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <h3>Install Dependencies</h3>
-                <p>Ensure CMake, C++ toolchain, SDL2 libraries, and Node.js are installed.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <h3>Build & Configure</h3>
-                <p>Generate native build files with CMake or launch the web preview server.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">4</div>
-                <h3>Launch & Command</h3>
-                <p>Execute the game client or inspect tactical schemas via the web terminal.</p>
-            </div>
-        </div>
-
-        <div class="code-block">
-            <code>
-# 1. Clone repository<br>
-git clone https://github.com/jurgen-paul/tactical-legends.git<br>
-cd tactical-legends<br>
-<br>
-# 2. Web Applet Dev Server (AI Studio / Node.js)<br>
-npm install<br>
-npm run dev<br>
-<br>
-# 3. Native C++ / CMake Engine Build (Linux / Ubuntu)<br>
-sudo apt update && sudo apt install cmake g++ libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev<br>
-mkdir build && cd build<br>
-cmake ..<br>
-make -j$(nproc)<br>
-./tactical_legends
-            </code>
-        </div>
-    </section>
-
-    <!-- Important Links Section -->
-    <section class="links" id="links">
-        <h2 class="section-title">Repository Documentation</h2>
-        <p class="section-subtitle">Comprehensive guides, design specifications, and contributor materials.</p>
-        <div class="links-grid">
-            <div class="link-card">
-                <h3>📚 Project Overview</h3>
-                <p>Deep-dive into system architecture, event subsystems, and data layers.</p>
-                <a href="/docs/INDEX.md">Read Index →</a>
-            </div>
-            <div class="link-card">
-                <h3>🎮 Gameplay Mechanics</h3>
-                <p>Full breakdown of action points, weapon recoil, abilities, and unit roles.</p>
-                <a href="/docs/GAMEPLAY.md">Gameplay Guide →</a>
-            </div>
-            <div class="link-card">
-                <h3>⚙️ Architecture Spec</h3>
-                <p>Layered engine design from platform bindings up to the dialogue manager.</p>
-                <a href="/docs/ARCHITECTURE.md">Architecture Doc →</a>
-            </div>
-            <div class="link-card">
-                <h3>🤝 Contributing</h3>
-                <p>Contribute new units, balancing tweaks, or localization strings.</p>
-                <a href="https://github.com/jurgen-paul/tactical-legends/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contribution Rules →</a>
-            </div>
-            <div class="link-card">
-                <h3>⚖️ License & Terms</h3>
-                <p>Open source under Apache License 2.0. Permissive for open exploration.</p>
-                <a href="/LICENSE">View License →</a>
-            </div>
-            <div class="link-card">
-                <h3>🧪 CI / Automated Tests</h3>
-                <p>Unit test harness for battle management and pathfinding verification.</p>
-                <a href="https://github.com/jurgen-paul/tactical-legends" target="_blank" rel="noopener noreferrer">GitHub Actions →</a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="https://github.com/jurgen-paul/tactical-legends" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="/docs/INDEX.md">Documentation</a>
-                <a href="/docs/GAMEPLAY.md">Gameplay</a>
-                <a href="/docs/ARCHITECTURE.md">Architecture</a>
-                <a href="/LICENSE">Apache 2.0 License</a>
-            </div>
-            <p>&copy; 2024–2026 Tactical Legends. Rise of OISTARIAN. All rights reserved.</p>
-            <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #475569;">Turn-based tactical strategy game with deep squad customization, adaptive AI, and rich lore in the world of Oistarian.</p>
+    <footer class="py-12 border-t border-slate-800/80 bg-slate-950 text-center text-xs text-slate-500 font-mono-tech">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>TACTICAL LEGENDS: RISE OF OISTARIAN • FULL PYTHON & TYPESCRIPT ARCHITECTURE</div>
+            <div>DEVELOPED BY OISTARS ENTERTAINMENT • ALL SYSTEMS VERIFIED</div>
         </div>
     </footer>
 
+    <!-- Interactive Client Script -->
     <script>
-        function switchTab(tabName, btnElement) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        async function runPythonCombatSim() {
+            const logBox = document.getElementById('combatLogBox');
+            logBox.innerHTML = '<div class="text-yellow-400">>>> Initiating headless Python simulation via /api/battle/simulate...</div>';
             
-            btnElement.classList.add('active');
-            const target = document.getElementById('tab-' + tabName);
-            if (target) {
-                target.classList.add('active');
+            try {
+                const res = await fetch('/api/battle/simulate', { method: 'POST' });
+                if (!res.ok) throw new Error('Simulation failed');
+                const data = await res.json();
+                
+                document.getElementById('simWinner').textContent = data.winner ? data.winner.toUpperCase() : 'DRAW';
+                document.getElementById('simTurns').textContent = data.turns_taken || '-';
+                document.getElementById('simSurvivors').textContent = (data.survivors ? data.survivors.length : '0') + ' units';
+                document.getElementById('simStatus').textContent = 'RESOLVED';
+                
+                logBox.innerHTML = '';
+                (data.final_log || []).forEach(entry => {
+                    const line = document.createElement('div');
+                    line.textContent = entry;
+                    if (entry.includes('💥')) line.className = 'text-yellow-300';
+                    else if (entry.includes('🏆')) line.className = 'text-emerald-400 font-bold';
+                    else if (entry.includes('⚠️')) line.className = 'text-red-400';
+                    else line.className = 'text-slate-300';
+                    logBox.appendChild(line);
+                });
+                logBox.scrollTop = logBox.scrollHeight;
+            } catch (e) {
+                logBox.innerHTML += `<div class="text-red-400">[ERROR] Failed to run simulation: ${e.message}</div>`;
             }
         }
     </script>

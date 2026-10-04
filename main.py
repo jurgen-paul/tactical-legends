@@ -28,6 +28,8 @@ from SquadMember import get_default_squad, SquadMember
 from soundNvoiceManager import SoundNVoiceManager
 from coe import CathedralOfEchoes
 from vault_of_eden import VaultOfEdenEncounter
+from typescript_engine import generate_procedural_operative, RelicFusionEngine, FogOfWarGrid
+from html_portal import render_html_page
 
 BASE_DIR = Path(__file__).resolve().parent
 PUBLIC_DIR = BASE_DIR / "public"
@@ -91,6 +93,11 @@ class TacticalLegendsHTTPHandler(SimpleHTTPRequestHandler):
             self.send_json_response(encounter.run_full_simulation())
             return
 
+        if self.path == "/api/ts/operative":
+            op = generate_procedural_operative()
+            self.send_json_response(op.to_dict())
+            return
+
         if self.path == "/api/codex":
             codex_file = RESOURCE_DIR / "CODEX.json"
             if codex_file.exists():
@@ -137,6 +144,12 @@ class TacticalLegendsHTTPHandler(SimpleHTTPRequestHandler):
             game = TacticalGame()
             result = game.simulate_automated_battle()
             self.send_json_response(result)
+            return
+
+        if self.path == "/api/ts/relic/fuse":
+            fusion = RelicFusionEngine()
+            res = fusion.fuse("EchoCore", "EdenAlloy")
+            self.send_json_response(res)
             return
 
         self.send_error(404, "Unknown POST Endpoint")
@@ -368,9 +381,21 @@ def main():
     parser.add_argument("--voice", action="store_true", help="Display voice scripts and trailer audio manifest")
     parser.add_argument("--coe", action="store_true", help="Run Cathedral of Echoes (COE) moral consequence demo")
     parser.add_argument("--eden", action="store_true", help="Run Vault of Eden symphonic tactical encounter demo")
+    parser.add_argument("--ts", action="store_true", help="Run TypeScript-to-Python unified systems test and demos")
+    parser.add_argument("--portal", action="store_true", help="Generate and export the Python HTML Portal")
     parser.add_argument("--test", action="store_true", help="Execute Python unit & integration tests")
 
     args = parser.parse_args()
+
+    if args.portal:
+        from html_portal import export_html
+        export_html(BASE_DIR / "index.html")
+        return
+
+    if args.ts:
+        from typescript_engine import run_tests as run_ts_tests
+        run_ts_tests()
+        return
 
     if args.coe:
         from coe import run_demo
