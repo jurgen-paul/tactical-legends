@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
+import { exec } from 'child_process';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -17,6 +18,46 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/docs', express.static(path.join(__dirname, 'docs')));
 app.use('/store-assets', express.static(path.join(__dirname, 'store-assets')));
 app.use(express.static(__dirname));
+
+// Python Engine Battle Simulation Endpoint
+app.post('/api/battle/simulate', (req, res) => {
+  exec('python3 main.py --json-sim', { cwd: __dirname }, (error, stdout, stderr) => {
+    if (error) {
+      return res.status(500).json({ error: 'Python simulation failed', details: stderr });
+    }
+    try {
+      const data = JSON.parse(stdout);
+      res.json(data);
+    } catch (e) {
+      res.status(500).json({ error: 'Failed to parse simulation output', raw: stdout });
+    }
+  });
+});
+
+// Squad roster from Python Engine
+app.get('/api/squad', (req, res) => {
+  exec('python3 SquadMember.py', { cwd: __dirname }, (error, stdout) => {
+    if (!error && stdout.includes('{')) {
+      try {
+        const jsonPart = stdout.substring(stdout.indexOf('{'));
+        return res.json(JSON.parse(jsonPart));
+      } catch {}
+    }
+    res.json({ squad: "Oistarian Recon", status: "Active" });
+  });
+});
+
+// Python Engine Status
+app.get('/api/python/health', (req, res) => {
+  exec('python3 main.py --test', { cwd: __dirname }, (error, stdout) => {
+    res.json({
+      status: error ? 'error' : 'online',
+      tests_passed: !error,
+      system: 'Tactical Legends Python Engine',
+      output: stdout.split('\n').filter(Boolean)
+    });
+  });
+});
 
 // Optional lightweight JSON endpoints based on repo datasets
 app.get('/api/codex', (req, res) => {
