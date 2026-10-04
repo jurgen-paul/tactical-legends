@@ -251,17 +251,37 @@
             gap: 1.25rem;
         }
 
+        @keyframes operativePulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.45);
+                border-color: rgba(0, 212, 255, 0.5);
+                transform: translateY(-2px);
+            }
+            50% {
+                box-shadow: 0 0 16px 3px rgba(0, 212, 255, 0.35);
+                border-color: rgba(0, 212, 255, 0.85);
+                transform: translateY(-4px);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 212, 255, 0);
+                border-color: rgba(0, 212, 255, 0.5);
+                transform: translateY(-2px);
+            }
+        }
+
         .operative-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 8px;
             padding: 1.25rem;
             position: relative;
-            transition: border-color 0.2s;
+            transition: all 0.25s ease;
+            cursor: pointer;
         }
 
         .operative-card:hover {
-            border-color: rgba(0, 212, 255, 0.4);
+            background: rgba(0, 212, 255, 0.06);
+            animation: operativePulse 2s infinite ease-in-out;
         }
 
         .op-role {
@@ -412,6 +432,77 @@
         .feature-card p {
             color: #94a3b8;
             font-size: 0.95rem;
+        }
+
+        /* Tactical Tips Section */
+        .tips-section {
+            padding: 4.5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tip-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.75rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-4px);
+            border-color: #00d4ff;
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.15);
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .tip-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #00d4ff;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
+        }
+
+        .tip-card h3 {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tip-card p {
+            color: #94a3b8;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .tip-detail {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 0.75rem;
+            font-family: monospace;
+            font-size: 0.82rem;
+            color: #38bdf8;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
         }
 
         /* Tech Stack Section */
@@ -637,6 +728,7 @@
                 <li><a href="#command">Command</a></li>
                 <li><a href="#gallery">Visuals</a></li>
                 <li><a href="#features">Features</a></li>
+                <li><a href="#tips">Tactical Tips</a></li>
                 <li><a href="#tech">Tech Stack</a></li>
                 <li><a href="#getting-started">Install</a></li>
                 <li><a href="#links">Docs</a></li>
@@ -846,6 +938,67 @@
                 <div class="feature-icon">🧩</div>
                 <h3>Modular Cross-Platform Architecture</h3>
                 <p>Clean, extensible architecture built with modern CMake and SDL2 for optimal performance across Linux, macOS, and Windows.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tactical Tips Section -->
+    <section class="tips-section" id="tips">
+        <h2 class="section-title">Tactical Tips for Commanders</h2>
+        <p class="section-subtitle">Strategic field doctrines and combat advice derived from veterans of the Oistarian frontlines.</p>
+        <div class="tips-grid">
+            <div class="tip-card">
+                <span class="tip-badge">Map Control</span>
+                <h3>⛰️ Secure High Ground & Cover</h3>
+                <p>Units positioned on elevated ridge tiles gain +2 sightline range and defensive evasion. Always end turns behind full cover (walls/barriers) rather than half cover (debris) to halve incoming projectile damage.</p>
+                <div class="tip-detail">
+                    <span>💡 PRO TIP:</span> Never leave scouts out in open sand where enemy marksmen have uninterrupted sightlines.
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <span class="tip-badge">Flanking Doctrine</span>
+                <h3>🎯 Crossfire & Flank Angles</h3>
+                <p>Attacking an enemy operative from a 90° angle or rear flank bypasses their cover defense and triggers a <strong>+25% Critical Flank Multiplier</strong>. Pin enemies with suppressive rifle fire while a mobile scout closes the angle.</p>
+                <div class="tip-detail">
+                    <span>💡 PRO TIP:</span> Pair Trooper-9BF9's suppressive fire with Operative Vex's high-mobility flank maneuver.
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <span class="tip-badge">Resource Economy</span>
+                <h3>⚡ Action Point (AP) Budgeting</h3>
+                <p>Every turn is defined by Action Points. Sprinting into maximum distance tiles exhausts all remaining AP. Plan your moves backwards: calculate attack AP first, reserve emergency retreat AP, and check cooldowns before committing.</p>
+                <div class="tip-detail">
+                    <span>💡 PRO TIP:</span> Keep 1 AP in reserve for defensive Overwatch if enemy reinforcements are inbound.
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <span class="tip-badge">AI Prediction</span>
+                <h3>🤖 Outwit Behavior Trees</h3>
+                <p>Adaptive AI seeks the nearest wounded operative and falls back when surrounded. Bait aggressive enemy assault troopers into predetermined crossfire zones or smoke grenade choke points where their accuracy drops drastically.</p>
+                <div class="tip-detail">
+                    <span>💡 PRO TIP:</span> Exploit AI cooldowns right after enemies expend their high-damage heavy weapons.
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <span class="tip-badge">Squad Synergy</span>
+                <h3>🛡️ Interlocking Formations</h3>
+                <p>Never isolate units. Position Vanguard and Heavy Breachers on the frontline with Shields active, tucking fragile Tech and Marksmen two tiles behind. Support units can stabilize morale before panic cascades.</p>
+                <div class="tip-detail">
+                    <span>💡 PRO TIP:</span> Lt. Maya Cohen's kinetic barrier protects entire squads passing through narrow chokepoints.
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <span class="tip-badge">Relic Matrix</span>
+                <h3>🔮 Harness Relic Mutations</h3>
+                <p>Equip relics like the <strong>Echo Core</strong> (+15% reaction speed) and <strong>Iron Sigil</strong> (+3 Armor) on frontline operatives to build resilience. Stack relics that augment your squad's primary tactical doctrine.</p>
+                <div class="tip-detail">
+                    <span>💡 PRO TIP:</span> Forge relics into Surge Beacons at the Vault for expedition-wide squad buffs.
+                </div>
             </div>
         </div>
     </section>

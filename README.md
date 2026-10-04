@@ -1,454 +1,279 @@
-<img width="1517" height="984" alt="tactical-legends badge" src="https://github.com/user-attachments/assets/f67d5892-1098-4b74-94b3-724b6e3b2bca" />
+<div align="center">
 
+# ⚔️ Tactical Legends: Rise of OISTARIAN
+
+**A turn-based tactical strategy game featuring deep squad customization, adaptive AI behavior trees, and branching narrative campaigns set across the dunes and cyber-citadels of Oistarian.**
 
 [![CI](https://github.com/jurgen-paul/tactical-legends/actions/workflows/ci.yml/badge.svg)](https://github.com/jurgen-paul/tactical-legends/actions)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/default/badge)](https://www.bestpractices.dev/)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/jurgen-paul/tactical-legends/badge)](https://securityscorecards.dev/viewer/?repo=github.com/jurgen-paul/tactical-legends)
+[![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20Windows%20%7C%20Web-00d4ff.svg)](#installation)
+[![Engine](https://img.shields.io/badge/Engine-C%2B%2B%20%2F%20SDL2%20%2F%20Node.js-38bdf8.svg)](#architecture)
 
-# Tactical Legends
+<br />
 
-> A turn-based tactical strategy game template built with C++, SDL2, and modern web tooling.
+<img src="TL_001.jpeg" alt="Tactical Legends — Rise of OISTARIAN Hero Banner" width="100%" style="border-radius: 8px; max-height: 480px; object-fit: cover;" />
 
-[![Tactical Legends banner — Hero Operative](TL_001.jpeg)](https://github.com/jurgen-paul/tactical-legends)
-
-# Tactical Legends
-
-Welcome to **Tactical Legends**, an open-source tactical strategy game focused on turn-based combat, deep squad customization, and replayable missions. Whether you’re a strategist, developer, or gaming enthusiast, Tactical Legends offers an extensible foundation for tactical grid-based warfare in the world of Oistarian.
-
-## Table of Contents
-
-- [About](#about)
-- [Features](#features)
-- [Visual Dossier & Screenshots](#visual-dossier--screenshots)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Play Store Console — Store Listing & Release Checklist](#play-store-console)
-- [Production page](docs/production-tactical-legend.md)
-- [Preview page](docs/preview-tactical-legend-page.md)
-- [Testing](#testing)
-- [Contributing](#contributing)
-- [License](#license)
-- [Support](#support)
+</div>
 
 ---
 
-## About
+## 📑 Table of Contents
 
-Tactical Legends delivers engaging tactical gameplay built with C++ and SDL2, designed for extensibility and cross-platform support. Plan your moves, outwit adaptive AI, and enjoy a game that grows with every contribution.
+- [About the Game](#-about-the-game)
+- [Key Features](#-key-features)
+- [Visual Dossier & Media](#-visual-dossier--media)
+- [System Architecture](#-system-architecture)
+- [Installation & Quick Start](#-installation--quick-start)
+  - [Web Applet (AI Studio / Node.js)](#1-web-applet-ai-studio--nodejs)
+  - [Native C++ Engine (CMake & SDL2)](#2-native-c-engine-cmake--sdl2)
+- [Testing & Verification](#-testing--verification)
+- [Data-Driven Design & Modding](#-data-driven-design--modding)
+- [Play Store Release Checklist](#-play-store-release-checklist)
+- [Contributing](#-contributing)
+- [License & Support](#-license--support)
 
-## Features
+---
 
-- Turn-based tactical combat
-- Modular codebase using CMake
-- Cross-platform support (Windows, macOS, Linux)
-- SDL2-powered graphics and audio
-- Unit testing via CTest
-- Deep squad customization and branching campaign (coming soon)
+## 🌌 About the Game
 
-## Visual Dossier & Screenshots
+In the ancient, war-torn sands of **Oistarian**, forgotten relic vaults clash with high-tech corporate hegemony. As a tactical squad commander, you lead specialized fireteams through treacherous subterranean chambers, sandstorms, and fortified citadels.
 
-Here are featured operatives, environments, and tactical system schematics from *Tactical Legends: Rise of OISTARIAN*:
+Every choice matters:
+* **The AP Economy**: Manage Action Points (AP) across unit movement, cover maneuvering, primary fire, and specialized gadget activations.
+* **The Core Loop**: `Loadout Customization` ➔ `Silent Infiltration` ➔ `Grid Engagement` ➔ `Relic Extraction` ➔ `Narrative Debrief`.
+* **Dynamic Morality & Faction Trust**: Align with ritualist factions like the *Crimson Vow*, tech-purists like *Echo Ascendants*, or corporate enforcers in the *Dominion*.
+
+---
+
+## ⚡ Key Features
+
+- **🎯 Tactical Grid-Based Combat**: High-stakes turn-based combat with realistic cover mechanics, directional sightlines, elevation advantages, and suppression fire.
+- **🤖 Adaptive AI Behavior Trees**: Opponents evaluate flanking corridors, lay down overwatch fire, coordinate suppression, and fall back when morale deteriorates.
+- **🛡️ Futuristic Gadget Ecosystem**: Deploy surveillance drones, portable kinetic energy shields, optical camouflage cloaks, and EMP disruption charges.
+- **🔬 Relic Fusion Matrix**: Recover prehistoric Oistarian relics (like the *Echo Core* and *Iron Sigil*) and forge them into synergistic *Surge Beacons* granting team-wide neural reflex buffs.
+- **📖 Branching Campaign Paths**: Dynamic story paths influenced by your operative mortality rate, faction standing, and tactical objectives achieved.
+- **🧩 Cross-Platform & Modular**: Built with a clean CMake architecture in C++ / SDL2, paired with a modern Node.js web command portal.
+
+---
+
+## 🖼️ Visual Dossier & Media
+
+Explore key operatives, environments, and tactical interface schematics from *Tactical Legends: Rise of OISTARIAN*:
 
 ### 1. Frontline Vanguard — Operative TL-001
-![Tactical Operative TL-001 — Frontline Vanguard](TL_001.jpeg)
-*Heavy tactical operative deployed in high-threat desert conflict zones with hardened ballistic armor and standard assault platform.*
+<img src="TL_001.jpeg" alt="Tactical Operative TL-001 — Frontline Vanguard" width="100%" />
 
-### 2. Recon Specialist — Unit TL-003
-![Recon Specialist TL-003 — Advanced Scout](TL_003.jpeg)
-*Advanced long-range reconnaissance operative specializing in enemy tracking, stealth infiltration, and sightline control.*
-
-### 3. Urban Infiltration Specialist — Operative TL-008
-![Urban Infiltration Specialist TL-008](TL_008.jpeg)
-*Cyber-warfare operative firing a high-tech rifle over a neon cityscape as VTOL support crafts circle overhead.*
-
-### 4. The Vault of Eden — Ancient Subterranean Chamber
-![Vault of Eden — Ancient Subterranean Chamber](_bf325426-3049-42b5-b67d-b0049ca7858b.jpeg)
-*Cloaked operative exploring the ancient Vault of Eden, recovering primordial relics and navigating subterranean ruins.*
-
-### 5. Squad Bay Interface & Unit Diagnostics
-![Tactical Legends Squad Bay UI & Diagnostics](store-assets/annotated/annotated-ss5.svg)
-*Tactical squad bay interface displaying operative loadouts, action points (AP), hit points (HP), movement range (MOV), and weapon synergy.*
-
-
-## Installation
-
-### Prerequisites
-
-- CMake >= 3.x
-- g++ >= 9.0
-- SDL2, SDL2_image, SDL2_mixer, SDL2_ttf
-
-### Setup
-
-```bash
-sudo apt update
-sudo apt install cmake g++ libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
-git clone https://github.com/jurgen-paul/tactical-legends.git
-cd tactical-legends
-mkdir build
-cmake -S. -B build
-cmake --build build
-```
-
-## Usage
-
-Run the game executable from the build directory:
-
-```bash
-./build/tactical_legends
-```
-
-## Play Store Console — Store Listing & Release Checklist
-
-Use this checklist and the metadata templates below to prepare a Play Store release. Replace the placeholders with your real values (package name, URLs, images, email).
-
-1) App identifiers
-- Package name / App bundle ID: com.example.tacticallegends  <-- replace with your actual package name
-- Version code / version name: e.g., 100 (versionCode), 1.0.0 (versionName)
-- Build artifact: Upload Android App Bundle (.aab) built with targetSdkVersion >= 31
-
-2) Store listing metadata (fill these in Play Console)
-- App title: Tactical Legends — Rise of OISTARIAN
-- Short description (max 80 chars): Turn-based tactical strategy with deep squad customization.
-- Full description (max 4000 chars): Replace the paragraph below with game-specific marketing copy.
-
-  Tactical Legends is a turn-based tactical strategy game where you command a squad of heroes across branching missions. Customize loadouts, exploit terrain, and outsmart adaptive AI opponents. Fe[...]
-
-- What’s new / Release notes: Add release-specific notes here.
-
-3) Store listing assets (required)
-- High-res icon: 512x512 PNG
-- Feature graphic: 1024x500 PNG (used on Play Store listing)
-- Screenshots: Phone screenshots (minimum 2, recommended 4–8), 16:9 or 9:16 ratios, PNG/JPEG. Include at least one landscape and one portrait where appropriate.
-- Promo video (optional): YouTube URL
-- Privacy policy URL: https://yourdomain.com/privacy (required if app collects personal data)
-- Contact email: privacy@yourdomain.com (required)
-
-4) App content & policies
-- Content rating questionnaire: complete honestly in Play Console
-- Target audience and content: declare if intended for children
-- Ads & in-app purchases: declare implementation
-- Permissions: Only request runtime permissions you need (e.g., INTERNET, READ_EXTERNAL_STORAGE) and document reasons in the Play Console
-
-5) Technical checklist
-- Build App Bundle (.aab) and sign with Play App Signing
-- Target Android API level required by Play Store (check current requirement)
-- Verify AAB installs on supported devices/emulators
-- Verify ProGuard/R8 rules and that native libraries are included
-- Test in internal/closed testing tracks before production
-
-6) Release tracks & testing
-- Create an internal test track for quick verification
-- Then a closed or open test track to test with a broader audience
-- Prepare release notes for each track
-
-7) Compliance
-- Verify privacy policy covers data collection, analytics, advertising, and payment processing
-- Ensure GDPR/CCPA compliance if applicable
-
-Metadata JSON template (fill and paste into your release notes or internal docs):
-
-```json
-{
-  "packageName": "com.example.tacticallegends",
-  "title": "Tactical Legends — Rise of OISTARIAN",
-  "shortDescription": "Turn-based tactical strategy with deep squad customization.",
-  "fullDescription": "Tactical Legends is a turn-based tactical strategy game where you command a squad of heroes across branching missions...",
-  "privacyPolicyUrl": "https://yourdomain.com/privacy",
-  "contactEmail": "privacy@yourdomain.com",
-  "featureGraphic": "assets/feature_graphic.png",
-  "highResIcon": "assets/icon_512.png",
-  "screenshots": ["assets/ss1.png","assets/ss2.png"]
-}
-```
-
-Helpful commands
-
-- Build Android AAB (example for Unity/Gradle):
-  - Unity: File > Build Settings > Android > Build App Bundle
-  - Gradle CLI: ./gradlew bundleRelease
-
-- Verify AAB locally with bundletool and install on device:
-```bash
-bundletool build-apks --bundle=app.aab --output=app.apks --mode=universal
-bundletool install-apks --apks=app.apks
-```
-
-Next steps
-- Replace all placeholders above (package name, URLs, images, email) with your real values
-- Add the Play Store assets to the repository under /store-assets/ (icons, feature graphic, screenshots)
-- Build and upload your signed .aab in Play Console, set up testing tracks, and roll out
+*Heavy assault operative deployed in contested desert sectors, equipped with hardened ballistic plating and standard modular pulse rifle.*
 
 ---
 
-## Testing
+### 2. Recon Specialist — Unit TL-003
+<img src="TL_003.jpeg" alt="Recon Specialist TL-003 — Advanced Scout" width="100%" />
 
-Run all unit tests with:
+*Long-range tactical scout specializing in optical reconnaissance, sensor jamming, high-velocity sniper fire, and stealth flank maneuvers.*
+
+---
+
+### 3. Urban Infiltration Specialist — Operative TL-008
+<img src="TL_008.jpeg" alt="Urban Infiltration Specialist TL-008" width="100%" />
+
+*Cyber-warfare and CQB operative firing a precision marksman rifle over a neon skyline as VTOL support crafts coordinate extraction.*
+
+---
+
+### 4. The Vault of Eden — Ancient Subterranean Chamber
+<img src="_bf325426-3049-42b5-b67d-b0049ca7858b.jpeg" alt="Vault of Eden — Ancient Subterranean Chamber" width="100%" />
+
+*Cloaked operative exploring the primordial Vault of Eden beneath the desert surface, deciphering ancient relic inscriptions.*
+
+---
+
+### 5. Squad Bay Interface & Unit Diagnostics
+<img src="store-assets/annotated/annotated-ss5.svg" alt="Tactical Legends Squad Bay UI & Diagnostics" width="100%" />
+
+*Squad Bay terminal schematic detailing operative health (HP), action points (AP), movement speed (MOV), weapon range (RNG), and active ability loadouts.*
+
+---
+
+## 🏛️ System Architecture
+
+Tactical Legends enforces a modular, decoupled engine design:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                       UI / HUD LAYER                        │
+│          Menus, Squad Bay, Dialog, Web Command Terminal      │
+├─────────────────────────────────────────────────────────────┤
+│                     GAME LOGIC LAYER                        │
+│    BattleManager, CampaignBranchingManager, Inventory, Lore │
+├─────────────────────────────────────────────────────────────┤
+│                    AI DECISION SUBSYSTEM                    │
+│      Behavior Trees, A* Pathfinding, Difficulty Scaler      │
+├─────────────────────────────────────────────────────────────┤
+│                       ENGINE LAYER                          │
+│         Game Loop, Event Bus, Input System, Renderer        │
+├─────────────────────────────────────────────────────────────┤
+│                      PLATFORM LAYER                         │
+│       SDL2 (Graphics/Audio), File I/O, Web Host (Node.js)   │
+└─────────────────────────────────────────────────────────────┘
+```
+
+<img width="100%" alt="Tactical Legends Architecture Diagram" src="https://github.com/user-attachments/assets/e6e160a1-1a7d-42f6-8991-63b6786e1112" />
+
+### Onboarding Flow for Contributors
+<img width="100%" alt="Onboarding Flow Diagram" src="https://github.com/user-attachments/assets/31835e2c-649f-4518-a8db-625105ac725b" />
+
+---
+
+## 🛠️ Installation & Quick Start
+
+### 1. Web Applet (AI Studio / Node.js)
+
+The web showcase and tactical command console run directly via Node.js on port 3000:
+
+```bash
+# Clone the repository
+git clone https://github.com/jurgen-paul/tactical-legends.git
+cd tactical-legends
+
+# Install dependencies
+npm install
+
+# Start the dev server on port 3000 (0.0.0.0)
+npm run dev
+```
+
+Visit `http://localhost:3000` to view the interactive briefing console, operative dossier, and documentation portal.
+
+---
+
+### 2. Native C++ Engine (CMake & SDL2)
+
+To compile the standalone native engine client on Linux (Ubuntu/Debian):
+
+```bash
+# Install toolchain and SDL2 development libraries
+sudo apt update
+sudo apt install cmake g++ libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
+
+# Generate build configuration
+mkdir build && cd build
+cmake -S .. -B . -DCMAKE_BUILD_TYPE=Release
+
+# Compile binary
+cmake --build . -j$(nproc)
+
+# Launch game
+./tactical_legends
+```
+
+On **macOS** (via Homebrew):
+```bash
+brew install cmake sdl2 sdl2_image sdl2_mixer sdl2_ttf
+mkdir build && cd build
+cmake .. && make -j
+./tactical_legends
+```
+
+---
+
+## 🧪 Testing & Verification
+
+Automated unit tests validate pathfinding accuracy, damage formulas, and AI state transitions:
 
 ```bash
 cd build
 ctest --output-on-failure
 ```
-Project Overview: Tactical Legends – Rise of OISTARIAN
-Tactical Legends is a cross-platform game designed for strategic depth and replayability. It features:
-• 	Turn-based tactical combat with adaptive AI
-• 	Modular codebase using CMake for easy extension
-• 	Cross-platform support (Windows, macOS, Linux)
-• 	SDL2-powered graphics and audio
-• 	Deep squad customization and branching campaign structure
 
-Tactical Legends Game Architecture Diagram
-Diagram Highlights:
-• 	Central Game Loop powered by SDL2
-• 	Modular AI System with combat and stealth logic
-• 	Campaign Manager for branching storylines
-• 	Audio Manager for immersive sound design
-• 	UI Layer built with Vue and C++
-• 	Data Layer using Prisma and JSON configs
-• 	Build & Deployment via CMake and YAML workflows
-• 	Testing supported by CTest
-<img width="1105" height="811" alt="tactical-legend architecture diagram (Image 2 - soldier as unit art)" src="https://github.com/user-attachments/assets/e6e160a1-1a7d-42f6-8991-63b6786e1112" />
-
-## Contributing
-
-We welcome contributions! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
-<img width="950" height="657" alt="onboarding flow — tactical-legend (Image 3 - poster thumbnail)" src="https://github.com/user-attachments/assets/31835e2c-649f-4518-a8db-625105ac725b" />
-The flow is split into two main tracks:
-🔍 Discovery & Setup
-• 	Discover the project on GitHub
-• 	Read the README and contribution guidelines
-• 	Set up the development environment (C++, SDL2, CMake)
-• 	Explore the codebase (AI, UI, Campaign Manager)
-• 	Pick an issue or feature to work on
-🛠️ Contribution & Review
-• 	Fork the repository and create a branch
-• 	Develop and test changes locally
-• 	Submit a pull request
-• 	Participate in code review and make revisions
-• 	Merge and celebrate your contribution 🎉
-Each stage is represented with labeled boxes and directional arrows to show progression. It’s designed to be intuitive and beginner-friendly.
-Click/open the card above to download the diagram.
-
-To propose changes:
-- Fork the repo
-- Create a feature branch
-- Submit a pull request
-# Enhanced Stripe SaaS Subscription System
-
-A production-ready, TypeScript-based SaaS subscription management system with Stripe integration.
-
-## 🚀 Features
-
-- **Secure Payment Processing** - Full Stripe integration with 3D Secure support
-- **Subscription Management** - Create, update, and cancel subscriptions
-- **Automatic Retries** - Smart payment retry logic for failed transactions
-- **Webhook Handling** - Comprehensive event processing for subscription lifecycle
-- **Email Notifications** - Automated customer notifications for all events
-- **Rate Limiting** - Protection against abuse
-- **TypeScript** - Full type safety across the application
-- **Logging** - Structured logging with Winston
-- **Error Handling** - Robust error handling and validation
-
-## 📋 Prerequisites
-
-- Node.js 18+ 
-- npm or yarn
-- Stripe account
-- PostgreSQL (or your preferred database)
-
-## 🛠️ Installation
-
-### Backend Setup
-
-1. **Clone and install dependencies:**
+For web applet verification:
 ```bash
-cd backend
-npm install
-```
-
-2. **Configure environment variables:**
-```bash
-cp .env.example .env
-# Edit .env with your actual credentials
-```
-
-3. **Set up Stripe:**
-   - Create a Stripe account at https://stripe.com
-   - Get your API keys from the Stripe Dashboard
-   - Create a product and price in Stripe
-   - Set up webhook endpoint at `https://yourdomain.com/webhook`
-   - Add webhook secret to `.env`
-
-4. **Build and run:**
-```bash
-# Development
-npm run dev
-
-# Production build
 npm run build
-npm start
 ```
-
-### Frontend Setup
-
-1. **Install dependencies:**
-```bash
-cd frontend
-npm install
-```
-
-2. **Configure Stripe public key:**
-   - Update `pk_test_YourPublicKey` in `App.jsx` with your actual public key
-   - Update `priceId` with your Stripe price ID
-
-3. **Run development server:**
-```bash
-npm run dev
-```
-
-## 🔧 Configuration
-
-### Stripe Webhook Events
-
-Configure your Stripe webhook to listen for these events:
-- `invoice.payment_succeeded`
-- `invoice.payment_failed`
-- `customer.subscription.deleted`
-- `customer.subscription.updated`
-- `customer.subscription.trial_will_end`
-
-### Database Schema
-
-```sql
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  email VARCHAR(255) UNIQUE NOT NULL,
-  customer_id VARCHAR(255) UNIQUE NOT NULL,
-  subscription_id VARCHAR(255),
-  status VARCHAR(50) NOT NULL,
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
-);
-
-CREATE INDEX idx_customer_id ON users(customer_id);
-CREATE INDEX idx_subscription_id ON users(subscription_id);
-```
-
-## 📡 API Endpoints
-
-### POST /create-subscription
-Create a new subscription for a customer.
-
-**Request Body:**
-```json
-{
-  "email": "user@example.com",
-  "priceId": "price_xxxxxxxxxxxxx",
-  "trialDays": 14,
-  "couponId": "coupon_xxxxx" // optional
-}
-```
-
-**Response:**
-```json
-{
-  "subscriptionId": "sub_xxxxxxxxxxxxx",
-  "status": "trialing",
-  "requiresAction": false
-}
-```
-
-### POST /cancel-subscription
-Cancel a subscription at period end.
-
-**Request Body:**
-```json
-{
-  "email": "user@example.com"
-}
-```
-
-### POST /webhook
-Stripe webhook endpoint (automatically called by Stripe).
-
-### GET /health
-Health check endpoint.
-
-## 🧪 Testing
-
-```bash
-# Run tests
-npm test
-
-# Watch mode
-npm run test:watch
-
-# Test webhook locally with Stripe CLI
-stripe listen --forward-to localhost:4242/webhook
-```
-
-## 🔒 Security Best Practices
-
-1. **Never commit API keys** - Always use environment variables
-2. **Validate webhook signatures** - Prevents fraudulent webhook calls
-3. **Use HTTPS in production** - Required for Stripe webhooks
-4. **Implement rate limiting** - Protect against abuse
-5. **Sanitize user input** - Prevent injection attacks
-6. **Keep dependencies updated** - Regular security patches
-
-## 📊 Monitoring & Logging
-
-Logs are structured and written to:
-- `error.log` - Error-level logs only
-- `combined.log` - All logs
-- Console output - Development environment
-
-Example log entry:
-```json
-{
-  "level": "info",
-  "message": "Subscription created: sub_xxxxxxxxxxxxx",
-  "timestamp": "2025-11-29T12:00:00.000Z"
-}
-```
-
-## 🚨 Error Handling
-
-The system handles various error scenarios:
-
-- **Invalid payment methods** - Returns clear error to user
-- **Failed payments** - Automatic retry with customer notification
-- **Webhook failures** - Logged and can be replayed from Stripe
-- **3D Secure** - Automatic handling with client confirmation
-
-## 📈 Scaling Considerations
-
-1. **Database** - Replace in-memory storage with PostgreSQL/MongoDB
-2. **Caching** - Add Redis for session management
-3. **Queue System** - Use Bull/Bee-Queue for async tasks
-4. **Load Balancing** - Deploy behind nginx or AWS ALB
-5. **Monitoring** - Add Sentry or similar error tracking
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
-
-## 📝 License
-
-MIT License - feel free to use for commercial projects
-
-## 🆘 Support
-
-For issues and questions:
-- Check the [Stripe documentation](https://stripe.com/docs)
-- Review existing GitHub issues
-- Create a new issue with reproduction steps
 
 ---
 
-> _Note_: If you plan to contribute code, please also review the project's [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines and setup instructions.
+## 💾 Data-Driven Design & Modding
+
+Tactical Legends loads content dynamically from JSON configurations.
+
+### Adding an Operative
+In `resource/CODEX.json`:
+```json
+{
+  "name": "Lieutenant Sofia Varga",
+  "faction": "Independent Operative",
+  "role": "Intelligence",
+  "expertise": ["Cyber infiltration", "Interrogation resistance", "Signal triangulation"],
+  "unlockCondition": "Decode the 'Black Cipher' relic",
+  "portraitPath": "Images/Operatives/SofiaVarga"
+}
+```
+
+### Adding a Mission Configuration
+In `Sample MissionConfig.json`:
+```json
+{
+  "id": "MISSION_001",
+  "name": "Dawn Infiltration",
+  "environment": "UrbanRuins",
+  "objectives": [
+    { "type": "Infiltrate", "location": "ArmoryAccess" },
+    { "type": "DisableCore", "location": "ReactorRoom" },
+    { "type": "Exfiltrate", "location": "ExtractionPoint" }
+  ],
+  "difficulty": 1,
+  "moralityImpact": 5,
+  "branchingRules": {
+    "ifMoralityGte": 50,
+    "ifTrustGte": { "EchoAscendants": 60 }
+  }
+}
+```
+
+---
+
+## 📱 Play Store Release Checklist
+
+If packaging for Google Play Store Android distribution:
+
+1. **Identifiers**:
+   - Package Name: `com.example.tacticallegends`
+   - Target SDK: Android 12+ (API 31+)
+2. **Assets**:
+   - High-Res Icon: 512x512 PNG (`store-assets/icon_512.png`)
+   - Feature Graphic: 1024x500 PNG (`store-assets/feature_graphic.png`)
+   - Screenshots: Portrait and landscape phone screenshots from `store-assets/screenshots/`
+3. **Build Command**:
+   ```bash
+   bundletool build-apks --bundle=app-release.aab --output=app.apks --mode=universal
+   bundletool install-apks --apks=app.apks
+   ```
+
+---
+
+## 🤝 Contributing
+
+We warmly welcome community contributions! Whether you're optimizing pathfinding algorithms, designing new maps, or translating narrative lore:
+
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/tactical-drone-support`).
+3. Commit your changes (`git commit -m 'feat: Add EMP reconnaissance drone'`).
+4. Push to the branch (`git push origin feature/tactical-drone-support`).
+5. Open a Pull Request.
+
+Please see [CONTRIBUTING.md](CONTRIBUTING.md) and our [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for detailed guidelines.
+
+---
+
+## 📜 License & Support
+
+* **License**: Distributed under the **Apache License 2.0**. See [`LICENSE`](LICENSE) for terms.
+* **Documentation**: Full technical documentation is available in [`/docs/INDEX.md`](docs/INDEX.md).
+* **Issues & Discussions**: Report bugs and propose game balancing changes in the [GitHub Issues](https://github.com/jurgen-paul/tactical-legends/issues) tracker.
+
+<div align="center">
+  <sub>Built with passion for tactical strategy gaming. Rise of OISTARIAN — Command, Customize, Conquer.</sub>
+</div>
