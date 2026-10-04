@@ -3,21 +3,24 @@
 
 [![CI](https://github.com/jurgen-paul/tactical-legends/actions/workflows/ci.yml/badge.svg)](https://github.com/jurgen-paul/tactical-legends/actions)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/default/badge)](https://www.bestpractices.dev/)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/jurgen-paul/tactical-legends/badge)](https://securityscorecards.dev/viewer/?repo=github.com/jurgen-paul/tactical-legends)
 
 # Tactical Legends
 
-> A turn-based tactical strategy game template built with Unity / Godot / Unreal Engine (replace with the engine you used).
+> A turn-based tactical strategy game template built with C++, SDL2, and modern web tooling.
 
-[![Tactical Legends banner — placeholder screenshot (Hero: Image 1 - mystical vault) ](https://via.placeholder.com/800x400)](https://play.google.com/store/apps/details?id=com.example.tacticallegends)
+[![Tactical Legends banner — Hero Operative](TL_001.jpeg)](https://github.com/jurgen-paul/tactical-legends)
 
 # Tactical Legends
 
-Welcome to **Tactical Legends**, an open-source tactical strategy game focused on turn-based combat, deep squad customization, and replayable missions. Whether you’re a strategist, developer, or[...]
+Welcome to **Tactical Legends**, an open-source tactical strategy game focused on turn-based combat, deep squad customization, and replayable missions. Whether you’re a strategist, developer, or gaming enthusiast, Tactical Legends offers an extensible foundation for tactical grid-based warfare in the world of Oistarian.
 
 ## Table of Contents
 
 - [About](#about)
 - [Features](#features)
+- [Visual Dossier & Screenshots](#visual-dossier--screenshots)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Play Store Console — Store Listing & Release Checklist](#play-store-console)
@@ -32,7 +35,7 @@ Welcome to **Tactical Legends**, an open-source tactical strategy game focused o
 
 ## About
 
-Tactical Legends delivers engaging tactical gameplay built with C++ and SDL2, designed for extensibility and cross-platform support. Plan your moves, outwit adaptive AI, and enjoy a game that grow[...]
+Tactical Legends delivers engaging tactical gameplay built with C++ and SDL2, designed for extensibility and cross-platform support. Plan your moves, outwit adaptive AI, and enjoy a game that grows with every contribution.
 
 ## Features
 
@@ -42,6 +45,31 @@ Tactical Legends delivers engaging tactical gameplay built with C++ and SDL2, de
 - SDL2-powered graphics and audio
 - Unit testing via CTest
 - Deep squad customization and branching campaign (coming soon)
+
+## Visual Dossier & Screenshots
+
+Here are featured operatives, environments, and tactical system schematics from *Tactical Legends: Rise of OISTARIAN*:
+
+### 1. Frontline Vanguard — Operative TL-001
+![Tactical Operative TL-001 — Frontline Vanguard](TL_001.jpeg)
+*Heavy tactical operative deployed in high-threat desert conflict zones with hardened ballistic armor and standard assault platform.*
+
+### 2. Recon Specialist — Unit TL-003
+![Recon Specialist TL-003 — Advanced Scout](TL_003.jpeg)
+*Advanced long-range reconnaissance operative specializing in enemy tracking, stealth infiltration, and sightline control.*
+
+### 3. Urban Infiltration Specialist — Operative TL-008
+![Urban Infiltration Specialist TL-008](TL_008.jpeg)
+*Cyber-warfare operative firing a high-tech rifle over a neon cityscape as VTOL support crafts circle overhead.*
+
+### 4. The Vault of Eden — Ancient Subterranean Chamber
+![Vault of Eden — Ancient Subterranean Chamber](_bf325426-3049-42b5-b67d-b0049ca7858b.jpeg)
+*Cloaked operative exploring the ancient Vault of Eden, recovering primordial relics and navigating subterranean ruins.*
+
+### 5. Squad Bay Interface & Unit Diagnostics
+![Tactical Legends Squad Bay UI & Diagnostics](store-assets/annotated/annotated-ss5.svg)
+*Tactical squad bay interface displaying operative loadouts, action points (AP), hit points (HP), movement range (MOV), and weapon synergy.*
+
 
 ## Installation
 
